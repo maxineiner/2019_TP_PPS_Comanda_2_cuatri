@@ -3,4 +3,4 @@
 </h1>
 
 
-Para registrarse: https://forms.gle/MQudzzZkWsfpihy27
+Para registrarse: https://forms.gle/n5rUakcPKSywgFGU8
