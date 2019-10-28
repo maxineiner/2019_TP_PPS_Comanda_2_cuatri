@@ -1,5 +1,7 @@
 {
   "name": "Comanda",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
