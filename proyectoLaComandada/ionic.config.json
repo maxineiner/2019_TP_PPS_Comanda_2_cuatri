@@ -1,5 +1,7 @@
 {
   "name": "proyectoLaComandada",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -24,3 +24,79 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.bg{
+    --background: rgba(255,0,0,1);
+    --background: -moz-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 61%, rgba(201,10,10,1) 99%, rgba(201,10,10,1) 100%);
+    --background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,0,0,1)), color-stop(61%, rgba(255,0,0,1)), color-stop(99%, rgba(201,10,10,1)), color-stop(100%, rgba(201,10,10,1)));
+    --background: -webkit-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 61%, rgba(201,10,10,1) 99%, rgba(201,10,10,1) 100%);
+    --background: -o-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 61%, rgba(201,10,10,1) 99%, rgba(201,10,10,1) 100%);
+    --background: -ms-linear-gradient(top, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 61%, rgba(201,10,10,1) 99%, rgba(201,10,10,1) 100%);
+    --background: linear-gradient(to bottom, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 61%, rgba(201,10,10,1) 99%, rgba(201,10,10,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#c90a0a', GradientType=0 );
+}
+
+.footer{
+    text-align: center;
+    --background: rgb(143, 0, 0);
+    --color:rgba(56, 56, 56, 0.37)
+}
+
+.item{
+    --background: rgba(255, 0, 0, 0);
+    --color: white;
+    --font-size: 3.5rem;
+}
+
+.label{
+    font-family:"cinzel decorative" !important;
+    font-style:"normal" !important;
+    font-size: 2vmax !important;
+    color: rgb(243, 243, 243);
+}
+
+.titulo{
+    margin: 20% 0% 10% 0%;
+    font-family:"cinzel decorative gordo" !important;
+    font-style:"normal" !important;
+    font-size: 4.5vmax !important;
+    color: rgb(243, 243, 243);
+    text-align: center;
+}
+
+.boton{
+    margin-top: 10%;
+    // font-family:"cinzel decorative gordo" !important;
+    // font-style:"normal" !important;
+    font-size: 3.5vmax !important;
+    color: rgb(243, 243, 243);
+    --border-color: aliceblue;
+    --background-activated:rgba(230, 230, 230, 0.856);
+}
+
+.centrar-col{
+    margin: 0 auto;
+}
+
+.recuperar{
+    color:white;
+}
+
+.amarillo{
+    filter:invert(1.5);
+  }
+
+@font-face{
+    font-family:"cinzel decorative gordo";
+    font-style:"normal";
+    font-weight:700;
+    src:url(./assets/fuentes/cinzeldecorative-bold.ttf) format('truetype')
+}
+
+@font-face{
+    font-family:"cinzel decorative";
+    font-style:"regular";
+    font-weight:400;
+    src:url(./assets/fuentes/cinzeldecorative-regular.ttf) format('truetype')
+}
+
