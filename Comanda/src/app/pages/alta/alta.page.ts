@@ -5,6 +5,7 @@ import { ComandaServiceService } from 'src/app/services/comanda-service.service'
 import { AlertController } from '@ionic/angular';
 import { ActorTypeBase } from 'src/app/model/actorTypeBase';
 import { ActorType } from 'src/app/model/actorType';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-alta',
@@ -15,11 +16,13 @@ export class AltaPage implements OnInit {
   myForm: FormGroup;
   image: string;
   actorType: ActorTypeBase;
+  code: any;
 
   constructor(
     private comandaService: ComandaServiceService,
-    public alertController: AlertController,
-    public camera: Camera) { }
+    private alertController: AlertController,
+    private barcodeScanner: BarcodeScanner,
+    private camera: Camera) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -46,9 +49,19 @@ export class AltaPage implements OnInit {
       if (imageData) {
         this.image = `data:image/jpeg;base64,${imageData}`;
       }
-     }, (err) => {
+    }, (err) => {
       this.presentAlert(err);
-     });
+    });
+  }
+
+  barcodeScannerFn() {
+    this.barcodeScanner.scan().then(barcodeData => {
+      // this.presentAlert(barcodeData);
+      this.code = JSON.stringify(barcodeData);
+    }).catch(err => {
+      this.presentAlert(err.message);
+      // this.code = err.message;
+    });
   }
 
   save() {

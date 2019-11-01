@@ -12,6 +12,13 @@
           <img *ngIf="!image" src="assets/images/usuario.png">
           <img *ngIf="image" [src]="image">
         </ion-avatar>
+        <div class="icon-container">
+          <ion-icon (click)="barcodeScannerFn()" class="icon" name="barcode"></ion-icon>
+          <p style="font-size: 10px;">Lector de codigo de barra</p>
+        </div>
+        <div>
+          {{code}}
+        </div>
       </ion-card-header>
 
       <ion-card-content>
@@ -40,4 +47,5 @@
     </ion-card>
 
   </form>
+
 </ion-content>
