@@ -1,0 +1,39 @@
+1-Creo mi rama:
+  
+  git checkout -b gamma
+
+
+
+Alta:
+
+1-Crear una carpeta "modals" y dentro tenemos un archivo "ts" llamado "entidad"
+  el cual va a una interfaz generica para "empleados,supervisores,dueño, clientes" ya que
+  todos tiene los mismos datos y solo cambia su "perfil".
+
+export interface Entidad {
+  nombre: string;
+  apellido: string;
+  correo: string;
+  contraseña: string;
+  dni: string;
+  cuil: string;
+  foto?: string
+  perfil: string
+}
+ 
+
+2-Crear un servicio llamado "alta" en una carpeta llamada "servicios"
+  -funcion AltaEntidad(obj: Entidad) esta funcion guarda el correo y la contraseña
+   en el authentication y tambien carga todos los datos en la BD. 
+
+3-Crear carpeta "componetes" la cual tendra:
+  altaDueño
+  altaEmpleado
+
+  *Estos se crearon utilizando "page" en la terminal , ejemplo : ionic g page componentes/altaDueño
+  
+  
+  
+
+
+  
