@@ -56,7 +56,7 @@ export class AltaPage implements OnInit {
 
   barcodeScannerFn() {
     this.barcodeScanner.scan().then(barcodeData => {
-      // this.presentAlert(barcodeData);
+      // this.presentAlert(barcodeData);barcodeData
       this.code = JSON.stringify(barcodeData);
     }).catch(err => {
       this.presentAlert(err.message);
