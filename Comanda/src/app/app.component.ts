@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { timer } from 'rxjs';
-import { AuthService } from "./services/auth.service";
+import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 
 
@@ -21,7 +21,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private AFauth: AuthService,
-    private publicRouter:Router
+    private publicRouter: Router
   ) {
     this.initializeApp();
   }
@@ -30,13 +30,13 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      timer(3600).subscribe(()=>{this.showSplash=false;})
+      timer(3600).subscribe(() => {this.showSplash = false; });
     });
   }
 
-  LogOut(){
+  LogOut() {
     this.AFauth.logOut();
-    this.publicRouter.navigate(['/login'])
+    this.publicRouter.navigate(['/login']);
   }
 
 }
