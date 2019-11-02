@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActorTypeBase } from '../model/actorTypeBase';
 
@@ -9,8 +8,7 @@ import { ActorTypeBase } from '../model/actorTypeBase';
 export class ComandaServiceService {
 
   constructor(
-    private firestore: AngularFirestore,
-    private afAuth: AngularFireAuth) { }
+    private firestore: AngularFirestore) { }
 
   public saveActorType(actorType: ActorTypeBase) {
     this.firestore.collection('Empleados').add({
