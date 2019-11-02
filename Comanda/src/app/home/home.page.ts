@@ -10,8 +10,8 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private menu: MenuController) {}
 
-  prueba() {
-    this.navCtrl.navigateRoot('alta');
+  add(typeEmployed) {
+    this.navCtrl.navigateRoot(['alta', typeEmployed]);
   }
 
 }

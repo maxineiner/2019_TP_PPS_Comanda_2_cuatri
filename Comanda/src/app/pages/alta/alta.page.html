@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>alta</ion-title>
+    <ion-title>{{titleTypeEmployed}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,10 +14,7 @@
         </ion-avatar>
         <div class="icon-container">
           <ion-icon (click)="barcodeScannerFn()" class="icon" name="barcode"></ion-icon>
-          <p style="font-size: 10px;">Lector de codigo de barra</p>
-        </div>
-        <div>
-          {{code}}
+          <p style="font-size: 10px;">Escanea el DNI</p>
         </div>
       </ion-card-header>
 
@@ -31,15 +28,35 @@
         </ion-item>
 
         <ion-item>
-          <ion-input formControlName="dni" type="text" placeholder="dni"></ion-input>
+          <ion-input formControlName="dni" type="text" placeholder="dni" maxlength="8"></ion-input>
         </ion-item>
+        <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
+          myForm.get('dni').errors.error">
+          <p>El campo dni solo debe contener numeros</p>lengthValidator
+        </div>
+        <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
+          myForm.get('dni').touched && myForm.get('dni').errors.lengthError">
+          <p>El campo dni debe contener 8 numeros</p>
+        </div>
 
         <ion-item>
-          <ion-input formControlName="cuil" type="text" placeholder="cuil"></ion-input>
+          <ion-input formControlName="cuil" type="text" placeholder="cuil" maxlength="12"></ion-input>
+        </ion-item>
+        <div class="isa_error" *ngIf="myForm.get('cuil').errors && myForm.get('cuil').dirty && 
+          myForm.get('cuil').errors.error">
+          <p>El campo cuit solo debe contener numeros</p>
+        </div>
+
+        <ion-item *ngIf="typeEmployed !== 'S'">
+          <ion-label>Tipo de Empleado</ion-label>
+          <ion-select formControlName="tiposEmpleados" placeholder="Seleccione uno">
+            <ion-select-option value="C">Cocinero</ion-select-option>
+            <ion-select-option value="B">Bar Tender</ion-select-option>
+            <ion-select-option value="M">Camarero</ion-select-option>
+          </ion-select>
         </ion-item>
 
-        <ion-button class="font-style" color="success" fill="outline" shape="round" expand="full" type="submit"
-          [disabled]="!myForm.valid">
+        <ion-button color='primary' fill="outline" expand="block" type="submit" [disabled]="!myForm.valid">
           Registrar
         </ion-button>
 
