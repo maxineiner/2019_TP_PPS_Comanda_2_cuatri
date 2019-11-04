@@ -8,14 +8,21 @@ import {Entidad} from '../modals/entidad'
 export class AltaService {
 
   refEntidad : AngularFirestoreCollection<Entidad>
-  constructor(private bd : AngularFirestore,private auth : AngularFireAuth) { 
+
+
+  constructor(private bd : AngularFirestore,private auth : AngularFireAuth){ 
      this.refEntidad = this.bd.collection("entidades");
   }
-  altaeEntidad(obj : Entidad){
-    
+
+
+  altaeEntidad(objeto : Entidad){
+
     try{
-       this.auth.auth.createUserWithEmailAndPassword(obj.correo,obj.clave);
-       this.refEntidad.add(obj);
+       this.auth.auth.createUserWithEmailAndPassword(objeto.correo,objeto.clave);
+       this.refEntidad.add(objeto).then(data =>{
+         alert(data);
+       });
+       //para que es este add?
     }
     catch(e){
       console.log(e);

@@ -10,11 +10,22 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {AltaJefeComponent} from './componentes/alta-jefe/alta-jefe.component'
 import {AngularFireModule} from '@angular/fire';
-import {config} from '../environments/environment';
+// import {config} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Base64 } from '@ionic-native/base64/ngx';
+const config = {
+  apiKey: "AIzaSyC-UMfVeQNeMx1AQ2m9Mgktwf5w5o9YZAE",
+  authDomain: "lacomanda-c1055.firebaseapp.com",
+  databaseURL: "https://lacomanda-c1055.firebaseio.com",
+  projectId: "lacomanda-c1055",
+  storageBucket: "lacomanda-c1055.appspot.com",
+  messagingSenderId: "503253383760",
+  appId: "1:503253383760:web:755ebaceea1ba83ce2af55",
+  measurementId: "G-FF8H5K31XZ"
+}
 
 @NgModule({
   declarations: [AppComponent,AltaJefeComponent],
@@ -30,6 +41,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     SplashScreen,
     Camera,
     BarcodeScanner,
+    Base64,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
