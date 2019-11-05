@@ -14,4 +14,8 @@ export class HomePage {
     this.navCtrl.navigateRoot(['alta', typeEmployed]);
   }
 
+  pruebaprod() {
+    this.navCtrl.navigateRoot('alta-productos');
+  }
+
 }
