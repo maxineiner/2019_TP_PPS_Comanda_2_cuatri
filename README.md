@@ -12,7 +12,7 @@ Alfa: Nicolas Mazzoconi<br>
 Beta: Giulano Tritto<br>
 Gama: Roman Pellitta<br>
 <br>
-Semana de 2 al 9 de noviembre
+<h2>Semana de 2 al 9 de noviembre</h2>
 <br>
 <h3>Objetivos: Altas</h3>
 <br>
