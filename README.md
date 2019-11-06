@@ -22,6 +22,6 @@ Gama: Roman Pellitta<br>
 *Alta Cliente (responsable:)   <br>
 *Alta mesa (responsable:)<br>
 <br>
-icono y splash animado (responsable:) 
+icono y splash animado (responsable: Pellitta) 
 <h3>Diagrama código Qr (mesa)</h3>
 <img src="https://github.com/maxineiner/2019_TP_PPS_Comanda_2_cuatri/blob/master/Diagrama_QR_MESA.jpg"/>
