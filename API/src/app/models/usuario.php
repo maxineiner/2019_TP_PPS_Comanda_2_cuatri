@@ -1,7 +1,7 @@
 <?php  
 namespace App\Models;
  
-class compra extends \Illuminate\Database\Eloquent\Model{  
+class usuario extends \Illuminate\Database\Eloquent\Model{  
     public $timestamps = false;
 }
 ?>
