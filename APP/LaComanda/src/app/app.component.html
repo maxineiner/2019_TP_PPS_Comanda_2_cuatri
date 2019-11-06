@@ -1,3 +1,14 @@
+<div *ngIf="showSplash" class="splash">  
+  <div class="texto titulo">La Comanda</div>
+  <div class="spinner heartBeat" style="border-radius: 50%;"></div>
+  <div class="texto nombre">Doble puntero a Null - 4to B</div>
+</div>
+
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
 </ion-app>
+
+<div class="spinnerInterceptor heartBeat" *ngIf="showSpinner">
+  <img src="../assets/icon/icon.png" style="border-radius: 50%;">
+  <p>Cargando...</p>
+</div>

@@ -1,0 +1,63 @@
+<app-header titulo="La comanda" [backButton]="false"></app-header>
+
+<ion-content padding color="tertiary">
+  <img src="/assets/icon/icon.png" style="border-radius: 50%;">
+  <form [formGroup]="form" (ngSubmit)="onSubmitLogin()">
+    <ion-item color="light">
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="mail" type="text" placeholder="Email"></ion-input>
+    </ion-item>
+    <ng-container *ngFor="let validation of validation_messages.mail">
+      <div *ngIf="form.get('mail').hasError(validation.type) && (form.get('mail').dirty || form.get('mail').touched)">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+    <ion-item color="light">
+      <ion-icon name="key" slot="start"></ion-icon>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
+    </ion-item>
+    <ng-container *ngFor="let validation of validation_messages.password">
+      <div
+        *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+    <br>
+
+    <ion-button color="dark" expand="block" type="submit" [disabled]="!form.valid">
+      Entrar
+    </ion-button>
+
+    <br>
+
+  </form>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="dark">
+      <ion-icon name="person"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color="primary" (click)="cargarDatos(this.rolesEnum.admin)">
+        Adm
+      </ion-fab-button>
+      <ion-fab-button color="secondary" (click)="cargarDatos(this.rolesEnum.invitado)">
+        Inv
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="top">
+      <ion-fab-button size="large" color="tertiary" (click)="cargarDatos(this.rolesEnum.usuario)">
+        Usr
+      </ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button color="success" (click)="cargarDatos(this.rolesEnum.anonimo)">
+        Anón
+      </ion-fab-button>
+      <ion-fab-button color="warning" (click)="cargarDatos(this.rolesEnum.tester)">
+        Test
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

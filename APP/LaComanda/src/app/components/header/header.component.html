@@ -1,0 +1,14 @@
+<ion-header style="text-align: center; --background:violet;">
+  <ion-toolbar  >
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="backButton" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title >{{ titulo }}</ion-title>
+    <ion-buttons *ngIf="this.url !== '/login'" slot="end">
+      <ion-button (click)="onLogout()" > 
+        <ion-icon class="icon" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
