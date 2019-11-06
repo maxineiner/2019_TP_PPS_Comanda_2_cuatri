@@ -16,7 +16,7 @@ class AutentificadorJWT
             'exp' => $ahora + (60*60),
             'aud' => self::Aud(),
             'data' => $datos,
-            'app'=> "API REST LA COMANDA 2018"
+            'app'=> "API REST LA COMANDA 2019"
         );
      
         return JWT::encode($payload, self::$claveSecreta);
@@ -28,8 +28,7 @@ class AutentificadorJWT
         if(empty($token)|| $token=="")
         {
             throw new Exception("El token esta vacio.");
-        } 
-        // las siguientes lineas lanzan una excepcion, de no ser correcto o de haberse terminado el tiempo       
+        }    
         try {
             $decodificado = JWT::decode(
             $token,
@@ -41,13 +40,11 @@ class AutentificadorJWT
            throw new Exception("Clave fuera de tiempo");
         }
         
-        // si no da error,  verifico los datos de AUD que uso para saber de que lugar viene  
         if($decodificado->aud !== self::Aud())
         {
             throw new Exception("No es el usuario valido");
         }
     }
-    
    
      public static function ObtenerPayLoad($token)
     {
@@ -57,7 +54,8 @@ class AutentificadorJWT
             self::$tipoEncriptacion
         );
     }
-     public static function ObtenerData($token)
+
+    public static function ObtenerData($token)
     {
         return JWT::decode(
             $token,
@@ -65,6 +63,7 @@ class AutentificadorJWT
             self::$tipoEncriptacion
         )->data;
     }
+    
     private static function Aud()
     {
         $aud = '';

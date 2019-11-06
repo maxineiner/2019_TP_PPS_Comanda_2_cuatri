@@ -19,9 +19,9 @@ return [
         'db'=> [
             'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'sp',
-            'username' => 'root',
-            'password' => '',
+            'database' => 'id10207414_comanda',
+            'username' => 'id10207414_root',
+            'password' => '123456',
             'charset'   => 'utf8',
             'collation' => 'utf8_spanish2_ci',
             'prefix'    => '',
