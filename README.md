@@ -6,7 +6,7 @@
 Para registrarse: https://forms.gle/n5rUakcPKSywgFGU8
 <br>
 <br>
-<h3>Intregantes:</h3>
+<h3>Integrantes:</h3>
 <br>
 Alfa: Nicolas Mazzoconi<br>
 Beta: Giulano Tritto<br>
