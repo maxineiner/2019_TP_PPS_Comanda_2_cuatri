@@ -16,12 +16,12 @@ Gama: Roman Pellitta<br>
 <br>
 <h3>Objetivos: Altas</h3>
 <br>
-*Alta dueño/supervisor(responsable:)<br>
-*Alta EmpLeado (responsable:)<br>
-*Alta Producto (responsable:)<br>
-*Alta Cliente (responsable:)   <br>
-*Alta mesa (responsable:)<br>
+*Alta dueño/supervisor(responsable:Nicolas Mazzoconi)<br>
+*Alta Empleado (responsable:Giuliano Tritto)<br>
+*Alta Producto (responsable:Nicolas Mazzoconi)<br>
+*Alta Cliente (responsable:Giuliano Tritto)   <br>
+*Alta mesa (responsable:Roman Pellitta)<br>
 <br>
-icono y splash animado (responsable:) 
+icono y splash animado (responsable:Roman Pellitta) 
 <h3>Diagrama código Qr (mesa)</h3>
 <img src="https://github.com/maxineiner/2019_TP_PPS_Comanda_2_cuatri/blob/master/Diagrama_QR_MESA.jpg"/>
