@@ -51,8 +51,5 @@ export class ListaEsperaRegistroPage implements OnInit {
     //  console.log(pos);
 
   }
-  verListaConsola()
-  {
-    console.log(this.arrayClientes);
-  }
+
 }
