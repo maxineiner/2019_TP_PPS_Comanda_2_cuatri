@@ -7,19 +7,26 @@ import { ActorTypeBase } from 'src/app/model/actorTypeBase';
 import { ActorType } from 'src/app/model/actorType';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ActivatedRoute } from '@angular/router';
-
+import { timer } from 'rxjs';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { Cliente } from 'src/app/model/cliente';
+import {ListaEsperaService } from 'src/app/services/lista-espera.service'
 @Component({
-  selector: 'app-alta',
-  templateUrl: './alta.page.html',
-  styleUrls: ['./alta.page.scss'],
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
 })
-export class AltaPage implements OnInit {
+export class RegisterPage implements OnInit {
+
   myForm: FormGroup;
   image: string;
-  actorType: ActorTypeBase;
+  // actorType: ActorTypeBase;
+  auxCliente: Cliente;
   code: any;
   typeEmployed: string;
   titleTypeEmployed: string;
+  showSplash = true;
+
 
   constructor(
     private comandaService: ComandaServiceService,
@@ -27,15 +34,18 @@ export class AltaPage implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private camera: Camera,
     public navCtrl: NavController,
-    public activeRoute: ActivatedRoute) { }
+    public activeRoute: ActivatedRoute,
+    private splashScreen: SplashScreen,
+    private listaEsperaService:ListaEsperaService) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
+      email: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      dni: new FormControl('', [Validators.required, this.onlyNumbersValidator, this.lengthValidator(8)]),
+      lastName: new FormControl(''),
+      dni: new FormControl(''),
     });
-   
+    timer(3600).subscribe(() => {this.showSplash = false; });
   }
 
   /** funcion para tomar la foto con @ionic-native/camera/ngx */
@@ -77,112 +87,39 @@ export class AltaPage implements OnInit {
     this.myForm.controls.name.setValue(code[posName]);
     this.myForm.controls.lastName.setValue(code[posLastName]);
     this.myForm.controls.dni.setValue(code[posDni].trim());
-    this.myForm.controls.cuil.setValue(this.calcularCuil(code[posDni], code[posSexo]).replace(/ /g, ''));
-  }
-
-  calcularCuil(documentNumber, gender) {
-    'use strict';
-    const HOMBRE = ['HOMBRE', 'M', 'MALE'],
-      MUJER = ['MUJER', 'F', 'FEMALE'],
-      SOCIEDAD = ['SOCIEDAD', 'S', 'SOCIETY'];
-    let AB, C: any;
-
-    /**
-     * Verifico que el documentNumber tenga exactamente ocho numeros y que
-     * la cadena no contenga letras.
-     */
-    /*if (documentNumber.length !== 8 || isNaN(documentNumber)) {
-      if (documentNumber.length === 7 && !isNaN(documentNumber)) {
-        documentNumber = '0'.concat(documentNumber);
-      } else {
-        // Muestro un error en caso de no serlo.
-        throw new Error('El numero de documentNumber ingresado no es correcto.');
-      }
-    }*/
-
-    /**
-     * De esta manera permitimos que el gender venga en minusculas,
-     * mayusculas y titulo.
-     */
-    gender = gender.toUpperCase();
-
-    // Defino el valor del prefijo.
-    if (HOMBRE.indexOf(gender) >= 0) {
-      AB = '20';
-    } else if (MUJER.indexOf(gender) >= 0) {
-      AB = '27';
-    } else {
-      AB = '30';
-    }
-
-    /*
-     * Los numeros (excepto los dos primeros) que le tengo que
-     * multiplicar a la cadena formada por el prefijo y por el
-     * numero de documentNumber los tengo almacenados en un arreglo.
-     */
-    const multiplicadores = [3, 2, 7, 6, 5, 4, 3, 2];
-
-    // Realizo las dos primeras multiplicaciones por separado.
-    // tslint:disable-next-line:radix
-    let calculo = ((parseInt(AB.charAt(0)) * 5) + (parseInt(AB.charAt(1)) * 4));
-
-    /*
-     * Recorro el arreglo y el numero de documentNumber para
-     * realizar las multiplicaciones.
-     */
-    for (let i = 0; i < 8; i++) {
-      // tslint:disable-next-line:radix
-      calculo += (parseInt(documentNumber.charAt(i)) * multiplicadores[i]);
-    }
-
-    // Calculo el resto.
-    // tslint:disable-next-line:radix
-    const resto = calculo % 11;
-
-    /*
-     * Llevo a cabo la evaluacion de las tres condiciones para
-     * determinar el valor de C y conocer el valor definitivo de
-     * AB.
-     */
-    if ((SOCIEDAD.indexOf(gender) < 0) && (resto === 1)) {
-      if (HOMBRE.indexOf(gender) >= 0) {
-        C = '9';
-      } else {
-        C = '4';
-      }
-      AB = '23';
-    } else if (resto === 0) {
-      C = '0';
-    } else {
-      C = 11 - resto;
-    }
-
-    // Show example
-    console.log([AB, documentNumber, C].join('-'));
-
-    // Generate cuit
-    const cuil = [AB, documentNumber, C].join('');
-
-    return cuil;
+   
   }
 
   save() {
-    const typeE = this.typeEmployed === 'S' ? 'S' : this.myForm.get('tiposEmpleados').value;
-    const img = this.image ? this.image : '';
-    try {
-      this.actorType = new ActorTypeBase(
-        this.myForm.get('name').value,
-        this.myForm.get('lastName').value,
-        this.myForm.get('dni').value,
-        this.myForm.get('cuil').value,
-        img,
-        typeE);
-
-      this.comandaService.saveActorType(this.actorType);
-      this.presentAlertSuccess('El alta se realizo exitosamente');
-    } catch (error) {
-      this.presentAlertSuccess(error.message);
+    if(this.image == null)
+    {
+        console.log("Tienen que tener una foto");
+        this.presentAlert("El registro debe incluir minimo una foto , un mail y el nombre");
+      
+    } 
+    else {
+      // const typeE = this.typeEmployed === 'S' ? 'S' : this.myForm.get('tiposEmpleados').value;
+       const img = this.image ? this.image : '';
+      try {
+        this.auxCliente = new Cliente(
+          this.myForm.get('email').value,
+          this.myForm.get('name').value,
+          this.myForm.get('lastName').value,
+          this.myForm.get('dni').value,
+          img,
+          'CLIENTE',
+          'ESPERA'
+        )
+        this.presentAlertSuccess('El pedido de registro se realizó exitosamente, te llegara un mail cuando se verifique tu usuario');
+        console.log(this.auxCliente);
+        this.listaEsperaService.AddClientToWaitingList(this.auxCliente);
+        // this.comandaService.saveActorType(this.actorType);
+        
+      } catch (error) {
+        this.presentAlertSuccess(error.message);
+      }
     }
+
   }
 
   async presentAlert(err) {
@@ -237,6 +174,13 @@ export class AltaPage implements OnInit {
       return null;
     };
   }
+
+  fotoPrueba() {
+    
+    this.image = 'https://cdn.tn.com.ar/sites/default/files/styles/1366x765/public/2018/10/15/comida-chatarra-abstinencia.jpg';
+    console.log("foto subida");
+  }
+
 
 
 }

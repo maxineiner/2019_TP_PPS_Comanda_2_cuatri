@@ -35,8 +35,8 @@ export class LoginPage implements OnInit {
     }).catch(err => { console.log(err); this.presentAlert() });
   }
 
-  // GoToRegister() {
-  //   this.publicRouter.navigate("/Register");
-  // }
+  GoToRegister() {
+    this.publicRouter.navigate(['/register']);
+  }
 
 }

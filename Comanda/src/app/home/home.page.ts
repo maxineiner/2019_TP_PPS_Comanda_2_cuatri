@@ -16,5 +16,7 @@ export class HomePage {
     else
       this.navCtrl.navigateRoot(route);
   }
-
+  listaEspera() {
+    this.navCtrl.navigateRoot('lista-espera-registro');
+  }
 }
