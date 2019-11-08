@@ -1,0 +1,66 @@
+<div *ngIf='showSplash; else app' class="fondo">
+    <div class="base">
+      <div class="logo"></div>
+    </div>
+  </div>
+
+<ion-header *ngIf= '!showSplash'>
+  <ion-toolbar>
+    <ion-title>Registro de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="save()">
+    <ion-card>
+      <ion-card-header>
+        <ion-avatar class="avatar" (click)="takePhoto()">
+          <img *ngIf="!image" src="assets/images/usuario.png">
+          <img *ngIf="image" [src]="image">
+        </ion-avatar>
+        <div class="icon-container">
+          <ion-icon (click)="barcodeScannerFn()" class="icon" name="barcode"></ion-icon>
+          <p style="font-size: 10px;">Escanea el DNI</p>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+
+          <ion-item>
+              <ion-input formControlName="email" type="email" placeholder="email"></ion-input>
+            </ion-item>
+        <ion-item>
+          <ion-input formControlName="name" type="text" placeholder="nombre"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input formControlName="lastName" type="text" placeholder="apellido"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input formControlName="dni" type="text" placeholder="dni" maxlength="8"></ion-input>
+        </ion-item>
+        <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
+          myForm.get('dni').errors.error">
+          <p>El campo dni solo debe contener numeros</p>lengthValidator
+        </div>
+        <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
+          myForm.get('dni').touched && myForm.get('dni').errors.lengthError">
+          <p>El campo dni debe contener 8 numeros</p>
+        </div>
+
+
+
+        <ion-button color='primary' fill="outline" expand="block" type="submit" [disabled]="!myForm.valid">
+          Registrar
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+    <ion-button (click) = "fotoPrueba()" >
+        foto prueba
+      </ion-button>
+
+  </form>
+
+</ion-content>

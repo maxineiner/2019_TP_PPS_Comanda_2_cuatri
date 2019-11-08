@@ -17,5 +17,7 @@ export class HomePage {
   pruebaprod() {
     this.navCtrl.navigateRoot('alta-productos');
   }
-
+  listaEspera() {
+    this.navCtrl.navigateRoot('lista-espera-registro');
+  }
 }
