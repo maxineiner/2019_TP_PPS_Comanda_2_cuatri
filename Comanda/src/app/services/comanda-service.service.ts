@@ -33,4 +33,15 @@ export class ComandaServiceService {
       // type: actorType.type
     });
   }
+
+  public getRol_user() {
+    return this.firestore.collection('Rol_User').snapshotChanges();
+  }
+
+  public addListaEspera(email: string, id: string) {
+    this.firestore.collection('Lista_Espera').add({
+      email: email,
+      idAuth: id
+    });
+  }
 }

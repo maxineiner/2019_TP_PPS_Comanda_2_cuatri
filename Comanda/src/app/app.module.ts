@@ -14,6 +14,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAWUuOEwKZrD3jBv6Jxq-DmQ-hZSdNupiw',
@@ -33,7 +34,9 @@ const firebaseConfig = {
     , AppRoutingModule
     , AngularFireModule.initializeApp(firebaseConfig)
     , AngularFireAuthModule
-    , AngularFirestoreModule],
+    , AngularFirestoreModule
+    , NgxPermissionsModule
+    ],
   providers: [
     StatusBar,
     SplashScreen,

@@ -1,14 +1,20 @@
 <ion-content>
-  <ion-button color="primary" fill="outline" expand="block" (click)="add('S')" style="margin-top: 75px;">
-      Alta Dueño/Supervisor
+  <ion-button *ngxPermissionsOnly="['DUEÑO', 'SUPERVISOR']" color="primary" fill="outline" expand="block"
+    (click)="add('S')" style="margin-top: 75px;">
+    Alta Dueño/Supervisor
   </ion-button>
 
-  <ion-button color="primary" fill="outline" expand="block" (click)="add('E')" style="margin-top: 25px;">
-      Alta Empleado
+  <ion-button *ngxPermissionsOnly="['DUEÑO', 'SUPERVISOR']" color="primary" fill="outline" expand="block" (click)="add('E')" style="margin-top: 25px;">
+    Alta Empleado
   </ion-button>
 
-  <ion-button color="primary" fill="outline" expand="block"  style="margin-top: 25px;" (click)="pruebaprod()">
+  <ion-button *ngxPermissionsOnly="['COCINERO', 'BARTTENDER']" color="primary" fill="outline" expand="block" style="margin-top: 25px;" (click)="pruebaprod()">
     Alta Productos
   </ion-button>
-</ion-content>
 
+  <!-- boton solo disponible para clientes -->
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block"
+    (click)="agregarListaEspera()" style="margin-top: 25px;">
+    Lector de QR para Solicitar Mesa
+  </ion-button>
+</ion-content>

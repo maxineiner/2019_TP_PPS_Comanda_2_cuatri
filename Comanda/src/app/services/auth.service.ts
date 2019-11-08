@@ -18,6 +18,14 @@ export class AuthService {
     
   }
 
+  currentUserId() {
+    return this.AFauth.auth.currentUser.uid;
+  }
+
+  currentUserEmail() {
+    return this.AFauth.auth.currentUser.email;
+  }
+  
   logOut(){
     this.AFauth.auth.signOut();
   }
