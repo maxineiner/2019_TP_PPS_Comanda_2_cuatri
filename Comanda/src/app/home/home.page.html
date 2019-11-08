@@ -1,14 +1,18 @@
 <ion-content>
-  <ion-button color="primary" fill="outline" expand="block" (click)="add('S')" style="margin-top: 75px;">
+  <ion-button color="primary" fill="outline" expand="block" (click)="goTo('alta', 'S')" style="margin-top: 75px;">
       Alta Dueño/Supervisor
   </ion-button>
 
-  <ion-button color="primary" fill="outline" expand="block" (click)="add('E')" style="margin-top: 25px;">
+  <ion-button color="primary" fill="outline" expand="block" (click)="goTo('alta', 'E')" style="margin-top: 25px;">
       Alta Empleado
   </ion-button>
 
-  <ion-button color="primary" fill="outline" expand="block"  style="margin-top: 25px;" (click)="pruebaprod()">
+  <ion-button color="primary" fill="outline" expand="block"  style="margin-top: 25px;" (click)="goTo('alta-productos')">
     Alta Productos
+  </ion-button>
+
+  <ion-button color="primary" fill="outline" expand="block"  style="margin-top: 25px;" (click)="goTo('alta-mesa')">
+    Alta Mesas
   </ion-button>
 
   <ion-button color="primary" fill="outline" expand="block"  style="margin-top: 25px;" (click)="listaEspera()">

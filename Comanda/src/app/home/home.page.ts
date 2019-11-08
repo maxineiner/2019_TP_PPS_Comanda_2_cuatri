@@ -10,12 +10,11 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private menu: MenuController) {}
 
-  add(typeEmployed) {
-    this.navCtrl.navigateRoot(['alta', typeEmployed]);
-  }
-
-  pruebaprod() {
-    this.navCtrl.navigateRoot('alta-productos');
+  goTo(route, param){
+    if(param)
+      this.navCtrl.navigateRoot([route, param]);
+    else
+      this.navCtrl.navigateRoot(route);
   }
   listaEspera() {
     this.navCtrl.navigateRoot('lista-espera-registro');
