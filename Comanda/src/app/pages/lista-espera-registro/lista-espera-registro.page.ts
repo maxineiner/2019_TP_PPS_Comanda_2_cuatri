@@ -19,10 +19,13 @@ export class ListaEsperaRegistroPage implements OnInit {
   }
   arrayClientes = [];
   private async verLista() {
+    console.log("esta en verLista");
     this.listaEsperaService.getClientsToWaitingList().subscribe(async (clientes) => {
       
       // this.arrayClientes
+      this.arrayClientes = [];
       clientes.forEach(cliente => {
+   
         if(cliente.estado == "ESPERA")
         {
           this.arrayClientes.push(cliente);
@@ -38,9 +41,18 @@ export class ListaEsperaRegistroPage implements OnInit {
     console.log(item);
   }
   rechazar(item:Cliente) { 
-    console.log(item);
+
+    console.log(this.arrayClientes);
     this.listaEsperaService.removeClienteWaitingList(item);
-    let pos = this.arrayClientes.indexOf(item);
-    this.arrayClientes.splice(pos,1);
+    console.log(this.arrayClientes);
+
+    //  let pos = this.arrayClientes.indexOf(item);
+    //  this.arrayClientes.splice(pos,1);
+    //  console.log(pos);
+
+  }
+  verListaConsola()
+  {
+    console.log(this.arrayClientes);
   }
 }
