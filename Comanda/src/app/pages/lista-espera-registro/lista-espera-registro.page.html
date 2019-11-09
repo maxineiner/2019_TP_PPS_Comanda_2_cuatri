@@ -1,0 +1,28 @@
+
+<ion-content>
+    
+
+       
+          <!-- <tr *ngFor="let item of arrayClientes">
+            <td>{{item.email}}</td>
+            <td>{{item.name}}</td>            
+            <td>{{item.lastname}}</td> 
+            <td>{{item.dni}}</td>
+            <td> <img src={{item.image}} class="imagenTabla"> </td> 
+           
+          </tr> -->
+      <h2> Clientes esperando autorización</h2>
+          <div class="card" *ngFor = "let item of arrayClientes">
+              <img class="img-thumbnail" src="{{item.image}}" alt="Avatar" style="width:100%">
+              <h1>{{item.name}} {{item.lastName}} </h1>
+              <p class="title">{{item.email}}</p>
+              <p>{{item.dni}} </p>
+ 
+              <p><button class="button"  (click)="aceptar(item)">Aceptar</button></p>
+              <p><button class="buttonR"  (click)="rechazar(item)">Rechazar</button></p>
+            </div>
+            
+        
+
+<!-- <button (click)="verLista()">Ver lista espera</button> -->
+</ion-content>

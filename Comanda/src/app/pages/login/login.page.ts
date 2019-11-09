@@ -39,9 +39,9 @@ export class LoginPage implements OnInit {
     this.email = email;
     this.password = password;
   }
-
-  // GoToRegister() {
-  //   this.publicRouter.navigate("/Register");
-  // }
+  
+  GoToRegister() {
+    this.publicRouter.navigate(['/register']);
+  }
 
 }

@@ -43,12 +43,14 @@ export class HomePage implements OnInit {
     });
   }
 
-  add(typeEmployed) {
-    this.navCtrl.navigateRoot(['alta', typeEmployed]);
+  goTo(route, param){
+    if(param)
+      this.navCtrl.navigateRoot([route, param]);
+    else
+      this.navCtrl.navigateRoot(route);
   }
-
-  pruebaprod() {
-    this.navCtrl.navigateRoot('alta-productos');
+  listaEspera() {
+    this.navCtrl.navigateRoot('lista-espera-registro');
   }
 
   irAListaEspera() {

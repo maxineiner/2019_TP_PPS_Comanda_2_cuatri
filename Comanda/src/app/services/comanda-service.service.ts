@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ActorTypeBase } from '../model/actorTypeBase';
 import { Producto } from '../model/producto';
+import { Table } from '../model/table';
 
 @Injectable({
   providedIn: 'root'
@@ -44,4 +45,13 @@ export class ComandaServiceService {
       idAuth: id
     });
   }
+  public saveTable(table: Table) {
+    this.firestore.collection('Mesas').add({
+      number: table.number,
+      capacity: table.capacity,
+      type: table.type,
+      image: table.image
+    });
+  }
+
 }
