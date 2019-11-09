@@ -51,8 +51,7 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateRoot('alta-productos');
   }
 
-  agregarListaEspera() {
-    this.comandaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId());
-  }
+  irAListaEspera() {
+    this.navCtrl.navigateRoot('lista-espera');  }
 
 }
