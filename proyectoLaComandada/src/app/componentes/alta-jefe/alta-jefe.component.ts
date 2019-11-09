@@ -16,29 +16,27 @@ export class AltaJefeComponent implements OnInit {
   mostrar : boolean = true;
   mostrarFoto : string = "";
   tipo  : string = "password"; 
-  entidad;
-
+  entidad : Entidad = {nombre : "" , apellido : "" , dni : "" , cuit : "" , perfil : "" , correo : "" , clave : "" };
   icono="eye-off";
-  //datos
-  nombre : string ="";
-  correo : string ="";
-  clave : string ="";
-  apellido : string
-  dni : string;
-  cuit : string;
-  perfil : string;
-  foto : string;
-  //
 
-  constructor(private altaServicio : AltaService,private camara : Camera,private barcodeScanner : BarcodeScanner,public domSanitezer : DomSanitizer,private base64:Base64) { 
-    this.foto = "../../../assets/user.png";
+
+  constructor(private altaServicio : AltaService,private camara : Camera,private barcodeScanner : BarcodeScanner,public domSanitezer : DomSanitizer) { 
+    this.entidad.foto = "../../../assets/user.png";
   }
 
   ngOnInit(){}
 
-  registrar(){
-    this.entidad = new Entidad(this.nombre,this.apellido,this.dni,this.cuit,this.perfil,this.foto,this.correo,this.clave);    
-    this.altaServicio.altaeEntidad(this.entidad);
+  async registrar(){
+    console.log("Perfil :" + this.entidad.perfil);
+    if(this.entidad.nombre !== "" && this.entidad.apellido !== "" && this.entidad.dni !== "" && this.entidad.cuit !== "" && this.entidad.perfil !== "" && this.entidad.correo !== "" && this.entidad.clave !== ""){
+      if(await this.altaServicio.altaeEntidad(this.entidad)){
+        console.log("Se ha registrado correctamente");
+        this.altaServicio.presentToast("Se ha registrado como " + this.entidad.perfil + " correctamente.","success");
+      }
+    }
+    else{
+      this.altaServicio.presentToast("Por favor, complete todos los campos para poder regsitrarse correctamente","primary");
+    }
   }
 
   tomarFoto(){
@@ -52,10 +50,9 @@ export class AltaJefeComponent implements OnInit {
     }
     
     this.camara.getPicture(options).then((imageData) => {
-    //  console.log(imageData);
      let base64Image = 'data:image/jpeg;base64,' + imageData;
-     this.foto = base64Image;
-     //vamo a hacer un par de cosas,que?
+     this.entidad.foto = base64Image;
+
      console.log(base64Image.length);
      console.log(base64Image);
     }, (err) => {

@@ -1,31 +1,30 @@
 <ion-content paddin center text-center>
   <ion-item lines = "none" style="margin-top:5%">
-    <img src={{foto}} class="img-redonda">
-    <!-- <img [src] = "domSanitezer.bypassSecurityTrustUrl(foto)" class="img-redonda"> //que es eso de domSanitezer??? -->
+    <img [src] = "domSanitezer.bypassSecurityTrustUrl(entidad.foto)" class="img-redonda">
   </ion-item>
-  <ion-button (click) = "tomarFoto()" color = "primary" style="color: red;" ><ion-icon name="camera" style="font-size: 250%;"></ion-icon></ion-button>
-  <ion-item style="width: 90%;margin: auto;margin-top: 10%;" lines = "none" >
-      <ion-input placeholder = "Nombre" [(ngModel)] = "nombre" style="color :rgba(255,0,0,1)"></ion-input>
-      <ion-input placeholder = "Apellido" [(ngModel)] = "apellido" style="color :rgba(255,0,0,1)"></ion-input>
+  <ion-button (click) = "tomarFoto()" color = "primary"><ion-icon name="camera"></ion-icon></ion-button>
+  <ion-item style="margin-top: 10%;" lines = "none" >
+      <ion-input placeholder = "Nombre" [(ngModel)] = "entidad.nombre"></ion-input>
+      <ion-input placeholder = "Apellido" [(ngModel)] = "entidad.apellido"></ion-input>
   </ion-item>
-  <ion-item style="width: 90%;margin: auto;"  lines = "none">
-      <ion-input placeholder = "DNI" [(ngModel)] = "dni" style="color :rgba(255,0,0,1)"></ion-input>
+  <ion-item lines = "none">
+      <ion-input type = "number" placeholder = "DNI" [(ngModel)] = "entidad.dni"></ion-input>
       <ion-button (click) = "cargarPorQR()" size = "full">QR</ion-button>
   </ion-item>
-  <ion-item style="width: 90%;margin: auto;"  lines = "none">
-      <ion-input placeholder = "CUIT" [(ngModel)] = "cuit" style="color :rgba(255,0,0,1)"></ion-input>
+  <ion-item lines = "none">
+    <ion-input type = "number" placeholder = "CUIT" [(ngModel)] = "entidad.cuit"></ion-input>
   </ion-item>
-  <ion-item style="width: 90%;margin: auto;right: 15px;"  lines = "none">
-     <ion-select interface="popover" placeholder="Perfil" [(ngModel)] = "perfil" style="color :rgba(255,0,0,1);">
+  <ion-item style="right: 15px;"  lines = "none">
+     <ion-select interface="popover" placeholder="Perfil" [(ngModel)] = "entidad.perfil">
           <ion-select-option value="dueño">Dueño</ion-select-option>
           <ion-select-option value="supervisor">Supervisor</ion-select-option>
       </ion-select>
   </ion-item>
-  <ion-item style="width: 90%;margin: auto;"  lines = "none" >
-      <ion-input placeholder = "Correo electrónico" [(ngModel)] = "correo" style="color :rgba(255,0,0,1)"></ion-input>
+  <ion-item lines = "none" >
+      <ion-input placeholder = "Correo electrónico" [(ngModel)] = "entidad.correo"></ion-input>
   </ion-item>
-  <ion-item style="width: 90%;margin: auto;"  lines = "none">
-      <ion-input [type] = "tipo" placeholder = "Contraseña" [(ngModel)] = "clave" style="color :rgba(255,0,0,1)"></ion-input>
+  <ion-item  lines = "none">
+      <ion-input [type] = "tipo" placeholder = "Contraseña" [(ngModel)] = "entidad.clave"></ion-input>
       <ion-icon name={{icono}} color = "danger" (click) = "verClave()"></ion-icon>
   </ion-item>
   <ion-button (click) = "registrar()" shape="round"  expand="block" class="boton"  fill="outline">Registrar</ion-button>

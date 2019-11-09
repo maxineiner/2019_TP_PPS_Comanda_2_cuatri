@@ -16,6 +16,8 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
+import { AltaMesaComponent } from './componentes/alta-mesa/alta-mesa.component';
+import { SelectorComponent } from './componentes/selector/selector.component';
 const config = {
   apiKey: "AIzaSyC-UMfVeQNeMx1AQ2m9Mgktwf5w5o9YZAE",
   authDomain: "lacomanda-c1055.firebaseapp.com",
@@ -28,7 +30,7 @@ const config = {
 }
 
 @NgModule({
-  declarations: [AppComponent,AltaJefeComponent],
+  declarations: [AppComponent,AltaJefeComponent,AltaMesaComponent,SelectorComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,
   AngularFireModule.initializeApp(config),

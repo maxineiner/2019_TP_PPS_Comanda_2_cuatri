@@ -9,11 +9,19 @@
      margin:auto;
 }
 .boton{
-    margin-top: 7%;
-    // font-family:"cinzel decorative gordo" !important;
-    // font-style:"normal" !important;
+    margin-top: 3%;
     font-size: 3.5vmax !important;
     color: rgba(255,0,0,1);
     --border-color: rgba(255,0,0,1);
     --background-activated:rgba(255,0,0,1, 0.856);
+}
+ion-input,ion-select,ion-button{
+    color :rgba(255,0,0,1);
+}
+ion-item{
+    width: 90%;
+    margin: auto;
+}
+ion-icon{
+  font-size: 170%;
 }
