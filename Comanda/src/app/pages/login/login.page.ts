@@ -35,6 +35,11 @@ export class LoginPage implements OnInit {
     }).catch(err => { console.log(err); this.presentAlert() });
   }
 
+  autocompletar(email, password) {
+    this.email = email;
+    this.password = password;
+  }
+
   // GoToRegister() {
   //   this.publicRouter.navigate("/Register");
   // }

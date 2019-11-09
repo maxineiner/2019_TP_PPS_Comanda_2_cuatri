@@ -52,6 +52,11 @@ export class HomePage implements OnInit {
   }
 
   irAListaEspera() {
-    this.navCtrl.navigateRoot('lista-espera');  }
+    this.navCtrl.navigateRoot('lista-espera');  
+  }
+
+  encuestas(){
+    console.log('encuestas');
+  }
 
 }

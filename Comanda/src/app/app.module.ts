@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { ZBar } from '@ionic-native/zbar/ngx';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAWUuOEwKZrD3jBv6Jxq-DmQ-hZSdNupiw',
@@ -42,6 +43,7 @@ const firebaseConfig = {
     SplashScreen,
     Camera,
     BarcodeScanner,
+    ZBar,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

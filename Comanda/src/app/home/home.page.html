@@ -12,9 +12,14 @@
     Alta Productos
   </ion-button>
 
-  <!-- boton solo disponible para clientes -->
+  <!-- botones solo disponible para clientes -->
   <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block"
     (click)="irAListaEspera()" style="margin-top: 25px;">
     Lector de QR para Solicitar Mesa
+  </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block"
+    (click)="encuestas()" style="margin-top: 25px;">
+    Ver encuestas
   </ion-button>
 </ion-content>
