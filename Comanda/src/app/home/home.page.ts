@@ -49,6 +49,7 @@ export class HomePage implements OnInit {
     else
       this.navCtrl.navigateRoot(route);
   }
+  
   listaEspera() {
     this.navCtrl.navigateRoot('lista-espera-registro');
   }

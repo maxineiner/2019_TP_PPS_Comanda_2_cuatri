@@ -19,7 +19,7 @@ export class AltaPage implements OnInit {
   actorType: ActorTypeBase;
   code: any;
   typeEmployed: string;
-  titleTypeEmployed: string;
+  titleTypeEmployed: string = 'Alta Dueño Supervisor';
 
   constructor(
     private comandaService: ComandaServiceService,
@@ -38,7 +38,14 @@ export class AltaPage implements OnInit {
       email: new FormControl('', [Validators.required, this.validatorFormatt]),
       password: new FormControl('', [Validators.required])
     });
-   
+
+    this.typeEmployed = this.activeRoute.snapshot.params.param;
+    console.log(this.typeEmployed);
+
+    if(this.typeEmployed != 'S') {
+      this.myForm.addControl('tiposEmpleados', new FormControl('', [Validators.required]));
+      this.titleTypeEmployed = 'Alta Empleado';
+    }   
   }  
 
   /** funcion para tomar la foto con @ionic-native/camera/ngx */

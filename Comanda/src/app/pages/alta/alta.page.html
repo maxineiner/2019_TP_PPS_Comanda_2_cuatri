@@ -32,7 +32,7 @@
         </ion-item>
         <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
           myForm.get('dni').errors.error">
-          <p>El campo dni solo debe contener numeros</p>lengthValidator
+          <p>El campo dni solo debe contener numeros</p>
         </div>
         <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
           myForm.get('dni').touched && myForm.get('dni').errors.lengthError">
@@ -48,11 +48,11 @@
         </div>
 
         <ion-item>
-          <ion-input formControlName="emial" type="text" placeholder="email"></ion-input>
+          <ion-input formControlName="email" type="text" placeholder="email"></ion-input>
         </ion-item>
         <div class="isa_error" *ngIf="myForm.get('email').errors && myForm.get('email').dirty &&
           myForm.get('email').touched && myForm.get('email').errors.emailErrFormat">
-          El formato del email ingresado no es el correcto
+          <p>El formato del email ingresado no es el correcto</p>
         </div>
 
         <ion-item>
