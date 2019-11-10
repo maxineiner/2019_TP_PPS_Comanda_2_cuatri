@@ -34,9 +34,12 @@ export class AltaPage implements OnInit {
       name: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
       dni: new FormControl('', [Validators.required, this.onlyNumbersValidator, this.lengthValidator(8)]),
+      cuil: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, this.validatorFormatt]),
+      password: new FormControl('', [Validators.required])
     });
    
-  }
+  }  
 
   /** funcion para tomar la foto con @ionic-native/camera/ngx */
   takePhoto() {
@@ -236,6 +239,14 @@ export class AltaPage implements OnInit {
       }
       return null;
     };
+  }
+
+  validatorFormatt(control: AbstractControl) {
+    let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]+@[a-zA-Z0-9-]+?(\.[a-zA-Z0-9-]+){1,}$/;
+    if (control.value.length > 0 && !exp.exec(control.value)) {
+      return { emailErrFormat: true }
+    }
+    return null;
   }
 
 
