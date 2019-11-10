@@ -27,21 +27,21 @@ export class AltaJefeComponent implements OnInit {
   dni : string;
   cuit : string;
   perfil : string;
-  foto : string;
+  foto : string = "../../../assets/user.png";
   //
 
   constructor(private altaServicio : AltaService,private camara : Camera,private barcodeScanner : BarcodeScanner,public domSanitezer : DomSanitizer,private base64:Base64) { 
-    this.foto = "../../../assets/user.png";
   }
 
   ngOnInit(){}
 
   registrar(){
+    console.log("entro a registrar");
     this.entidad = new Entidad(this.nombre,this.apellido,this.dni,this.cuit,this.perfil,this.foto,this.correo,this.clave);    
     this.altaServicio.altaeEntidad(this.entidad);
   }
 
-  tomarFoto(){
+  async tomarFoto(){
 
     const options: CameraOptions = {
       quality: 100,
