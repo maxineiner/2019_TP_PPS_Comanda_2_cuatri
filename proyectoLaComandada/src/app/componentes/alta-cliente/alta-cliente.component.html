@@ -1,0 +1,38 @@
+<ion-header>
+    <ion-toolbar style="text-align: center;" color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref=""></ion-back-button>
+          </ion-buttons>
+        <ion-title>Registro de Cliente</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<ion-content center text-center style="--background: rgb(253, 253, 253);">
+    <ion-item lines="none">
+      <img  src={{cliente.foto}} class="img-redonda">
+    </ion-item>
+    <ion-button (click)="tomarFoto()" color ="danger"><ion-icon name="camera"></ion-icon></ion-button>
+    <ion-item lines="none" >
+        <ion-input placeholder = "Nombre" [(ngModel)] = "cliente.nombre"></ion-input>
+      </ion-item>
+   <ion-item lines="none">
+        <ion-input placeholder = "Apellido" [(ngModel)] = "cliente.apellido"></ion-input>
+      </ion-item>
+      <ion-item lines = "none">
+        <ion-input type = "number" placeholder = "DNI" [(ngModel)] = "cliente.dni" max=8></ion-input>
+        <ion-button (click) = "cargarPorQR()" size="full" color="danger" shape="round">QR</ion-button>
+    </ion-item>
+    <!-- <ion-item style="right: 15px;"  lines = "none">
+       <ion-select interface="popover" placeholder="Perfil" [(ngModel)] = "cliente.perfil">
+            <ion-select-option value="dueño">Dueño</ion-select-option>
+            <ion-select-option value="supervisor">Supervisor</ion-select-option>
+        </ion-select>
+    </ion-item> -->
+    <ion-item  lines = "none">
+        <ion-input placeholder = "Correo electrónico" [(ngModel)] = "cliente.correo"></ion-input>
+    </ion-item>
+    <ion-item   lines = "none" >
+        <ion-input type="password" placeholder = "Contraseña" [(ngModel)] = "cliente.clave"></ion-input>
+        <!-- <ion-icon name={{icono}} color = "danger" (click) = "verClave()"></ion-icon> -->
+    </ion-item>
+    <ion-button style="margin-top: 5%;" (click) = "registrar()" shape="round"  expand="block" class="registrar-botton"  fill="outline">Registrar</ion-button>
+  </ion-content>

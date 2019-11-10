@@ -9,13 +9,13 @@
     <ion-row>
       <ion-col size="11" class="centrar-col">
         <!-- <p class="titulo">Iniciar Secion</p> -->
-        <ion-item>
+        <ion-item class="bg-input">
           <ion-label position="floating" class="label">Correo Electronico</ion-label>
-          <ion-input type="text" class="input-correo"></ion-input>
+          <ion-input type="text" class="input-correo" name="correo" [(ngModel)]="correo"></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="bg-input">
           <ion-label position="floating" class="label">Contraseña</ion-label>
-          <ion-input type="password"></ion-input>
+          <ion-input type="password"  name="clave" [(ngModel)]="clave"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -25,14 +25,14 @@
         <br>
         <a href="#" class="recuperar">¿Olvidaste la contraeña? ¡Recuperala!</a>
         <img src="../../../assets/usos/separador-png-2.png" class="amarillo" alt="">
-        <ion-button shape="round"  expand="block" class="boton"  fill="outline">Registrarse</ion-button>
+        <ion-button shape="round"  expand="block" class="boton"  fill="outline" [routerLink]="['/registro']" routerLinkActive="router-link-active" >Registrarse</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
   </ion-content>
 <ion-footer >
   <ion-toolbar class="footer">
-   Creado por
+    <label for="">Creado por</label>
     <img src="../../../assets/logos/logo-sample-3bytes-tt.png" alt="" width="20%">
   </ion-toolbar>
 </ion-footer>

@@ -37,9 +37,10 @@
 }
 
 .footer{
+    height: 5vmax;
     text-align: center;
     --background: rgb(143, 0, 0);
-    --color:rgba(56, 56, 56, 0.37)
+    --color:rgba(180, 180, 180, 0.788);
 }
 
 .item{
@@ -64,8 +65,9 @@
     text-align: center;
 }
 
+
 .boton{
-    margin-top: 10%;
+    margin-top: 2%;
     // font-family:"cinzel decorative gordo" !important;
     // font-style:"normal" !important;
     font-size: 3.5vmax !important;
@@ -79,12 +81,33 @@
 }
 
 .recuperar{
+    margin: 0 !important;
+    font-size: 2vmax;
     color:white;
 }
 
 .amarillo{
     filter:invert(1.5);
-  }
+}
+
+.bg-input{
+    font-weight:800;
+    --color:red;
+    --background: #ebebeb;
+    --border-radius:30px;
+    margin-bottom: 5px;
+}
+
+.img-redonda{
+    height: 150px;
+    width: 150px;
+    /* los siguientes valores son independientes del tamaño del círculo */
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
+    margin:auto;
+}
 
 @font-face{
     font-family:"cinzel decorative gordo";
