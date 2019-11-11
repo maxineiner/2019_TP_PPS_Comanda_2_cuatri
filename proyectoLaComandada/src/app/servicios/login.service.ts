@@ -20,34 +20,14 @@ export class LoginService {
             let verificar = await this.auth.auth.signInWithEmailAndPassword(usuario,clave);
             let correo = await verificar.user.email;
             console.log(correo);
-            return await this.traerUsuario(correo);
+            console.log("entre a treaer usuario" + correo);
         } catch (error) {
             return error.message;
         }
     }
     
-    async traerUsuario(correo : string)
+    traerUsuario(correo : string)
     {
-        console.log("entre a treaer usuario" + correo);
-        this.angularFirestore.collection<Object>("entidades", ref => ref.where("correo","==",correo)).valueChanges().subscribe(
-            datos =>{
-                console.log(datos);
-                switch (datos['0']["estado"]){
-                    case 'pendiente':
-                        console.log("pendiente");
-                        return "Su solicitud de cliente aun sigue en espera de aprobacion, vuelva a intentarlo en la brevedad.";
-                    case 'aprobado':
-                        return "esta aprobado";
-                }
-            }
-        );
-
-    //     this.colecionFotos.snapshotChanges(['added']).pipe(
-    //   map(actions => actions.map(a => {
-    //     const data = a.payload.doc.data();
-    //     const id = a.payload.doc.id;
-    //     console.log({...data});
-    //     return { id, ...data };
-    //   })))
+        return this.angularFirestore.collection("entidades", ref => ref.where("correo","==",correo)).valueChanges();
     }
 }

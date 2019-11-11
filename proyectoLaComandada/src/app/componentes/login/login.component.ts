@@ -32,8 +32,19 @@ export class LoginComponent implements OnInit {
           this.mensaje("Error!, la contraseña invalida");
           break;
         default:
-          console.log(respuesta);
-          this.mensaje(respuesta);
+          this.loginServi.traerUsuario(this.correo).subscribe(
+            respuesta =>{
+             console.log();
+             switch (respuesta['0']['estado']) {
+               case 'pendiente':
+                 this.mensaje("Su cuenta aun sigue en estado pendiente, intente ingresar nuevamente en la brevedad.")
+                 break;
+             
+               default:
+                 break;
+             }
+            }
+          );
           break;
       }
     }
@@ -50,12 +61,5 @@ export class LoginComponent implements OnInit {
     toast.present();
   }
 
-  async test()
-  {
-    console.log("entre a test");
-    this.loginServi.traerUsuario(this.correo);
-  }
-
   ngOnInit() {}
-
 }
