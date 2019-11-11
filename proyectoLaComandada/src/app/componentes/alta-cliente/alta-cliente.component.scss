@@ -26,6 +26,15 @@ ion-input{
     margin:auto;
 }
 
+ion-select{
+    --color :rgba(255,0,0,1) !important;
+}
+
+ion-select-option{
+    --color :rgb(255, 0, 0) !important;
+}
+
+
 .registrar-botton{
     height: 7vmax;
     font-size: 3vmax;
@@ -36,6 +45,7 @@ ion-input{
     --background-activated:rgb(255,0,0,1, 0.856);
 }
 
+
 @media(max-width:300px)
 {
     ion-input{
@@ -45,6 +55,7 @@ ion-input{
     }
 
     ion-item{
+        height: 10vmax;
         margin-bottom:0px;
     }
 

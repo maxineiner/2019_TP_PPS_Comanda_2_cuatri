@@ -16,6 +16,9 @@ import { AltaClienteService } from './servicios/alta-cliente.service';
 import {  AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { config } from './firebase';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { LoginService } from 'src/app/servicios/login.service';
 
 
 
@@ -29,8 +32,11 @@ import { config } from './firebase';
     StatusBar,
     Camera,
     SplashScreen,
+    BarcodeScanner,
     AngularFirestore,
     AltaClienteService,
+    AngularFireAuth,
+    LoginService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

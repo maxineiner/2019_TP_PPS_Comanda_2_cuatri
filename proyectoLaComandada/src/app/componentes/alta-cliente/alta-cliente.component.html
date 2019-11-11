@@ -9,24 +9,34 @@
 <ion-content center text-center style="--background: rgb(253, 253, 253);">
     <ion-item lines="none">
       <img  src={{cliente.foto}} class="img-redonda">
+    </ion-item> 
+    <ion-button *ngIf="cliente.perfil == 'cliente'" (click)="tomarFoto()" color ="danger"><ion-icon name="camera"></ion-icon></ion-button>
+     <ion-item lines = "none" style="color: red;">
+      <label>Tipo de perfil:</label>
+       <ion-select interface="popover" [(ngModel)] = "cliente.perfil" lines = "none">
+            <ion-select-option value="cliente" lines = "none">Cliente</ion-select-option >
+            <ion-select-option value="anonimo" lines = "none" (click)="anonimo()">Anonimo</ion-select-option>
+        </ion-select>
     </ion-item>
-    <ion-button (click)="tomarFoto()" color ="danger"><ion-icon name="camera"></ion-icon></ion-button>
-    <ion-item lines="none" >
+    <div *ngIf="cliente.perfil == 'cliente'">
+      <ion-item lines="none" >
         <ion-input placeholder = "Nombre" [(ngModel)] = "cliente.nombre"></ion-input>
       </ion-item>
-   <ion-item lines="none">
+      <ion-item lines="none">
         <ion-input placeholder = "Apellido" [(ngModel)] = "cliente.apellido"></ion-input>
       </ion-item>
       <ion-item lines = "none">
-        <ion-input type = "number" placeholder = "DNI" [(ngModel)] = "cliente.dni" max=8></ion-input>
+        <ion-input type = "number" placeholder = "DNI" [(ngModel)] = "cliente.dni"></ion-input>
         <ion-button (click) = "cargarPorQR()" size="full" color="danger" shape="round">QR</ion-button>
-    </ion-item>
-    <!-- <ion-item style="right: 15px;"  lines = "none">
-       <ion-select interface="popover" placeholder="Perfil" [(ngModel)] = "cliente.perfil">
-            <ion-select-option value="dueño">Dueño</ion-select-option>
-            <ion-select-option value="supervisor">Supervisor</ion-select-option>
-        </ion-select>
-    </ion-item> -->
+      </ion-item>
+    </div>
+
+    <div *ngIf="cliente.perfil == 'anonimo'">
+      <ion-item lines="none" >
+      <ion-input placeholder = "Alias" [(ngModel)]="cliente.nombre"></ion-input>
+      </ion-item>
+    </div>
+
     <ion-item  lines = "none">
         <ion-input placeholder = "Correo electrónico" [(ngModel)] = "cliente.correo"></ion-input>
     </ion-item>

@@ -98,16 +98,6 @@
     margin-bottom: 5px;
 }
 
-.img-redonda{
-    height: 150px;
-    width: 150px;
-    /* los siguientes valores son independientes del tamaño del círculo */
-    background-repeat: no-repeat;
-    background-position: 50%;
-    border-radius: 50%;
-    background-size: 100% auto;
-    margin:auto;
-}
 
 @font-face{
     font-family:"cinzel decorative gordo";
@@ -122,4 +112,26 @@
     font-weight:400;
     src:url(./assets/fuentes/cinzeldecorative-regular.ttf) format('truetype')
 }
-
+.md,
+.ios,
+.wp {
+    .custom-alert-danger{
+      > div {
+        background: red; // if you don't use .md, .ios, .mp initially, you'd have to use !important here.
+        color: #fff;
+      }
+    }
+    .alert-header{
+        color: #fff !important;
+    }
+    .alert-message{
+        background: red;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+    .alert-button{
+        border-radius: 10px;
+        color:rgb(255, 45, 45);
+        background-color: rgb(255, 255, 255) !important;
+    }
+}
