@@ -6,7 +6,9 @@ import { AlertController, NavController } from '@ionic/angular';
 import { ActorTypeBase } from 'src/app/model/actorTypeBase';
 import { ActorType } from 'src/app/model/actorType';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-alta',
@@ -26,8 +28,10 @@ export class AltaPage implements OnInit {
     private alertController: AlertController,
     private barcodeScanner: BarcodeScanner,
     private camera: Camera,
-    public navCtrl: NavController,
-    public activeRoute: ActivatedRoute) { }
+    private navCtrl: NavController,
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -39,14 +43,15 @@ export class AltaPage implements OnInit {
       password: new FormControl('', [Validators.required])
     });
 
-    this.typeEmployed = this.activeRoute.snapshot.params.param;
-    console.log(this.typeEmployed);
+    this.route.queryParams.subscribe((params) => {
+      this.typeEmployed = params['tipo'];
+      if (this.typeEmployed != 'S') {
+        this.myForm.addControl('tiposEmpleados', new FormControl('', [Validators.required]));
+        this.titleTypeEmployed = 'Alta Empleado';
+      }
+    });
 
-    if(this.typeEmployed != 'S') {
-      this.myForm.addControl('tiposEmpleados', new FormControl('', [Validators.required]));
-      this.titleTypeEmployed = 'Alta Empleado';
-    }   
-  }  
+  }
 
   /** funcion para tomar la foto con @ionic-native/camera/ngx */
   takePhoto() {
@@ -176,23 +181,32 @@ export class AltaPage implements OnInit {
     return cuil;
   }
 
-  save() {
-    const typeE = this.typeEmployed === 'S' ? 'S' : this.myForm.get('tiposEmpleados').value;
+  async save() {
+    const typeE = this.typeEmployed === 'S' ? 'SUPERVISOR' : this.myForm.get('tiposEmpleados').value;
     const img = this.image ? this.image : '';
-    try {
-      this.actorType = new ActorTypeBase(
-        this.myForm.get('name').value,
-        this.myForm.get('lastName').value,
-        this.myForm.get('dni').value,
-        this.myForm.get('cuil').value,
-        img,
-        typeE);
 
-      this.comandaService.saveActorType(this.actorType);
+    try {      
+      this.generateObj(typeE, img);
+
+      let data = await this.authService.createUserWithEmailAndPassword(this.actorType.emial, this.actorType.password);
+      let result = await this.comandaService.saveActorType(this.actorType);
+      let rol = this.comandaService.saveRol(data['user']['uid'], this.actorType.type);
       this.presentAlertSuccess('El alta se realizo exitosamente');
     } catch (error) {
       this.presentAlertSuccess(error.message);
     }
+  }
+
+  generateObj(typeE, img) {
+    return this.actorType = new ActorTypeBase(
+      this.myForm.get('name').value,
+      this.myForm.get('lastName').value,
+      this.myForm.get('dni').value,
+      this.myForm.get('cuil').value,
+      img, typeE,
+      this.myForm.get('email').value,
+      this.myForm.get('password').value
+    );
   }
 
   async presentAlert(err) {
@@ -221,7 +235,7 @@ export class AltaPage implements OnInit {
         }, {
           text: 'Aceptar',
           handler: () => {
-            this.navCtrl.navigateRoot('home');
+            this.router.navigate(['home']);
           }
         }
       ]

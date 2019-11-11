@@ -6,7 +6,7 @@ import { NoLogInGuard } from './guard/no-log-in.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard]},
-  { path: 'alta/:typeEmployed', loadChildren: './pages/alta/alta.module#AltaPageModule', canActivate: [AuthGuard] },
+  { path: 'alta', loadChildren: './pages/alta/alta.module#AltaPageModule', canActivate: [AuthGuard] },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule', canActivate: [NoLogInGuard]},
   { path: 'lista-espera', loadChildren: './pages/lista-espera/lista-espera.module#ListaEsperaPageModule', canActivate: [AuthGuard] },
   { path: 'alta-productos', loadChildren: './pages/alta-productos/alta-productos.module#AltaProductosPageModule', canActivate: [AuthGuard]},

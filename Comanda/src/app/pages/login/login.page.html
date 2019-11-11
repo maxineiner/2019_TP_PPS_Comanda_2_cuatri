@@ -4,11 +4,10 @@
 
     <ion-fab-list side="bottom">
       <ion-fab-button>Dueño</ion-fab-button>
-      <ion-fab-button>Super</ion-fab-button>
+      <ion-fab-button (click)="autocompletar('supervisor@gmail.com','123456')">Super</ion-fab-button>
       <ion-fab-button>Metre</ion-fab-button>
-      <ion-fab-button>Cliente</ion-fab-button>
-      <ion-fab-button>Cheff</ion-fab-button>
-      <ion-fab-button (click)="autocompletar('hernan@gmail.com','123456')">Hernan</ion-fab-button>
+      <ion-fab-button (click)="autocompletar('cliente@gmail.com','123456')">Cliente</ion-fab-button>
+      <ion-fab-button>Cheff</ion-fab-button>  
     </ion-fab-list>
   </ion-fab>
 

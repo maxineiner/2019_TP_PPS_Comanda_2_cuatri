@@ -3,6 +3,7 @@ import { NavController, MenuController } from '@ionic/angular';
 import { NgxPermissionsService } from 'ngx-permissions';
 import { ComandaServiceService } from '../services/comanda-service.service';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,56 +11,66 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  rolUser: { id: string; idAuth: any; tipo: any; }[];
+  rolUser: { id: string; idAuth: any; rol: any; }[];
   permiso: string;
 
   constructor(
+    public router: Router,
     public navCtrl: NavController,
     private menu: MenuController,
     private permissionsService: NgxPermissionsService,
     private comandaService: ComandaServiceService,
-    private authService: AuthService) {    
+    private authService: AuthService) {  
+      console.log('constructor');  
   }
 
   ngOnInit() {
-    /*const perm = ["CLIENTE"];
-    this.permissionsService.loadPermissions(perm);*/
+    this.flushPermissions();
     this.loadPermissions();
   }
 
-  loadPermissions() {
-    this.comandaService.getRol_user().subscribe(data => {
+  flushPermissions() {
+    this.permissionsService.flushPermissions();
+  }
+
+  loadPermissions() {    
+    this.comandaService.getRolUser().subscribe(data => {
       this.rolUser = data.map(e => {
         return {
           id: e.payload.doc.id,
           idAuth: e.payload.doc.data()['idAuth'],
-          tipo: e.payload.doc.data()['tipo'],
+          rol: e.payload.doc.data()['rol'],
         };
-      })
-      const id = this.authService.currentUserId();
+      });
+      const id = sessionStorage.getItem('idUser');
       const user = this.rolUser.find(user => user.idAuth === id );
-      this.permiso = user.tipo;
+      this.permiso = user.rol;
+      console.log('Permiso: ' + this.permiso);
       this.permissionsService.addPermission(this.permiso);
     });
   }
-
+  
   goTo(route, param){
     if(param)
-      this.navCtrl.navigateRoot([route, param]);
+      //this.navCtrl.navigateRoot([route, param ]);
+      this.router.navigate([route], { queryParams: {tipo: param}});
     else
-      this.navCtrl.navigateRoot(route);
+      this.router.navigate([route]);
+      // this.navCtrl.navigateRoot(route);
   }
   
   listaEspera() {
-    this.navCtrl.navigateRoot('lista-espera-registro');
+    this.router.navigate(['lista-espera-registro']);
+    // this.navCtrl.navigateRoot('lista-espera-registro');
   }
 
   irAListaEspera() {
-    this.navCtrl.navigateRoot('lista-espera');  
+    this.router.navigate(['lista-espera']);
+    // this.navCtrl.navigateRoot('lista-espera');  
   }
 
   encuestas(){
     console.log('encuestas');
-  }
+  }  
 
 }

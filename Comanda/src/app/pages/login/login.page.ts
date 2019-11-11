@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
 
   OnSubmitLogIn() {
     this.authService.logIn(this.email, this.password).then(res => {
-      console.log(res['user']['uid']);
+      sessionStorage.setItem('idUser', res['user']['uid']);
       this.publicRouter.navigate(['/home']);
     }).catch(err => { console.log(err); this.presentAlert() });
   }

@@ -12,14 +12,18 @@ export class ComandaServiceService {
   constructor(
     private firestore: AngularFirestore) { }
 
-  public saveActorType(actorType: ActorTypeBase) {
-    this.firestore.collection('Empleados').add({
+  public saveActorType(actorType: ActorTypeBase): Promise<any> {
+    return this.firestore.collection('Empleados').add({
       name: actorType.name,
       lastName: actorType.lastName,
       dni: actorType.dni,
       cuil: actorType.cuil,
       image: actorType.image,
-      type: actorType.type
+      rol: actorType.type,
+      email: actorType.emial,
+      password: actorType.password
+    }).then(doc => {
+    }).catch(err => {
     });
   }
 
@@ -35,8 +39,15 @@ export class ComandaServiceService {
     });
   }
 
-  public getRol_user() {
+  public getRolUser() {
     return this.firestore.collection('Rol_User').snapshotChanges();
+  }
+
+  public saveRol(idAuth, rol){
+    this.firestore.collection('Rol_User').add({
+      idAuth: idAuth,
+      rol: rol
+    });
   }
 
   public addListaEspera(email: string, id: string) {
