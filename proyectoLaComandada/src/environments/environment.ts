@@ -3,9 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
-export const config = {
+  production: false,
+  firebaseConfig : {
     apiKey: "AIzaSyC-UMfVeQNeMx1AQ2m9Mgktwf5w5o9YZAE",
     authDomain: "lacomanda-c1055.firebaseapp.com",
     databaseURL: "https://lacomanda-c1055.firebaseio.com",
@@ -14,7 +13,9 @@ export const config = {
     messagingSenderId: "503253383760",
     appId: "1:503253383760:web:755ebaceea1ba83ce2af55",
     measurementId: "G-FF8H5K31XZ"
-}
+  }
+
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

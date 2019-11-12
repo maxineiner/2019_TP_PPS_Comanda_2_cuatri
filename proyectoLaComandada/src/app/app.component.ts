@@ -16,6 +16,8 @@ export class AppComponent {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+    this.statusBar.styleBlackTranslucent();
+    this.statusBar.backgroundColorByHexString("#ff0000");
   }
 
   initializeApp() {

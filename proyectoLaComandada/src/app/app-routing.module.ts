@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AltaJefeComponent } from './componentes/alta-jefe/alta-jefe.component';
+import { MenuJefeComponent } from './componentes/menu-jefe/menu-jefe.component';
+import { ListaComponent } from './componentes/lista/lista.component';
 
 const routes: Routes = [
-  {path : "" , component : AltaJefeComponent}
+  {path : "menu" , component : MenuJefeComponent , children :[
+    {path : "lista" , component : ListaComponent , pathMatch : "full"}
+  ]},
+  {path : "" , redirectTo : "/menu/lista" , pathMatch : "full"},
+  {path : "lista" ,component:ListaComponent},
+
+  
 ];
 
 @NgModule({
