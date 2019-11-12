@@ -12,8 +12,9 @@ export class LoginComponent implements OnInit {
   constructor(private loginServi : LoginService,
     private toastController: ToastController,) { }
 
-  correo ="";
-  clave ="";
+  correo : string ="";
+  clave : string ="";
+  select : string;
 
   async iniciarSecion()
   {
@@ -26,10 +27,10 @@ export class LoginComponent implements OnInit {
 
       switch (respuesta) {
         case "The email address is badly formatted.":
-          this.mensaje("Error!, el correo electronico tiene un formato incorrecto.")
+          this.mensaje("Error! El correo electronico tiene un formato incorrecto.")
           break;
         case "The password is invalid or the user does not have a password.":
-          this.mensaje("Error!, la contraseña invalida");
+          this.mensaje("Error! La contraseña es incorrecta");
           break;
         default:
           this.loginServi.traerUsuario(this.correo).subscribe(
@@ -39,7 +40,6 @@ export class LoginComponent implements OnInit {
                case 'pendiente':
                  this.mensaje("Su cuenta aun sigue en estado pendiente, intente ingresar nuevamente en la brevedad.")
                  break;
-             
                default:
                  break;
              }
@@ -61,5 +61,31 @@ export class LoginComponent implements OnInit {
     toast.present();
   }
 
+  llenarInput(){
+    switch (this.select) {
+      case "admin":
+        this.correo = "admin@admin.com";
+        this.clave = "111111"
+        break;
+      case "invitado":
+        this.correo = "invitado@invitado.com";
+        this.clave = "222222"
+        break;
+      case "usuario":
+        this.correo = "usuario@usuario.com";
+        this.clave = "333333"
+        break;
+      case "tester":
+        this.correo = "tester@tester.com";
+        this.clave = "555555"
+        break;
+      case "anonimo":
+        this.correo = "anonimo@anonimo.com";
+        this.clave = "444444"
+        break;
+      default:
+        break;
+    }
+  }
   ngOnInit() {}
 }

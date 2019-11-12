@@ -85,15 +85,15 @@ export class AltaClienteComponent implements OnInit {
         toast.present();
       }
       else{
-        this.altaCliente.AltaCliente(this.cliente);
+         await this.altaCliente.AltaCliente(this.cliente);
          const alert = await this.alertController.create({
           // header: '¡Solicitud de cuenta enviada con exito!',
           // subHeader: 'Tu cuenta sera revisada por nuestros administradores en la brevedad',
-          message: '<h1>¡Solicitud de cuenta enviada con exito!<h1>No podras iniciar sesion hasta que nuestros administradores acepten tu solicitud de cliente',
+          message: '<h1>¡Solicitud de cuenta enviada con exito!</h1>No podras iniciar sesion hasta que nuestros administradores acepten tu solicitud de cliente',
           cssClass: 'custom-alert-danger',
           buttons: [
             {
-              text: '¡Okay! volver al inicio',
+              text: '¡Exelente! volver al inicio',
               handler: () => {
                 this.router.navigate(['/']);
               }
@@ -117,15 +117,15 @@ export class AltaClienteComponent implements OnInit {
         this.cliente.dni = "";
         this.cliente.foto = "../../assets/usos/user.png";
         this.cliente.estado = "aceptado";
-        this.altaCliente.AltaCliente(this.cliente);
+        await this.altaCliente.AltaCliente(this.cliente);
         const alert = await this.alertController.create({
           // header: '¡Solicitud de cuenta enviada con exito!',
           // subHeader: 'Tu cuenta sera revisada por nuestros administradores en la brevedad',
-          message: '<h1>¡Cuenta Anonima creada con exito!<h1>Ahora podras iniciar sesion como anonimo.',
+          message: '<h1>¡Cuenta Anonima creada con exito!</h1>Ahora podras iniciar sesion como anonimo.',
           cssClass: 'custom-alert-danger',
           buttons: [
             {
-              text: '¡Okay! volver al inicio',
+              text: '¡Exelente! volver al inicio',
               handler: () => {
                 this.router.navigate(['/']);
               }
@@ -133,7 +133,7 @@ export class AltaClienteComponent implements OnInit {
         }); 
         await alert.present();
       }
-      }
+    }
   }
 
 }
