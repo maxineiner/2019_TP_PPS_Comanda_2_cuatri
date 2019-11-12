@@ -1,10 +1,11 @@
-export interface Entidad {
-    nombre : string,
+export interface Entidad{
+    id? : string,
     apellido : string,
-    dni : string,
-    cuit : string,
-    perfil : string,
-    foto? : string,
+    clave : string,
     correo : string,
-    clave : string
+    estado : string,
+    foto : string,
+    nombre : string,
+    perfil : string,
+    dni : number,
 }

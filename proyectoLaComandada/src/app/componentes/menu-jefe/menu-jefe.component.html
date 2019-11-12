@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color = "danger">
+    <ion-buttons >
+      <ion-item color = "danger" class="ion-text-center">
+        <ion-menu-button menu = "first"></ion-menu-button>
+        <ion-title>La Comanda</ion-title>
+      </ion-item>
+    </ion-buttons> 
+</ion-toolbar>
+</ion-header>
+<ion-menu side="start" menuId="first" contentId = "principal">
+  <ion-header>
+    <ion-toolbar >
+        <ion-item color="danger">
+            <ion-avatar slot="start">
+                <img [src]="jefeLogueado.path">
+              </ion-avatar>
+              <ion-label>
+                <h2>{{jefeLogueado.nombre}} {{jefeLogueado.apellido}}</h2>
+                <h3>{{jefeLogueado.perfil}}</h3>
+              </ion-label>
+        </ion-item>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle *ngFor = "let item of items">
+          <ion-item [routerLink] = "item.ruta">
+            <ion-icon slot = "start" [name] = "item.icono" color = "danger"></ion-icon>
+            <ion-label>{{item.nombre}}</ion-label>
+          </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+  <ion-footer>
+    <ion-item routerLink = "">
+        <ion-icon color = "danger" name="log-out"></ion-icon>
+       <ion-label color = "danger">Cerrar Sesión</ion-label>
+    </ion-item>
+  </ion-footer>
+</ion-menu>
+<ion-router-outlet id = "principal"></ion-router-outlet>
