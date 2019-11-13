@@ -65,6 +65,14 @@
     text-align: center;
 }
 
+.titulo-menu{
+    font-family:"cinzel decorative gordo" !important;
+    font-style:"normal" !important;
+    font-size: 2.5vmax !important;
+    color: rgb(243, 243, 243);
+    text-align: center;
+}
+
 
 .boton{
     margin-top: 2%;
@@ -134,4 +142,15 @@
         color:rgb(255, 45, 45);
         background-color: rgb(255, 255, 255) !important;
     }
+}
+
+.spinner
+{
+    --background: white;
+    --spinner-color: red;
+    font-family:"cinzel decorative gordo" !important;
+    font-style:"normal" !important;
+    font-size: 1.5vmax !important;
+    color: rgb(255, 25, 25);
+    text-align: center;
 }

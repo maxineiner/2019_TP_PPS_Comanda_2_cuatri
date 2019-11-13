@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import{ AltaClienteService } from '../../servicios/alta-cliente.service';
@@ -20,7 +20,9 @@ export class AltaClienteComponent implements OnInit {
     private barcodeScanner : BarcodeScanner,
     private toastController: ToastController,
     public alertController: AlertController ,
-    public router : Router) { }
+    public router : Router,
+    public loadingController: LoadingController
+    ) { }
 
   ngOnInit() {}
 
@@ -47,6 +49,23 @@ export class AltaClienteComponent implements OnInit {
 
 
   //funciones
+
+  async present() {
+    return await this.loadingController.create({
+      duration: 5000,
+      spinner: "bubbles",
+      message: 'Iniciando sesion...',
+      translucent: true,
+      cssClass: "spinner",
+    }).then(a => {
+      a.present();
+    });
+  }
+
+  async dismiss() {
+    return await this.loadingController.dismiss();
+  }
+
   tomarFoto()
   {
     this.camera.getPicture(this.options).then((imageData) => {
@@ -85,10 +104,10 @@ export class AltaClienteComponent implements OnInit {
         toast.present();
       }
       else{
+        this.present();
          await this.altaCliente.AltaCliente(this.cliente);
+         this.dismiss();
          const alert = await this.alertController.create({
-          // header: '¡Solicitud de cuenta enviada con exito!',
-          // subHeader: 'Tu cuenta sera revisada por nuestros administradores en la brevedad',
           message: '<h1>¡Solicitud de cuenta enviada con exito!</h1>No podras iniciar sesion hasta que nuestros administradores acepten tu solicitud de cliente',
           cssClass: 'custom-alert-danger',
           buttons: [
@@ -105,6 +124,7 @@ export class AltaClienteComponent implements OnInit {
     else{
       if(this.cliente.nombre == "" || this.cliente.correo == "" || this.cliente.clave == "")
       {
+       
         const toast = await this.toastController.create({
           message: "Error! Por favor, complete todos los campos antes de registrarse",
           duration: 2500,
@@ -112,15 +132,15 @@ export class AltaClienteComponent implements OnInit {
         });
         toast.present();
       }
-      else{
+      else{ 
+        this.present();
         this.cliente.apellido = "";
         this.cliente.dni = "";
         this.cliente.foto = "../../assets/usos/user.png";
         this.cliente.estado = "aceptado";
         await this.altaCliente.AltaCliente(this.cliente);
+        this.dismiss();
         const alert = await this.alertController.create({
-          // header: '¡Solicitud de cuenta enviada con exito!',
-          // subHeader: 'Tu cuenta sera revisada por nuestros administradores en la brevedad',
           message: '<h1>¡Cuenta Anonima creada con exito!</h1>Ahora podras iniciar sesion como anonimo.',
           cssClass: 'custom-alert-danger',
           buttons: [

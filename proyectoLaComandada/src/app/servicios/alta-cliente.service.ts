@@ -11,10 +11,15 @@ export class AltaClienteService {
         this.colecion = this.angularFirestore.collection("entidades");
     }
 
-    AltaCliente(cliente)
+    async AltaCliente(cliente)
     {
-        this.angular.auth.createUserWithEmailAndPassword(cliente["correo"],cliente["clave"]);
-        this.colecion.add(cliente);
+        await this.angular.auth.createUserWithEmailAndPassword(cliente["correo"],cliente["clave"]).then(
+           accion =>
+           {
+            this.colecion.add(cliente); 
+           }
+           
+        );
     }
 
 

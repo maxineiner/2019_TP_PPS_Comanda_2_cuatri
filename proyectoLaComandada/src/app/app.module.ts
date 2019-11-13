@@ -19,13 +19,16 @@ import { config } from './firebase';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoginService } from 'src/app/servicios/login.service';
+import { MenuClienteComponent } from './componentes/menu-cliente/menu-cliente.component';
 
 
 
 @NgModule({
   declarations: [AppComponent,
   LoginComponent,
-  AltaClienteComponent],
+  AltaClienteComponent,
+  MenuClienteComponent,
+],
   entryComponents: [],
   imports: [BrowserModule,FormsModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(config)],
   providers: [

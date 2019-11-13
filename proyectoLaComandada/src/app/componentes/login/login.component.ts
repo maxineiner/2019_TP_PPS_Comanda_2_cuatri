@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { LoginService } from '../../servicios/login.service';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +12,39 @@ import { LoginService } from '../../servicios/login.service';
 export class LoginComponent implements OnInit {
 
   constructor(private loginServi : LoginService,
-    private toastController: ToastController,) { }
+    private toastController: ToastController,
+    private router : Router,
+    public loadingController: LoadingController) { 
+     
+    }
+
 
   correo : string ="";
   clave : string ="";
   select : string;
+
+  ionViewWillEnter()
+  { 
+    this.correo = "";
+    this.clave = "";
+  }
+
+  async present() {
+    return await this.loadingController.create({
+      duration: 5000,
+      spinner: "bubbles",
+      message: 'Iniciando sesion...',
+      translucent: true,
+      cssClass: "spinner",
+    }).then(a => {
+      a.present();
+    });
+  }
+
+  async dismiss() {
+    return await this.loadingController.dismiss();
+  }
+
 
   async iniciarSecion()
   {
@@ -23,24 +53,32 @@ export class LoginComponent implements OnInit {
       this.mensaje("Error! Por favor, complete todos los campos antes de iniciar sesion");
     }
     else{
+      this.present();
       let respuesta = await this.loginServi.ingresar(this.correo,this.clave);
 
       switch (respuesta) {
         case "The email address is badly formatted.":
-          this.mensaje("Error! El correo electronico tiene un formato incorrecto.")
+          this.dismiss();
+          this.mensaje("Error! El correo electronico tiene un formato incorrecto.");
           break;
         case "The password is invalid or the user does not have a password.":
+            this.dismiss();
           this.mensaje("Error! La contraseña es incorrecta");
           break;
+        case "There is no user record corresponding to this identifier. The user may have been deleted.":
+            this.dismiss();
+            this.mensaje("Error! la cuenta con la que intenta ingresar no existe");
+            break;
         default:
           this.loginServi.traerUsuario(this.correo).subscribe(
             respuesta =>{
-             console.log();
+              this.dismiss();
              switch (respuesta['0']['estado']) {
                case 'pendiente':
-                 this.mensaje("Su cuenta aun sigue en estado pendiente, intente ingresar nuevamente en la brevedad.")
+                 this.mensaje("Su cuenta aun sigue en estado pendiente, intente ingresar nuevamente en la brevedad.");
                  break;
-               default:
+               case 'aceptado':
+                 this.router.navigate(["/menu-cliente"]);
                  break;
              }
             }
@@ -87,5 +125,6 @@ export class LoginComponent implements OnInit {
         break;
     }
   }
+
   ngOnInit() {}
 }

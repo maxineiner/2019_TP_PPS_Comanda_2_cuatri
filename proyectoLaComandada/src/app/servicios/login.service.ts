@@ -13,6 +13,8 @@ export class LoginService {
     
     constructor(private angularFirestore: AngularFirestore, private auth : AngularFireAuth,private router : Router) {
     }
+
+
     
     async ingresar(usuario : string, clave : string)
     {
@@ -22,6 +24,7 @@ export class LoginService {
             console.log(correo);
             console.log("entre a treaer usuario" + correo);
         } catch (error) {
+            console.log(error.message);
             return error.message;
         }
     }
@@ -29,5 +32,17 @@ export class LoginService {
     traerUsuario(correo : string)
     {
         return this.angularFirestore.collection("entidades", ref => ref.where("correo","==",correo)).valueChanges();
+    }
+
+    traerDatosUsuario()
+    {
+        return this.traerUsuario(this.auth.auth.currentUser.email);
+
+    }
+
+    cerrarSesion()
+    {
+        this.auth.auth.signOut();
+        this.router.navigate(['']);
     }
 }
