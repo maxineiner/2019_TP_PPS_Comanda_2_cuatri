@@ -70,19 +70,21 @@ export class LoginComponent implements OnInit {
             this.mensaje("Error! la cuenta con la que intenta ingresar no existe");
             break;
         default:
-          this.loginServi.traerUsuario(this.correo).subscribe(
+          let promesa = this.loginServi.traerUsuario(this.correo).subscribe(
             respuesta =>{
               this.dismiss();
              switch (respuesta['0']['estado']) {
                case 'pendiente':
                  this.mensaje("Su cuenta aun sigue en estado pendiente, intente ingresar nuevamente en la brevedad.");
+                 promesa.unsubscribe();
                  break;
                case 'aceptado':
                  this.router.navigate(["/menu-cliente"]);
+                 promesa.unsubscribe();
                  break;
              }
             }
-          );
+          )
           break;
       }
     }
