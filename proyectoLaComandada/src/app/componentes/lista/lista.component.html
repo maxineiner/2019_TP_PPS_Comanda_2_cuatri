@@ -1,0 +1,26 @@
+<ion-content class = "ion-padding ion-text-center">
+  <ion-list style="margin-top:15%" *ngIf = "mostrar; else miDiv">
+  <ion-item  *ngFor = "let item of clientesPendientes" >
+      <ion-avatar slot="start">
+          <img [src]="item.foto">
+        </ion-avatar>
+        <ion-label>
+          <h2>{{item.nombre | nombreApellido}} {{item.apellido | nombreApellido}}</h2>
+          <h3>{{item.correo}}</h3>
+          <p>Se encuentra en espera</p>
+          <ion-buttons>
+            <ion-button (click) = "cambiarEstado('aceptado' , item)" style = "border-radius : 100%;background-color: #10dc60;"><ion-icon name="checkmark" color = "light"></ion-icon></ion-button>
+            <ion-label style="color:white">---</ion-label>
+            <ion-button (click) = "cambiarEstado('rechazado' , item)" style="border-radius : 100%;background-color: #f04141;"> <ion-icon name="close" color = "light"></ion-icon></ion-button>
+          </ion-buttons>
+        </ion-label>
+  </ion-item>
+</ion-list>
+<ng-template #miDiv>
+  <ion-content class = "ion-padding ion-text-center">
+      <img src = "../../../assets/vacio.jpg" style="width: 50%;margin: auto;margin-top: 50%">
+      <br>
+      <ion-label class="formato">No hay clientes pendientes en este momento.</ion-label>
+  </ion-content>
+</ng-template>
+</ion-content>

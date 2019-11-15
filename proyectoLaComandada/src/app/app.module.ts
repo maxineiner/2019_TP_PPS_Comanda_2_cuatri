@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -20,8 +20,13 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { LoginService } from 'src/app/servicios/login.service';
 import { MenuClienteComponent } from './componentes/menu-cliente/menu-cliente.component';
-
-
+//beta
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth'
+import { MenuJefeComponent } from './componentes/menu-jefe/menu-jefe.component'
+import { ListaComponent } from './componentes/lista/lista.component';
+import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
 
 @NgModule({
   declarations: [AppComponent,
@@ -30,7 +35,15 @@ import { MenuClienteComponent } from './componentes/menu-cliente/menu-cliente.co
   MenuClienteComponent,
 ],
   entryComponents: [],
-  imports: [BrowserModule,FormsModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(config)],
+  imports: [BrowserModule,
+    FormsModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule,
+    RouterModule,
+    AngularFireAuthModule
+],
   providers: [
     StatusBar,
     Camera,
