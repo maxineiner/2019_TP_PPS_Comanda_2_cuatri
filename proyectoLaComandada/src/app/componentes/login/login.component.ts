@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   correo : string ="";
   clave : string ="";
   select : string;
-
+  spinner : boolean;
   ionViewWillEnter()
   { 
     this.correo = "";
@@ -31,18 +31,25 @@ export class LoginComponent implements OnInit {
 
   async present() {
     return await this.loadingController.create({
-      duration: 5000,
       spinner: "bubbles",
       message: 'Iniciando sesion...',
       translucent: true,
       cssClass: "spinner",
     }).then(a => {
-      a.present();
+      a.present().then(
+        () =>{ 
+          if(!this.spinner)
+          {
+          this.loadingController.dismiss();
+          }
+        }
+      );
     });
   }
 
   async dismiss() {
-    return await this.loadingController.dismiss();
+    this.spinner = false;
+    //return await this.loadingController.dismiss();
   }
 
 
@@ -50,20 +57,20 @@ export class LoginComponent implements OnInit {
   {
     if(this.correo == "" || this.clave == "")
     {
-      this.mensaje("Error! Por favor, complete todos los campos antes de iniciar sesion");
+      this.mensaje("<h2>Error!</h2><h4>Por favor, complete todos los campos antes de iniciar sesion</h4>");
     }
     else{
       this.present();
       let respuesta = await this.loginServi.ingresar(this.correo,this.clave);
-
       switch (respuesta) {
         case "The email address is badly formatted.":
-          this.dismiss();
-          this.mensaje("Error! El correo electronico tiene un formato incorrecto.");
+          await this.dismiss().then(
+            () => this.mensaje("Error! El correo electronico tiene un formato incorrecto.")
+          );
           break;
         case "The password is invalid or the user does not have a password.":
             this.dismiss();
-          this.mensaje("Error! La contraseña es incorrecta");
+            this.mensaje("Error! La contraseña es incorrecta");
           break;
         case "There is no user record corresponding to this identifier. The user may have been deleted.":
             this.dismiss();
@@ -72,17 +79,40 @@ export class LoginComponent implements OnInit {
         default:
           let promesa = this.loginServi.traerUsuario(this.correo).subscribe(
             respuesta =>{
+              try {
               this.dismiss();
-             switch (respuesta['0']['estado']) {
-               case 'pendiente':
-                 this.mensaje("Su cuenta aun sigue en estado pendiente, intente ingresar nuevamente en la brevedad.");
-                 promesa.unsubscribe();
-                 break;
-               case 'aceptado':
-                 this.router.navigate(["/menu-cliente"]);
-                 promesa.unsubscribe();
-                 break;
-             }
+              switch (respuesta['0']['tipo'])
+              {
+                case 'cliente':
+                  switch (respuesta['0']['estado'])
+                  {
+                  case 'pendiente':
+                    this.mensaje("<h4>Su cuenta aun sigue en estado pendiente, intente ingresar nuevamente en la brevedad.</h4>");
+                    promesa.unsubscribe();
+                    break;
+                  case 'aceptado':
+                    this.router.navigate(["/menu-cliente"]);
+                    promesa.unsubscribe();
+                    break;
+                  }
+                  break;
+                case 'jefe':
+                    this.router.navigate(["/menu-jefe"]);
+                    promesa.unsubscribe();
+                  break;
+                case 'anonimo':
+                    this.router.navigate(["/menu-jefe"]);
+                    promesa.unsubscribe();
+                  break;
+                case 'empleado':
+                    this.router.navigate(["/menu-jefe"]);
+                    promesa.unsubscribe();
+                  break;
+              }
+                
+              } catch (error) {
+                this.mensaje("Su cuenta a sido eliminada.");
+              }
             }
           )
           break;
@@ -96,7 +126,15 @@ export class LoginComponent implements OnInit {
     const toast = await this.toastController.create({
       message: texto,
       duration: 2500,
-      color : "danger"
+      position:"top",
+      color : "light",
+      buttons: [{
+          text: 'x',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }]
     });
     toast.present();
   }
