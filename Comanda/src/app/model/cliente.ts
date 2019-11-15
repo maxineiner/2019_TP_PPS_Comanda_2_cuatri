@@ -7,8 +7,10 @@ export class Cliente {
     image: string;
     type: string;
     estado:string;
+    password:string;
 
-    constructor(email:string, paramName: string, paramLastName: string, paramDni: string, paramImg: string, paramType: string,estado:string) {
+    constructor(email:string, paramName: string, paramLastName: string, 
+        paramDni: string, paramImg: string, paramType: string,estado:string, pass:string) {
         this.email = email;
         this.name = paramName;
         this.lastName = paramLastName;
@@ -16,5 +18,6 @@ export class Cliente {
         this.image = paramImg;
         this.type = paramType;
         this.estado = estado;
+        this.password = pass;
     }
 }

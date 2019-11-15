@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {ListaEsperaService } from 'src/app/services/lista-espera.service'
 import { async } from 'q';
 import { Cliente } from 'src/app/model/cliente';
+import { AuthService} from "../../services/auth.service";
+import { Router } from "@angular/router";
+import { AlertController } from '@ionic/angular';
+import { ComandaServiceService } from 'src/app/services/comanda-service.service';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-lista-espera-registro',
@@ -10,13 +15,20 @@ import { Cliente } from 'src/app/model/cliente';
 })
 export class ListaEsperaRegistroPage implements OnInit {
 
-  constructor( private listaEsperaService:ListaEsperaService) { }
+  constructor( private listaEsperaService:ListaEsperaService,
+    private authService:AuthService,
+    public router : Router,
+    private alertController: AlertController,
+    private comandaService: ComandaServiceService,
+    private socialSharing: SocialSharing) { }
 
   ngOnInit() {
     this.arrayClientes = [];
     this.verLista();
 
   }
+  msjError:string;
+
   arrayClientes = [];
   private async verLista() {
     console.log("esta en verLista");
@@ -37,8 +49,22 @@ export class ListaEsperaRegistroPage implements OnInit {
     console.log(this.arrayClientes);
   }
 
-  aceptar(item:Cliente) {
+  async aceptar(item:Cliente) {
     console.log(item);
+      console.log(item.email);
+      console.log(item.password);
+      try{
+        let retorno = await this.authService.registerUser(item.email,item.password);
+      let rol = this.comandaService.saveRol(retorno['user']['uid'],item.type);
+      this.presentAlert("Cargado con exito");
+      this.enviarMailSucces(item);
+      }
+     catch (error) {
+      this.presentAlert(error.message);
+    }
+      
+        
+
   }
   rechazar(item:Cliente) { 
 
@@ -51,5 +77,35 @@ export class ListaEsperaRegistroPage implements OnInit {
     //  console.log(pos);
 
   }
+
+
+  async presentAlert(err) {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      subHeader: '',
+      message: err,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  enviarMailSucces(cliente:Cliente) {
+    this.socialSharing.canShareViaEmail().then(() => {
+      // Sharing via email is possible
+    }).catch((e) => {
+      console.log(e);
+      // Sharing via email is not possible
+    });
+    this.socialSharing.shareViaEmail('Body', 'Subject', ['hercrisjuan@gmail.com']).then(() => {
+      console.log( "Success!");
+    }).catch((e) => {
+      console.log( "Not Succes!");
+      console.log(e);
+      // Error!
+    });
+    
+ 
+      }
 
 }

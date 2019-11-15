@@ -38,6 +38,14 @@ export class AuthService {
       }).catch(err => reject(err));
     });    
   }
+
+  registerUser(email: string, pass: string) {
+    return new Promise((resolve, reject) => {
+      this.AFauth.auth.createUserWithEmailAndPassword(email, pass)
+        .then(userData => resolve(userData))
+        .catch(err => reject(err));
+    });
+  }
 }
 
 

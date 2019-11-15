@@ -40,10 +40,11 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.myForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, this.validatorFormatt]),
       name: new FormControl('', [Validators.required]),
       lastName: new FormControl(''),
       dni: new FormControl(''),
+      pass: new FormControl('',[Validators.required])
     });
     timer(3600).subscribe(() => {this.showSplash = false; });
   }
@@ -108,7 +109,8 @@ export class RegisterPage implements OnInit {
           this.myForm.get('dni').value,
           img,
           'CLIENTE',
-          'ESPERA'
+          'ESPERA',
+          this.myForm.get('pass').value
         )
         this.presentAlertSuccess('El pedido de registro se realizó exitosamente, te llegara un mail cuando se verifique tu usuario');
         console.log(this.auxCliente);
@@ -173,6 +175,14 @@ export class RegisterPage implements OnInit {
       }
       return null;
     };
+  }
+  
+  validatorFormatt(control: AbstractControl) {
+    let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]+@[a-zA-Z0-9-]+?(\.[a-zA-Z0-9-]+){1,}$/;
+    if (control.value.length > 0 && !exp.exec(control.value)) {
+      return { emailErrFormat: true }
+    }
+    return null;
   }
 
   fotoPrueba() {
