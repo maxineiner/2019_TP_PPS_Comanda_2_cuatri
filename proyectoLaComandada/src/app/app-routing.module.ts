@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'registro',component:AltaClienteComponent},
   {path:'menu-cliente',component:MenuClienteComponent},
 //beta
-  {path : "menu" , component : MenuJefeComponent , children :[
+  {path : "menu-jefe" , component : MenuJefeComponent , children :[
     {path : "lista" , component : ListaComponent , pathMatch : "full"}
   ]},
   {path : "" , redirectTo : "/menu/lista" , pathMatch : "full"},
