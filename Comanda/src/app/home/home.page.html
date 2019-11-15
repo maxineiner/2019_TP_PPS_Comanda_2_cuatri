@@ -34,4 +34,10 @@
     class="top">
     Ver encuestas
   </ion-button>
+
+  <!-- botones solo disponible para el metre-->
+  <ion-button *ngxPermissionsOnly="['METRE']" color="primary" fill="outline" expand="block" (click)="goTo('lista-espera-metre')"
+    class="top">
+    Lista de espera
+  </ion-button>
 </ion-content>

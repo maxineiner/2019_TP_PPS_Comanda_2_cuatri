@@ -16,6 +16,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ZBar } from '@ionic-native/zbar/ngx';
+import { MesasModalPage } from './modals/mesas-modal/mesas-modal.page';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAWUuOEwKZrD3jBv6Jxq-DmQ-hZSdNupiw',
@@ -28,8 +29,8 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, MesasModalPage],
+  entryComponents: [MesasModalPage],
   imports: [BrowserModule
     , IonicModule.forRoot()
     , AppRoutingModule
@@ -43,7 +44,7 @@ const firebaseConfig = {
     SplashScreen,
     Camera,
     BarcodeScanner,
-    ZBar,
+    ZBar,    
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

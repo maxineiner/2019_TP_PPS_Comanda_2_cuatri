@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <ion-grid>
+   <ion-row *ngFor="let c of clientes">
+     <ion-col>
+      <ion-card (click)="asignar(c)">     
+        <ion-card-content>
+          {{c.email}}
+        </ion-card-content>
+      </ion-card>
+     </ion-col>
+   </ion-row>
+ </ion-grid>
+</ion-content>

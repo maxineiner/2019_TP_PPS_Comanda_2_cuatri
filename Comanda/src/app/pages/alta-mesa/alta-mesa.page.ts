@@ -58,19 +58,21 @@ export class AltaMesaPage implements OnInit {
     const img = this.image ? this.image : '';
     try {
       this.table = new Table(
+        "",
         this.myForm.get('number').value,
         this.myForm.get('capacity').value,
         this.myForm.get('type').value,
-        img);
+        img,
+        true);
 
       this.comandaService.saveTable(this.table);
-      var tableCodeStr =  "table:"+this.table.number;
-      this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE,tableCodeStr)
-      .then((encodedData) => {
-        console.log(encodedData);
-    }, (err) => {
-        console.log("Error occured : " + err);
-    });   
+      var tableCodeStr = "table:" + this.table.number;
+      this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, tableCodeStr)
+        .then((encodedData) => {
+          console.log(encodedData);
+        }, (err) => {
+          console.log("Error occured : " + err);
+        });
       this.presentAlertSuccess('El alta se realizo exitosamente');
     } catch (error) {
       this.presentAlertSuccess(error.message);

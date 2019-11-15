@@ -4,6 +4,7 @@ import { NgxPermissionsService } from 'ngx-permissions';
 import { ComandaServiceService } from '../services/comanda-service.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ListaEsperaMesaService } from '../services/lista-espera-mesa.service';
 
 @Component({
   selector: 'app-home',
@@ -13,20 +14,27 @@ import { Router } from '@angular/router';
 export class HomePage implements OnInit {
   rolUser: { id: string; idAuth: any; rol: any; }[];
   permiso: string;
-
+  
   constructor(
     public router: Router,
     public navCtrl: NavController,
     private menu: MenuController,
     private permissionsService: NgxPermissionsService,
     private comandaService: ComandaServiceService,
-    private authService: AuthService) {  
+    private authService: AuthService,
+    private listaEsperaService: ListaEsperaMesaService) {  
       console.log('constructor');  
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.prueba();
     this.flushPermissions();
     this.loadPermissions();
+  }
+
+  async prueba() {
+    let existe = await this.listaEsperaService.existeEnListaEspera(this.authService.currentUserId());
+    return existe.docs.length > 1 ? true : false;
   }
 
   flushPermissions() {

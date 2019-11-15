@@ -13,6 +13,9 @@ const routes: Routes = [
   { path: 'alta-mesa', loadChildren: './pages/alta-mesa/alta-mesa.module#AltaMesaPageModule', canActivate: [AuthGuard]},
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule', canActivate: [NoLogInGuard] },
   { path: 'lista-espera-registro', loadChildren: './pages/lista-espera-registro/lista-espera-registro.module#ListaEsperaRegistroPageModule', canActivate: [AuthGuard] },
+  { path: 'lista-espera-metre', loadChildren: './pages/lista-espera-metre/lista-espera-metre.module#ListaEsperaMetrePageModule' },  { path: 'mesas-modal', loadChildren: './modals/mesas-modal/mesas-modal.module#MesasModalPageModule' },
+
+
 
 
 ];
