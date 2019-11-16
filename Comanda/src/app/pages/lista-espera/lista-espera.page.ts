@@ -62,10 +62,14 @@ export class ListaEsperaPage implements OnInit {
 
   async verificarMesa(numeroMesa) {
     let mesa = await this.mesasService.getTableByClient(this.authService.currentUserId());
-    let table = mesa.docs[0].data() as Table;   
-    mesa.docs.length === 1 && table.number === numeroMesa
-      ? this.presentAlert('Info', 'La mesa se verifico corretamente, puede tomar asiento y realizar su pedido')
+    if (mesa.docs.length === 0) {
+      this.presentAlert('Error', 'Esta mesa no le pertenece');
+    } else {
+      let table = mesa.docs[0].data() as Table;
+      mesa.docs.length === 1 && table.number === numeroMesa
+        ? this.presentAlert('Info', 'La mesa se verifico corretamente, puede tomar asiento y realizar su pedido')
         : this.presentAlert('Error', 'Esta mesa no le pertenece');
+    }
   }
 
   async presentAlert(headerMsj, msj) {

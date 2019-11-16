@@ -14,6 +14,7 @@ import { ListaEsperaMesaService } from '../services/lista-espera-mesa.service';
 export class HomePage implements OnInit {
   rolUser: { id: string; idAuth: any; rol: any; }[];
   permiso: string;
+  ocultarBtn: boolean;
   
   constructor(
     public router: Router,
@@ -28,6 +29,7 @@ export class HomePage implements OnInit {
   ngOnInit() {    
     this.flushPermissions();
     this.loadPermissions();
+    this.verificarListaEspera();
   } 
 
   flushPermissions() {
@@ -65,5 +67,10 @@ export class HomePage implements OnInit {
   encuestas(){
     console.log('encuestas');
   }  
+
+  async verificarListaEspera() {
+    let existe = await this.listaEsperaService.existeEnListaEspera(this.authService.currentUserId());
+    existe.docs.length === 0 ? this.ocultarBtn = false : this.ocultarBtn = true;
+  }
 
 }

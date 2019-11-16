@@ -26,7 +26,7 @@
 
   <!-- botones solo disponible para clientes -->
   <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('lista-espera')"
-    class="top">
+    class="top" [hidden]="ocultarBtn">
     Solicitar Mesa
   </ion-button>
 
