@@ -43,8 +43,8 @@ export class RegisterPage implements OnInit {
       email: new FormControl('', [Validators.required, this.validatorFormatt]),
       name: new FormControl('', [Validators.required]),
       lastName: new FormControl(''),
-      dni: new FormControl(''),
-      pass: new FormControl('',[Validators.required])
+      dni: new FormControl('',[this.onlyNumbersValidator, this.lengthValidator(8)]),
+      pass: new FormControl('',[Validators.required,this.lengthMinValidator(6),this.validatorPassFormatt])
     });
     timer(3600).subscribe(() => {this.showSplash = false; });
   }
@@ -88,7 +88,6 @@ export class RegisterPage implements OnInit {
     this.myForm.controls.name.setValue(code[posName]);
     this.myForm.controls.lastName.setValue(code[posLastName]);
     this.myForm.controls.dni.setValue(code[posDni].trim());
-   
   }
 
   save() {
@@ -170,7 +169,15 @@ export class RegisterPage implements OnInit {
 
   lengthValidator(minMax: number) {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      if (control.value !== undefined && (isNaN(control.value) || control.value.length < minMax)) {
+      if (control.value !== undefined && (isNaN(control.value) || (control.value.length < minMax && control.value.length != 0 ))) {
+        return { lengthError: true };
+      }
+      return null;
+    };
+  }
+  lengthMinValidator(min: number) {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      if (control.value !== undefined && (isNaN(control.value) || control.value.length < min)) {
         return { lengthError: true };
       }
       return null;
@@ -181,6 +188,13 @@ export class RegisterPage implements OnInit {
     let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]+@[a-zA-Z0-9-]+?(\.[a-zA-Z0-9-]+){1,}$/;
     if (control.value.length > 0 && !exp.exec(control.value)) {
       return { emailErrFormat: true }
+    }
+    return null;
+  }
+  validatorPassFormatt(control: AbstractControl) {
+    let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]$/;
+    if (control.value.length > 0 && !exp.exec(control.value)) {
+      return { passErrFormat: true }
     }
     return null;
   }

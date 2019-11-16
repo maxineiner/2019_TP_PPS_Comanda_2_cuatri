@@ -58,6 +58,7 @@ export class ListaEsperaRegistroPage implements OnInit {
       let rol = this.comandaService.saveRol(retorno['user']['uid'],item.type);
       this.presentAlert("Cargado con exito");
       this.enviarMailSucces(item);
+      this.listaEsperaService.removeClienteWaitingList(item);
       }
      catch (error) {
       this.presentAlert(error.message);
@@ -71,6 +72,7 @@ export class ListaEsperaRegistroPage implements OnInit {
     console.log(this.arrayClientes);
     this.listaEsperaService.removeClienteWaitingList(item);
     console.log(this.arrayClientes);
+    this.enviarMailFail(item);
 
     //  let pos = this.arrayClientes.indexOf(item);
     //  this.arrayClientes.splice(pos,1);
@@ -97,7 +99,7 @@ export class ListaEsperaRegistroPage implements OnInit {
       console.log(e);
       // Sharing via email is not possible
     });
-    this.socialSharing.shareViaEmail('Body', 'Subject', ['hercrisjuan@gmail.com']).then(() => {
+    this.socialSharing.shareViaEmail('su solicitud fue evaluda y ya puede ingresar con exito a la aplicacion como cliente! Buen provecho!', 'Solicitud generar cuenta en Restaurant "COMANDA"', [cliente.email]).then(() => {
       console.log( "Success!");
     }).catch((e) => {
       console.log( "Not Succes!");
@@ -107,5 +109,22 @@ export class ListaEsperaRegistroPage implements OnInit {
     
  
       }
+      enviarMailFail(cliente:Cliente) {
+        this.socialSharing.canShareViaEmail().then(() => {
+          // Sharing via email is possible
+        }).catch((e) => {
+          console.log(e);
+          // Sharing via email is not possible
+        });
+        this.socialSharing.shareViaEmail('su solicitud fue evaluda y lamanteblemente no comple los requisitos para sr nuestro cliente', 'Solicitud generar cuenta en Restaurant "COMANDA"', [cliente.email]).then(() => {
+          console.log( "Success!");
+        }).catch((e) => {
+          console.log( "Not Succes!");
+          console.log(e);
+          // Error!
+        });
+        
+     
+          }
 
 }
