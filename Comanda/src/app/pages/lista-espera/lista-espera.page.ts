@@ -75,9 +75,10 @@ export class ListaEsperaPage implements OnInit {
       buttons: [{
         text: 'Ok',
         handler: () => {
-          headerMsj === 'Error' 
+          this.navCtrl.navigateRoot('home');
+          /*headerMsj === 'Error' 
             ? this.navCtrl.navigateRoot('home') 
-              : console.log('ok');
+              : console.log('ok');*/
         }
       }]
     });
