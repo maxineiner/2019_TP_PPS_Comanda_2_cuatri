@@ -48,21 +48,6 @@ export class ComandaServiceService {
       idAuth: idAuth,
       rol: rol
     });
-  }
-
-  public addListaEspera(email: string, id: string) {
-    this.firestore.collection('Lista_Espera').add({
-      email: email,
-      idAuth: id
-    });
-  }
-  public saveTable(table: Table) {
-    this.firestore.collection('Mesas').add({
-      number: table.number,
-      capacity: table.capacity,
-      type: table.type,
-      image: table.image
-    });
   } 
 
 }

@@ -5,6 +5,7 @@ import { ComandaServiceService } from 'src/app/services/comanda-service.service'
 import { AlertController, NavController } from '@ionic/angular';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Table, TableType } from '../../model/table';
+import { MesaService } from 'src/app/services/mesa.service';
 
 @Component({
   selector: 'app-alta-mesa',
@@ -22,7 +23,8 @@ export class AltaMesaPage implements OnInit {
     private alertController: AlertController,
     private barcodeScanner: BarcodeScanner,
     private camera: Camera,
-    public navCtrl: NavController) { }
+    public navCtrl: NavController,
+    private mesaService: MesaService) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -65,7 +67,7 @@ export class AltaMesaPage implements OnInit {
         img,
         true);
 
-      this.comandaService.saveTable(this.table);
+      this.mesaService.saveTable(this.table);
       var tableCodeStr = "table:" + this.table.number;
       this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, tableCodeStr)
         .then((encodedData) => {

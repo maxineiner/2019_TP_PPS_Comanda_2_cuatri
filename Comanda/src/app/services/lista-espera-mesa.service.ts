@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+const DB = 'Lista_Espera_Mesa';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -9,19 +11,26 @@ export class ListaEsperaMesaService {
   constructor(private firestore: AngularFirestore) { }
 
   public getListaEsperaMesa() {
-    return this.firestore.collection('Lista_Espera').snapshotChanges();
+    return this.firestore.collection(DB).snapshotChanges();
+  }
+
+  public async addListaEspera(email: string, id: string) {
+    await this.firestore.collection(DB).add({
+      email: email,
+      idAuth: id
+    });
   }
 
   public async deleteCliente(idAuth) {
-    await this.firestore.collection('Lista_Espera').ref
+    await this.firestore.collection(DB).ref
       .where('idAuth', '==', idAuth)
       .get().then(async (documento) => {
-        await this.firestore.collection('Lista_Espera').doc(documento.docs[0].id).delete();
+        await this.firestore.collection(DB).doc(documento.docs[0].id).delete();
       })
   }
 
   public async existeEnListaEspera(idAuth) {
-    return await this.firestore.collection('Lista_Espera').ref
+    return await this.firestore.collection(DB).ref
       .where('idAuth','==', idAuth )
       .get();
   }

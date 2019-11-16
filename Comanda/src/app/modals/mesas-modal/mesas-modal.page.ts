@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Table } from 'src/app/model/table';
-import { MesaService } from 'src/app/services/mesa.service';
+import { Table } from '../../model/table';
+import { MesaService } from '../../services/mesa.service';
 import { NavParams, AlertController } from '@ionic/angular';
-import { ListaEsperaMesaService } from 'src/app/services/lista-espera-mesa.service';
 
 @Component({
   selector: 'app-mesas-modal',
@@ -20,7 +19,7 @@ export class MesasModalPage implements OnInit {
     private alertController: AlertController) { }
 
   ngOnInit() {
-    console.log(this.idAuth)
+    console.log(this.idAuth);
     this.queryListTable();
   }
 

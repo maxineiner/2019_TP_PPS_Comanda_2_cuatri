@@ -17,6 +17,15 @@ export class MesaService {
     return this.firestore.collection('Mesas').snapshotChanges();
   }
 
+  public saveTable(table: Table) {
+    this.firestore.collection('Mesas').add({
+      number: table.number,
+      capacity: table.capacity,
+      type: table.type,
+      image: table.image
+    });
+  } 
+
   public async updateTable(data: Table, idAuth) {
     await this.firestore.doc('Mesas/' + data.id).update(data)
       .then(doc => {

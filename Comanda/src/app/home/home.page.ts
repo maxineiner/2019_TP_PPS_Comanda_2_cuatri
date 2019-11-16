@@ -23,7 +23,6 @@ export class HomePage implements OnInit {
     private comandaService: ComandaServiceService,
     private authService: AuthService,
     private listaEsperaService: ListaEsperaMesaService) {  
-      console.log('constructor');  
   }
 
   ngOnInit() {    
@@ -54,24 +53,14 @@ export class HomePage implements OnInit {
   
   goTo(route, param){
     if(param)
-      //this.navCtrl.navigateRoot([route, param ]);
       this.router.navigate([route], { queryParams: {tipo: param}});
     else
       this.router.navigate([route]);
-      // this.navCtrl.navigateRoot(route);
   }
   
   listaEspera() {
     this.router.navigate(['lista-espera-registro']);
-    // this.navCtrl.navigateRoot('lista-espera-registro');
   }
-
-  irAListaEspera() {
-    this.router.navigate(['lista-espera']);
-    // this.navCtrl.navigateRoot('lista-espera');  
-  }
-
-
 
   encuestas(){
     console.log('encuestas');

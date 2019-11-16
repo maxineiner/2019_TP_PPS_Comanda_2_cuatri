@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ListaEsperaMesaService } from 'src/app/services/lista-espera-mesa.service';
-import { ClienteEspera } from 'src/app/model/clienteEspera';
+import { ListaEsperaMesaService } from '../../services/lista-espera-mesa.service';
+import { ClienteEspera } from '../../model/clienteEspera';
 import { ModalController } from '@ionic/angular';
-import { MesasModalPage } from 'src/app/modals/mesas-modal/mesas-modal.page';
+import { MesasModalPage } from '../../modals/mesas-modal/mesas-modal.page';
 
 @Component({
   selector: 'app-lista-espera-metre',
@@ -10,6 +10,7 @@ import { MesasModalPage } from 'src/app/modals/mesas-modal/mesas-modal.page';
   styleUrls: ['./lista-espera-metre.page.scss'],
 })
 export class ListaEsperaMetrePage implements OnInit {
+  
   clientes: ClienteEspera[];
 
   constructor(
