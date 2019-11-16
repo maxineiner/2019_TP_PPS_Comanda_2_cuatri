@@ -40,12 +40,13 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.myForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, this.validatorFormatt]),
       name: new FormControl('', [Validators.required]),
       lastName: new FormControl(''),
-      dni: new FormControl(''),
+      dni: new FormControl('',[this.onlyNumbersValidator, this.lengthValidator(8)]),
+      pass: new FormControl('',[Validators.required,this.validatorPassFormatt,this.lengthMinValidator(6)])
     });
-    timer(3600).subscribe(() => {this.showSplash = false; });
+    timer(3600).subscribe(() => {this.showSplash = false; });7
   }
 
   /** funcion para tomar la foto con @ionic-native/camera/ngx */
@@ -87,7 +88,6 @@ export class RegisterPage implements OnInit {
     this.myForm.controls.name.setValue(code[posName]);
     this.myForm.controls.lastName.setValue(code[posLastName]);
     this.myForm.controls.dni.setValue(code[posDni].trim());
-   
   }
 
   save() {
@@ -108,7 +108,8 @@ export class RegisterPage implements OnInit {
           this.myForm.get('dni').value,
           img,
           'CLIENTE',
-          'ESPERA'
+          'ESPERA',
+          this.myForm.get('pass').value
         )
         this.presentAlertSuccess('El pedido de registro se realizó exitosamente, te llegara un mail cuando se verifique tu usuario');
         console.log(this.auxCliente);
@@ -168,11 +169,38 @@ export class RegisterPage implements OnInit {
 
   lengthValidator(minMax: number) {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      if (control.value !== undefined && (isNaN(control.value) || control.value.length < minMax)) {
+      if (control.value !== undefined && (isNaN(control.value) || (control.value.length < minMax && control.value.length != 0 ))) {
         return { lengthError: true };
       }
       return null;
     };
+  }
+  lengthMinValidator(min: number) {
+    return (control: AbstractControl): { [key: string]: boolean } | null => {
+      if ( control.value.length < min) {
+        
+        console.log("error por el lenghtminvalidator");
+        return { lengthError: true };
+      }
+      return null;
+    };
+  }
+  
+  validatorFormatt(control: AbstractControl) {
+    let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]+@[a-zA-Z0-9-]+?(\.[a-zA-Z0-9-]+){1,}$/;
+    if (control.value.length > 0 && !exp.exec(control.value)) {
+      return { emailErrFormat: true }
+    }
+    return null;
+  }
+  validatorPassFormatt(control: AbstractControl) {
+    let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]$/;
+  
+    if (control.value.length <6  && !exp.exec(control.value))  {
+
+      return { passErrFormat: true }
+    }
+    return null;
   }
 
   fotoPrueba() {

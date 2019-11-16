@@ -21,7 +21,8 @@ export class ListaEsperaService {
       dni: auxCliente.dni,
       image: auxCliente.image,
       type: auxCliente.type,
-      estado:auxCliente.estado
+      estado:auxCliente.estado,
+      password:auxCliente.password
     });
   }
 
