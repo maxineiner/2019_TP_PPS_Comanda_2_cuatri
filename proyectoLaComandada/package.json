@@ -1,5 +1,5 @@
 {
-  "name": "proyectoLaComandada",
+  "name": "proyecto",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -89,11 +89,9 @@
       "phonegap-plugin-barcodescanner": {},
       "cordova-plugin-document-scanner": {}
     },
-    "platforms": [
-      "cordova-plugin-ionic-webview" : {},
-      "cordova-plugin-ionic-keyboard" : {},
-      "browser",
-      "android"
-   ]
+    "platforms": {
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {}
+    }
   }
 }

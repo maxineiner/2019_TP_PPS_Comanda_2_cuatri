@@ -25,7 +25,6 @@ export class AltaService {
           apellido : objeto.apellido,
           clave : objeto.clave,
           correo : objeto.correo,
-          cuit : objeto.cuit,
           dni : objeto.dni,
           foto : objeto.foto,
           nombre : objeto.nombre,

@@ -80,23 +80,26 @@ export class LoginComponent implements OnInit {
           let promesa = this.loginServi.traerUsuario(this.correo).subscribe(
             respuesta =>{
               try {
-              this.dismiss();
-              switch (respuesta['0']['tipo'])
+              switch (respuesta['0']['perfil'])
               {
                 case 'cliente':
                   switch (respuesta['0']['estado'])
                   {
                   case 'pendiente':
+                    this.dismiss();
                     this.mensaje("<h4>Su cuenta aun sigue en estado pendiente, intente ingresar nuevamente en la brevedad.</h4>");
                     promesa.unsubscribe();
                     break;
                   case 'aceptado':
+                    this.dismiss();
                     this.router.navigate(["/menu-cliente"]);
                     promesa.unsubscribe();
                     break;
                   }
                   break;
                 case 'jefe':
+                    this.dismiss();
+                    console.log("entre como jefe");
                     this.router.navigate(["/menu-jefe"]);
                     promesa.unsubscribe();
                   break;
@@ -141,9 +144,9 @@ export class LoginComponent implements OnInit {
 
   llenarInput(){
     switch (this.select) {
-      case "admin":
-        this.correo = "admin@admin.com";
-        this.clave = "111111"
+      case "jefe":
+        this.correo = "jefe@jefe.com";
+        this.clave = "jefe123"
         break;
       case "invitado":
         this.correo = "invitado@invitado.com";

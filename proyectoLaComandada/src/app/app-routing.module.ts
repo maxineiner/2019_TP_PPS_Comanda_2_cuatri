@@ -16,10 +16,8 @@ const routes: Routes = [
   {path : "menu-jefe" , component : MenuJefeComponent , children :[
     {path : "lista" , component : ListaComponent , pathMatch : "full"}
   ]},
-  {path : "" , redirectTo : "/menu/lista" , pathMatch : "full"},
-  {path : "lista" ,component:ListaComponent},
-
-  
+  // {path : "" , redirectTo : "/menu/lista" , pathMatch : "full"},
+  // {path : "lista" ,component:ListaComponent},  
 ];
 
 @NgModule({

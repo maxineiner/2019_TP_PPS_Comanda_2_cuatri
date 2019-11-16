@@ -54,7 +54,7 @@ export class AltaClienteComponent implements OnInit {
     return await this.loadingController.create({
       duration: 5000,
       spinner: "bubbles",
-      message: 'Iniciando sesion...',
+      message: 'Registrando usuario...',
       translucent: true,
       cssClass: "spinner",
     }).then(a => {
@@ -81,10 +81,25 @@ export class AltaClienteComponent implements OnInit {
     this.barcodeScanner.scan({formats : "PDF_417"}).then(barcodeData => {
      
       let datosBarcode = barcodeData.text.split("@");
-       console.log('Barcode data', datosBarcode);
-       this.cliente.nombre = datosBarcode[2];
+       console.log('Barcode data' + datosBarcode.length + datosBarcode);
+       if(datosBarcode.length == 8 || datosBarcode.length == 9)
+       {this.cliente.nombre = datosBarcode[2];
        this.cliente.apellido = datosBarcode[1];
        this.cliente.dni = datosBarcode[4];
+
+       }else if(datosBarcode.length == 17)
+       {
+        this.cliente.nombre = datosBarcode[5];
+        this.cliente.apellido = datosBarcode[4];
+        this.cliente.dni = datosBarcode[1];
+      }
+      else if(datosBarcode.length == 14)
+       {
+        this.cliente.nombre = datosBarcode[4];
+        this.cliente.apellido = datosBarcode[3];
+        this.cliente.dni = datosBarcode[7];
+      }
+       
      }).catch(err => {
          console.log('Error', err);
      });

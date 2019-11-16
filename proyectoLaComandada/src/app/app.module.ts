@@ -13,7 +13,7 @@ import { LoginComponent } from './componentes/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { AltaClienteComponent } from './componentes/alta-cliente/alta-cliente.component';
 import { AltaClienteService } from './servicios/alta-cliente.service';
-import {  AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { config } from './firebase';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
@@ -33,6 +33,9 @@ import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
   LoginComponent,
   AltaClienteComponent,
   MenuClienteComponent,
+  MenuJefeComponent,
+  ListaComponent,
+  NombreApellidoPipe,
 ],
   entryComponents: [],
   imports: [BrowserModule,
