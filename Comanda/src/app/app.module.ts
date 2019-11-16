@@ -16,6 +16,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ZBar } from '@ionic-native/zbar/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { MesasModalPage } from './modals/mesas-modal/mesas-modal.page';
 
 const firebaseConfig = {
@@ -44,7 +45,8 @@ const firebaseConfig = {
     SplashScreen,
     Camera,
     BarcodeScanner,
-    ZBar,    
+    ZBar,
+    SocialSharing,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
