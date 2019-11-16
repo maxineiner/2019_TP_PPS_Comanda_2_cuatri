@@ -44,9 +44,9 @@ export class RegisterPage implements OnInit {
       name: new FormControl('', [Validators.required]),
       lastName: new FormControl(''),
       dni: new FormControl('',[this.onlyNumbersValidator, this.lengthValidator(8)]),
-      pass: new FormControl('',[Validators.required,this.lengthMinValidator(6),this.validatorPassFormatt])
+      pass: new FormControl('',[Validators.required,this.validatorPassFormatt,this.lengthMinValidator(6)])
     });
-    timer(3600).subscribe(() => {this.showSplash = false; });
+    timer(3600).subscribe(() => {this.showSplash = false; });7
   }
 
   /** funcion para tomar la foto con @ionic-native/camera/ngx */
@@ -177,7 +177,9 @@ export class RegisterPage implements OnInit {
   }
   lengthMinValidator(min: number) {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
-      if (control.value !== undefined && (isNaN(control.value) || control.value.length < min)) {
+      if ( control.value.length < min) {
+        
+        console.log("error por el lenghtminvalidator");
         return { lengthError: true };
       }
       return null;
@@ -193,7 +195,9 @@ export class RegisterPage implements OnInit {
   }
   validatorPassFormatt(control: AbstractControl) {
     let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]$/;
-    if (control.value.length > 0 && !exp.exec(control.value)) {
+  
+    if (control.value.length <6  && !exp.exec(control.value))  {
+
       return { passErrFormat: true }
     }
     return null;
