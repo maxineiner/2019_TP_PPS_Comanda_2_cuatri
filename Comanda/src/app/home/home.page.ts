@@ -48,7 +48,6 @@ export class HomePage implements OnInit {
       const id = sessionStorage.getItem('idUser');
       const user = this.rolUser.find(user => user.idAuth === id );
       this.permiso = user.rol;
-      console.log('Permiso: ' + this.permiso);
       this.permissionsService.addPermission(this.permiso);
     });
   }
