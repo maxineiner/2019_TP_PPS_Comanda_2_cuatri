@@ -6,6 +6,7 @@ import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
 import { ListaEsperaMesaService } from 'src/app/services/lista-espera-mesa.service';
 import { MesaService } from 'src/app/services/mesa.service';
 import { Table } from 'src/app/model/table';
+import { ActivatedRoute } from '@angular/router';
 
 /** Este componente es el encargado de manejar la logica de agregar a un cliente a la lista de 
  * espera, y de verificar la mesa una vez asignada
@@ -20,6 +21,7 @@ export class ListaEsperaPage implements OnInit {
 
   /**contiene los numeros de las mesas */
   mesas = ['1', '2', '3'];
+  sm: boolean;
 
   constructor(
     private comandaService: ComandaServiceService,
@@ -28,9 +30,13 @@ export class ListaEsperaPage implements OnInit {
     public alertController: AlertController,
     private zbar: ZBar,
     private listaEsperaService: ListaEsperaMesaService,
-    private mesasService: MesaService) { }
+    private mesasService: MesaService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      this.sm = params['sm'];
+    });
     this.scanner();
   }
 
@@ -41,9 +47,11 @@ export class ListaEsperaPage implements OnInit {
     };
     this.zbar.scan(options)
       .then(result => {
-        result === 'Lista_Espera_Mesa' ? this.addListaEspera()
-          : this.mesas.includes(result) ? this.verificarMesa(result)
-            : this.presentAlert('Error', 'El codigo qr no es valido.');
+        result === 'Lista_Espera_Mesa' && this.sm ? this.addListaEspera()
+          : result === 'Lista_Espera_Mesa' && !this.sm ? this.presentAlert('Error', 'El codigo qr no es valido.')
+            : this.mesas.includes(result) && this.sm ? this.presentAlert('Error', 'El codigo qr no es valido.')
+              : this.mesas.includes(result) && !this.sm ? this.verificarMesa(result)
+                : this.presentAlert('Error', 'El codigo qr no es valido.');
       })
       .catch(error => {
         this.presentAlert('Error', error.message);
