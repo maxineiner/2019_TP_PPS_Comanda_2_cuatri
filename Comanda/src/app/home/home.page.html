@@ -27,8 +27,13 @@
   <!-- botones solo disponible para clientes -->
   <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="irAListaEspera()"
     class="top">
-    Lector de QR para Solicitar Mesa
+    Solicitar Mesa
   </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="irAListaEspera()"
+    class="top">
+    Verificar Mesa
+  </ion-button>  
 
   <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="encuestas()"
     class="top">

@@ -77,6 +77,8 @@ export class HomePage implements OnInit {
     // this.navCtrl.navigateRoot('lista-espera');  
   }
 
+  
+
   encuestas(){
     console.log('encuestas');
   }  
