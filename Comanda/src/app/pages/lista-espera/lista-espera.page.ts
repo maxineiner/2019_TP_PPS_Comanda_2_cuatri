@@ -35,7 +35,8 @@ export class ListaEsperaPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.sm = params['sm'];
+      if (params['tipo'])
+        this.sm = JSON.parse(params['tipo']);
     });
     this.scanner();
   }
@@ -60,12 +61,14 @@ export class ListaEsperaPage implements OnInit {
 
   async addListaEspera() {
     let existe = await this.listaEsperaService.existeEnListaEspera(this.authService.currentUserId());
-    if (existe.docs.length === 0) {
-      this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId());
-      this.presentAlert('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
-    } else {
-      this.presentAlert('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
-    }
+    existe.docs.length === 0
+      ? this.add()
+      : this.presentAlert('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
+  }
+
+  private add() {
+    this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId());
+    this.presentAlert('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
   }
 
   async verificarMesa(numeroMesa) {
@@ -74,7 +77,7 @@ export class ListaEsperaPage implements OnInit {
       this.presentAlert('Error', 'Esta mesa no le pertenece');
     } else {
       let table = mesa.docs[0].data() as Table;
-      mesa.docs.length === 1 && table.number === numeroMesa
+      mesa.docs.length === 1 && table.number === parseInt(numeroMesa)
         ? this.presentAlert('Info', 'La mesa se verifico corretamente, puede tomar asiento y realizar su pedido')
         : this.presentAlert('Error', 'Esta mesa no le pertenece');
     }

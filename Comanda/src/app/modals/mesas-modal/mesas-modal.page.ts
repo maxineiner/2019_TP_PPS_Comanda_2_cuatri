@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Table } from '../../model/table';
 import { MesaService } from '../../services/mesa.service';
-import { NavParams, AlertController } from '@ionic/angular';
+import { NavParams, AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,8 @@ export class MesasModalPage implements OnInit {
     private mesaService: MesaService,    
     private navParams: NavParams,
     private alertController: AlertController,
-    public router: Router) { }
+    public router: Router,
+    public modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.queryListTable();
@@ -58,13 +59,21 @@ export class MesasModalPage implements OnInit {
           text: 'Aceptar',
           handler: () => {
             this.mesaService.updateTable(data, this.idAuth);
-            this.router.navigate(['home']);
+            this.dismiss();
           }
         }
       ]
     });
 
     await alert.present();
+  }
+
+  dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
   }
 
 }

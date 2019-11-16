@@ -5,6 +5,7 @@ import { ComandaServiceService } from '../services/comanda-service.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { ListaEsperaMesaService } from '../services/lista-espera-mesa.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -23,14 +24,20 @@ export class HomePage implements OnInit {
     private permissionsService: NgxPermissionsService,
     private comandaService: ComandaServiceService,
     private authService: AuthService,
-    private listaEsperaService: ListaEsperaMesaService) {  
+    private listaEsperaService: ListaEsperaMesaService,
+    private spinner: NgxSpinnerService) {  
   }
 
-  ngOnInit() {    
+  ngOnInit() {  
+    //this.spinner.show()  
     this.flushPermissions();
     this.loadPermissions();
     this.verificarListaEspera();
   } 
+
+  ngAfterViewInit() {
+    //this.spinner.hide();
+  }
 
   flushPermissions() {
     this.permissionsService.flushPermissions();
@@ -48,7 +55,9 @@ export class HomePage implements OnInit {
       const id = sessionStorage.getItem('idUser');
       const user = this.rolUser.find(user => user.idAuth === id );
       this.permiso = user.rol;
+      console.log(this.permiso);
       this.permissionsService.addPermission(this.permiso);
+      //this.spinner.hide();
     });
   }
   

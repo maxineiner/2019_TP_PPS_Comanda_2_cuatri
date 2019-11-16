@@ -41,6 +41,7 @@
     "es6-promise-plugin": "^4.2.2",
     "firebase": "^7.2.2",
     "ngx-permissions": "^7.0.3",
+    "ngx-spinner": "^8.0.3",
     "qr-code-scanner": "^1.0.7",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
