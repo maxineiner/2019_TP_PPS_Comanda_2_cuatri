@@ -27,15 +27,9 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {    
-    this.prueba();
     this.flushPermissions();
     this.loadPermissions();
-  }
-
-  async prueba() {
-    let existe = await this.listaEsperaService.existeEnListaEspera(this.authService.currentUserId());
-    return existe.docs.length > 1 ? true : false;
-  }
+  } 
 
   flushPermissions() {
     this.permissionsService.flushPermissions();
@@ -77,7 +71,7 @@ export class HomePage implements OnInit {
     // this.navCtrl.navigateRoot('lista-espera');  
   }
 
-  
+
 
   encuestas(){
     console.log('encuestas');
