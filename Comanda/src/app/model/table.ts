@@ -1,14 +1,19 @@
 export class Table {
+    id?: string;
     number: number;
     capacity: number;
     type: TableType;
     image: string;
+    available: boolean;
+    idAuth: string;
 
-    constructor(number: number, capacity: number, type: TableType, image: string) {
+    constructor(idAuth: string, number: number, capacity: number, type: TableType, image: string, available: boolean) {
+        this.idAuth = idAuth;
         this.number = number;
         this.capacity = capacity;
         this.type = type;
         this.image = image;
+        this.available = available;
     }
 }
 

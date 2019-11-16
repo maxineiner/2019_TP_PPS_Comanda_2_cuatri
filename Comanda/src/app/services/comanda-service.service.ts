@@ -63,6 +63,6 @@ export class ComandaServiceService {
       type: table.type,
       image: table.image
     });
-  }
+  } 
 
 }
