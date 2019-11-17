@@ -33,18 +33,20 @@ export class HomePage implements OnInit {
     this.flushPermissions();
     this.loadPermissions();
     this.verificarListaEspera();
-  } 
+  }   
 
-  ngAfterViewInit() {
-    //this.spinner.hide();
+  ngOnDestroy(){
+    console.log('ngOnDestroy');
   }
 
   flushPermissions() {
     this.permissionsService.flushPermissions();
   }
 
-  loadPermissions() {    
-    this.comandaService.getRolUser().subscribe(data => {
+  loadPermissions() {   
+     this.permiso = sessionStorage.getItem('permiso');
+     this.permissionsService.addPermission(this.permiso);
+    /*this.comandaService.getRolUser().subscribe(data => {
       this.rolUser = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -53,12 +55,10 @@ export class HomePage implements OnInit {
         };
       });
       const id = sessionStorage.getItem('idUser');
-      const user = this.rolUser.find(user => user.idAuth === id );
+      const user = this.rolUser.find(user => user.idAuth === id);
       this.permiso = user.rol;
-      console.log(this.permiso);
       this.permissionsService.addPermission(this.permiso);
-      //this.spinner.hide();
-    });
+    });*/
   }
   
   goTo(route, param){
