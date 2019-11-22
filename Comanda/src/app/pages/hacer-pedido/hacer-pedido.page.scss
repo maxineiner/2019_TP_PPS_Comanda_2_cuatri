@@ -1,0 +1,123 @@
+.imagenTabla {
+    width: 40px;
+    height: 40px;
+}
+
+.card {
+    box-shadow: 0 4px 18px 0 rgba(51, 61, 211, 0.932);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+    /* max-width: 300px; */
+    width:330px;
+    height: 450px;
+    margin: 10px;
+    padding-bottom: 10px;
+    /* padding-left: 30px; */
+    float: left;
+    background-color: rgba(51, 61, 211, 0.932);
+    text-align: center;
+}
+
+/* Add rounded corners to the top left and the top right corner of the image */
+img {
+    /* border-top: 15px; */
+    /* padding:2px; */
+    border-radius: 5px 5px 0 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 25px;
+}/* Add some padding inside the card container */
+.container {
+    padding: 2px 16px;
+}
+.button{
+    margin-left: 1px;
+    display: inline-block;
+    width: 70%;
+    padding: 5px 15px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: rgb(36, 218, 66);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px #999;
+
+    border: none;
+    outline: 0;
+ 
+    padding: 8px;
+    color: white;
+   /* background-color: #000;*/
+    text-align: center;
+    cursor: pointer;
+    padding-bottom: 5%;
+  }
+  
+
+  .buttonR {
+    margin-left: 1px;
+    display: inline-block;
+    width: 70%;
+    padding: 5px 15px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: rgb(235, 69, 69);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px #999;
+
+    border: none;
+    outline: 0;
+ 
+    padding: 8px;
+    color: white;
+   /* background-color: #000;*/
+    text-align: center;
+    cursor: pointer;
+    padding-bottom: 5%;
+  }
+  .inputNumber {
+      background-color: rgba(51, 61, 211, 0.932);
+      width: 60px;
+      height: 60px;
+      font-size:2em;
+  }
+  .flotante {
+    display:scroll;
+        position:fixed;
+        bottom:0px;
+        right:0px;
+    }
+    .valorCarrito {
+        color:green;
+        background-color: rgba(170, 235, 154, 0.938);
+        
+    }
+    .divClass {
+        text-align: center;
+        color:rgba(51, 61, 211, 0.932);
+        background-color: rgb(170, 192, 231);
+        position: fixed;
+        /*nos posicionamos en el centro del navegador*/
+        top:50%;
+        left:55%;
+        /*determinamos una anchura*/
+        min-width: 350px;
+        max-width:400px;
+        
+        /*indicamos que el margen izquierdo, es la mitad de la anchura*/
+        margin-left:-200px;
+        /*determinamos una altura*/
+        max-height:700px;
+        /*indicamos que el margen superior, es la mitad de la altura*/
+        margin-top:-150px;
+        border:5px solid  rgba(51, 61, 211, 0.932);;
+        padding:5px;
+        
+    }

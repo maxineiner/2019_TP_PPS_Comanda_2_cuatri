@@ -8,6 +8,7 @@ import { ActorType } from 'src/app/model/actorType';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Producto } from 'src/app/model/producto';
 import { Imagen } from 'src/app/model/imagenes';
+import { AuthService} from "../../services/auth.service";
 // import { ImagePicker, ImagePickerOptions } from '@ionic-native/image-picker/ngx';
 @Component({
   selector: 'app-alta-productos',
@@ -23,6 +24,7 @@ export class AltaProductosPage implements OnInit {
   arrayFotos:Array<Imagen> = [];
   arrayInit=false;
   encodedData:string;
+  rolActual;
 
   // imagePickerOptions: ImagePickerOptions = {
   //   quality: 50,
@@ -33,7 +35,8 @@ export class AltaProductosPage implements OnInit {
     private comandaService: ComandaServiceService,
     private alertController: AlertController,
     private barcodeScanner: BarcodeScanner,
-    private camera: Camera) { }
+    private camera: Camera,
+    private authService:AuthService,) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -41,6 +44,24 @@ export class AltaProductosPage implements OnInit {
       descripcion: new FormControl('', Validators.required),
       tiempo: new FormControl('', Validators.required),
       precio: new FormControl('', Validators.required),
+    });
+    
+     this.authService.getRolwithEmail(this.authService.currentUserId()).subscribe(async (productos:any) => {
+      
+      productos.forEach(producto => {
+        if(producto.idAuth == this.authService.currentUserId())
+        {
+          this.rolActual = producto.rol;
+        }
+       
+        // if(producto.name != undefined)
+        // {
+        //   producto.image = JSON.parse(producto.image);
+        //   this.arrayProductos.push(producto);
+        // }
+        
+      });
+    
     });
   }
 
@@ -70,13 +91,23 @@ export class AltaProductosPage implements OnInit {
  
 
   save() {
-
+    console.log(this.rolActual);
+    let tipoProducto= "COMIDA";
+    if(this.rolActual == "BARTENDER"){
+      tipoProducto = "BEBIDA";
+    }
+    else if (this.rolActual == "COCINERO")
+    {
+      tipoProducto= "COMIDA"
+    }
+   
     this.producto = new Producto(
       this.myForm.get('name').value,
       this.myForm.get('descripcion').value,
       this.myForm.get('tiempo').value,
       this.myForm.get('precio').value,
-      JSON.stringify(this.arrayFotos)
+      JSON.stringify(this.arrayFotos),
+      tipoProducto
     );
 
     if(this.arrayFotos.length != 3) 

@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guard/auth.guard';
 import { NoLogInGuard } from './guard/no-log-in.guard';
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule), canActivate: [NoLogInGuard]},
@@ -15,10 +16,7 @@ const routes: Routes = [
   { path: 'lista-espera-registro', loadChildren: './pages/lista-espera-registro/lista-espera-registro.module#ListaEsperaRegistroPageModule', canActivate: [AuthGuard] },
   { path: 'lista-espera-metre', loadChildren: './pages/lista-espera-metre/lista-espera-metre.module#ListaEsperaMetrePageModule' },
   { path: 'mesas-modal', loadChildren: './modals/mesas-modal/mesas-modal.module#MesasModalPageModule' },
-
-
-
-
+  { path: 'hacer-pedido', loadChildren: './pages/hacer-pedido/hacer-pedido.module#HacerPedidoPageModule' },
 ];
 
 @NgModule({

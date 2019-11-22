@@ -36,6 +36,10 @@
     Verificar Mesa
   </ion-button>  
 
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('hacer-pedido')"
+  class="top">
+   Ver productos <!-- (no subir a develop es a modo de prueba)  -->
+</ion-button>
   <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="encuestas()"
     class="top">
     Ver encuestas

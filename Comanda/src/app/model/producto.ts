@@ -9,12 +9,12 @@ export class Producto {
     type: string;
     qr:string;
 
-    constructor(paramName: string, descripcion: string, tiempo: number, precio:number, arrayImages:string) {
+    constructor(paramName: string, descripcion: string, tiempo: number, precio:number, arrayImages:string, type:string) {
         this.name = paramName;
         this.descripcion = descripcion;
         this.tiempo = tiempo;
         this.precio = precio;
          this.image = arrayImages;
-        // this.type = paramType;
+         this.type = type;
     }
 }
