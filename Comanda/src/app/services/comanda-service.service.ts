@@ -33,7 +33,8 @@ export class ComandaServiceService {
       descripcion: producto.descripcion,
       tiempo: producto.tiempo,
       precio: producto.precio,
-      image: producto.image.toString()
+      image: producto.image.toString(),
+      type:producto.type
       // image: actorType.image,
       // type: actorType.type
     });

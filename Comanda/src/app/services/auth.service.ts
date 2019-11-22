@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+
+import { map } from 'rxjs/internal/operators/map';
 import { reject } from 'q';
 
 @Injectable({
@@ -7,7 +10,7 @@ import { reject } from 'q';
 })
 export class AuthService {
 
-  constructor(private AFauth: AngularFireAuth ) { }
+  constructor(private AFauth: AngularFireAuth,private firestore: AngularFirestore ) { }
 
   logIn(email:string, password:string){
 
@@ -46,6 +49,21 @@ export class AuthService {
         .catch(err => reject(err));
     });
   }
+
+    getRolwithEmail(idAuth:string)
+    {    
+      return this.firestore.collection('Rol_User').snapshotChanges().pipe(map((clientes) => {
+          return clientes.map((a) => {
+            
+              const data = a.payload.doc.data();
+              // data.id = a.payload.doc.id;
+              return data;
+            
+
+          });
+        }));
+    }
+
 }
 
 
