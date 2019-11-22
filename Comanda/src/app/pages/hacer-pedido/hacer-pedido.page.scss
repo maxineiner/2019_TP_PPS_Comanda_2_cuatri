@@ -33,9 +33,9 @@ img {
 .button{
     margin-left: 1px;
     display: inline-block;
-    width: 90%;
+    width: 70%;
     padding: 5px 15px;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     cursor: pointer;
     outline: none;
@@ -43,7 +43,7 @@ img {
     background-color: rgb(36, 218, 66);
     border: none;
     border-radius: 15px;
-    box-shadow: 0 9px #999;
+    box-shadow: 0 4px #999;
 
     border: none;
     outline: 0;
@@ -53,17 +53,16 @@ img {
    /* background-color: #000;*/
     text-align: center;
     cursor: pointer;
-    width: 100%;
-    padding-bottom: 0%;
+    padding-bottom: 5%;
   }
   
 
   .buttonR {
     margin-left: 1px;
     display: inline-block;
-    width: 90%;
+    width: 70%;
     padding: 5px 15px;
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
     cursor: pointer;
     outline: none;
@@ -71,7 +70,7 @@ img {
     background-color: rgb(235, 69, 69);
     border: none;
     border-radius: 15px;
-    box-shadow: 0 9px #999;
+    box-shadow: 0 4px #999;
 
     border: none;
     outline: 0;
@@ -81,6 +80,44 @@ img {
    /* background-color: #000;*/
     text-align: center;
     cursor: pointer;
-    width: 100%;
-    padding-bottom: 0%;
+    padding-bottom: 5%;
   }
+  .inputNumber {
+      background-color: rgba(51, 61, 211, 0.932);
+      width: 60px;
+      height: 60px;
+      font-size:2em;
+  }
+  .flotante {
+    display:scroll;
+        position:fixed;
+        bottom:0px;
+        right:0px;
+    }
+    .valorCarrito {
+        color:green;
+        background-color: rgba(170, 235, 154, 0.938);
+        
+    }
+    .divClass {
+        text-align: center;
+        color:rgba(51, 61, 211, 0.932);
+        background-color: rgb(170, 192, 231);
+        position: fixed;
+        /*nos posicionamos en el centro del navegador*/
+        top:50%;
+        left:55%;
+        /*determinamos una anchura*/
+        min-width: 350px;
+        max-width:400px;
+        
+        /*indicamos que el margen izquierdo, es la mitad de la anchura*/
+        margin-left:-200px;
+        /*determinamos una altura*/
+        max-height:700px;
+        /*indicamos que el margen superior, es la mitad de la altura*/
+        margin-top:-150px;
+        border:5px solid  rgba(51, 61, 211, 0.932);;
+        padding:5px;
+        
+    }
