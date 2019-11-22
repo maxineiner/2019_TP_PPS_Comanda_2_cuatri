@@ -1,4 +1,5 @@
 <ion-content>
+  <ngx-spinner></ngx-spinner>
   <ion-button *ngxPermissionsOnly="['DUEÑO', 'SUPERVISOR']" color="primary" fill="outline" expand="block"
     (click)="goTo('alta', 'S')" class="top">
     Alta Dueño/Supervisor
@@ -25,8 +26,8 @@
   </ion-button>
 
   <!-- botones solo disponible para clientes -->
-  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('lista-espera')"
-    class="top">
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('lista-espera', 'true')"
+    class="top" [hidden]="ocultarBtn">
     Solicitar Mesa
   </ion-button>
 

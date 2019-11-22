@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Table } from '../../model/table';
 import { MesaService } from '../../services/mesa.service';
-import { NavParams, AlertController } from '@ionic/angular';
+import { NavParams, AlertController, ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mesas-modal',
@@ -16,10 +17,11 @@ export class MesasModalPage implements OnInit {
   constructor(
     private mesaService: MesaService,    
     private navParams: NavParams,
-    private alertController: AlertController) { }
+    private alertController: AlertController,
+    public router: Router,
+    public modalCtrl: ModalController) { }
 
   ngOnInit() {
-    console.log(this.idAuth);
     this.queryListTable();
   }
 
@@ -44,7 +46,7 @@ export class MesasModalPage implements OnInit {
   async presentAlert(data: Table) {
     const alert = await this.alertController.create({
       header: 'Aviso',
-      message: 'Confirmar aginación de las mesa ' + data.number,
+      message: 'Confirmar aginación de la mesa ' + data.number,
       buttons: [
         {
           text: 'Cancelar',
@@ -57,12 +59,21 @@ export class MesasModalPage implements OnInit {
           text: 'Aceptar',
           handler: () => {
             this.mesaService.updateTable(data, this.idAuth);
+            this.dismiss();
           }
         }
       ]
     });
 
     await alert.present();
+  }
+
+  dismiss() {
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
   }
 
 }

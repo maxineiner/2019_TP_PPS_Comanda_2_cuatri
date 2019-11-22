@@ -5,6 +5,7 @@ import { ComandaServiceService } from '../services/comanda-service.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { ListaEsperaMesaService } from '../services/lista-espera-mesa.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { ListaEsperaMesaService } from '../services/lista-espera-mesa.service';
 export class HomePage implements OnInit {
   rolUser: { id: string; idAuth: any; rol: any; }[];
   permiso: string;
+  ocultarBtn: boolean;
   
   constructor(
     public router: Router,
@@ -22,20 +24,29 @@ export class HomePage implements OnInit {
     private permissionsService: NgxPermissionsService,
     private comandaService: ComandaServiceService,
     private authService: AuthService,
-    private listaEsperaService: ListaEsperaMesaService) {  
+    private listaEsperaService: ListaEsperaMesaService,
+    private spinner: NgxSpinnerService) {  
   }
 
-  ngOnInit() {    
+  ngOnInit() {  
+    //this.spinner.show()  
     this.flushPermissions();
     this.loadPermissions();
-  } 
+    this.verificarListaEspera();
+  }   
+
+  ngOnDestroy(){
+    console.log('ngOnDestroy');
+  }
 
   flushPermissions() {
     this.permissionsService.flushPermissions();
   }
 
-  loadPermissions() {    
-    this.comandaService.getRolUser().subscribe(data => {
+  loadPermissions() {   
+     this.permiso = sessionStorage.getItem('permiso');
+     this.permissionsService.addPermission(this.permiso);
+    /*this.comandaService.getRolUser().subscribe(data => {
       this.rolUser = data.map(e => {
         return {
           id: e.payload.doc.id,
@@ -44,11 +55,10 @@ export class HomePage implements OnInit {
         };
       });
       const id = sessionStorage.getItem('idUser');
-      const user = this.rolUser.find(user => user.idAuth === id );
+      const user = this.rolUser.find(user => user.idAuth === id);
       this.permiso = user.rol;
-      console.log('Permiso: ' + this.permiso);
       this.permissionsService.addPermission(this.permiso);
-    });
+    });*/
   }
   
   goTo(route, param){
@@ -65,5 +75,10 @@ export class HomePage implements OnInit {
   encuestas(){
     console.log('encuestas');
   }  
+
+  async verificarListaEspera() {
+    let existe = await this.listaEsperaService.existeEnListaEspera(this.authService.currentUserId());
+    existe.docs.length === 0 ? this.ocultarBtn = false : this.ocultarBtn = true;
+  }
 
 }
