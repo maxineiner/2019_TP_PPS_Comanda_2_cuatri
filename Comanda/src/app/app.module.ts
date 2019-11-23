@@ -18,8 +18,12 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { ZBar } from '@ionic-native/zbar/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { MesasModalPage } from './modals/mesas-modal/mesas-modal.page';
+<<<<<<< HEAD
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
+=======
+import { DetallePedidoModalPage } from './modals/detalle-pedido-modal/detalle-pedido-modal.page';
+>>>>>>> develop
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAWUuOEwKZrD3jBv6Jxq-DmQ-hZSdNupiw',
@@ -32,8 +36,8 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, MesasModalPage],
-  entryComponents: [MesasModalPage],
+  declarations: [AppComponent, MesasModalPage, DetallePedidoModalPage],
+  entryComponents: [MesasModalPage, DetallePedidoModalPage],
   imports: [BrowserModule
     , IonicModule.forRoot()
     , AppRoutingModule
