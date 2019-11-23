@@ -19,4 +19,14 @@ export class PedidosService {
 
     });
   }
+
+  public getPedidos() {
+    return this.firestore.collection('Lista_Pedidos').snapshotChanges();
+  }
+
+  public async SetEstado(id: string, estado: string) {
+    await this.firestore.doc('Lista_Pedidos/' + id).set({
+      estado: estado
+    }, { merge: true });
+  }
 }
