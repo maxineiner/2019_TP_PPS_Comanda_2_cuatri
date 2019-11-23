@@ -118,6 +118,7 @@ export class HacerPedidoPage implements OnInit {
     if(this.valorCarrito > 0)
     {
       this.pedidosService.AddPedidoToBD(this.auxPedido);
+      this.router.navigate(['home'])
     }
     else
     {
