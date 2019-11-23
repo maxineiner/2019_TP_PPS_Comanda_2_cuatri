@@ -18,6 +18,8 @@ const routes: Routes = [
   { path: 'mesas-modal', loadChildren: './modals/mesas-modal/mesas-modal.module#MesasModalPageModule' },
   { path: 'hacer-pedido', loadChildren: './pages/hacer-pedido/hacer-pedido.module#HacerPedidoPageModule' },
   { path: 'lista-pedidos', loadChildren: './pages/lista-pedidos/lista-pedidos.module#ListaPedidosPageModule' },
+  { path: 'detalle-pedido-modal', loadChildren: './modals/detalle-pedido-modal/detalle-pedido-modal.module#DetallePedidoModalPageModule' },
+
 
 ];
 
