@@ -15,12 +15,16 @@ export class PedidosService {
       idAuth:auxPedido.idAuth,
       total: auxPedido.total,
       estado: auxPedido.estado,
-      arrayDetalle: JSON.stringify(auxPedido.arrayDetalle),
+      arrayDetalle: auxPedido.arrayDetalle,
 
     });
   }
 
   public getPedidos() {
     return this.firestore.collection('Lista_Pedidos').snapshotChanges();
+  }
+
+  public async UpdatePedido(data: Pedido) {
+    await this.firestore.doc('Lista_Pedidos/' + data.id).update(data);
   }
 }

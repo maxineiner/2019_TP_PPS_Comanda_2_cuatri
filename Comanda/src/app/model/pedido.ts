@@ -2,6 +2,7 @@ import { Detalle } from './detalle';
 
 
 export class Pedido {
+    id?: string;
     idAuth:string;
     arrayDetalle:Array<Detalle>;
     estado:string;
