@@ -28,8 +28,8 @@ export class ListaPedidosPage implements OnInit {
       
       var mesaService = this.mesaService;
       this.pedidos.forEach(function (pedido) {
-        // var detalleStr = pedido.arrayDetalle.toString();
-        // pedido.arrayDetalle = JSON.parse(detalleStr);
+        var detalleStr = pedido.arrayDetalle.toString();
+        pedido.arrayDetalle = JSON.parse(detalleStr);
         mesaService.getTableByClient(pedido.idAuth).then(mesas => {
           var mesa = mesas.docs[0].data();
           pedido.numeroMesa = mesa.number;
@@ -74,8 +74,8 @@ export class ListaPedidosPage implements OnInit {
         , {
           text: 'Aceptar',
           handler: () => {
-            pedido.estado = 'CONFIRMADO';
-            this.pedidosService.UpdatePedido(pedido);
+            // pedido.estado = 'CONFIRMADO';
+            this.pedidosService.SetEstado(pedido.id, 'COFIRMADO');
           }
         }
       ]

@@ -24,7 +24,9 @@ export class PedidosService {
     return this.firestore.collection('Lista_Pedidos').snapshotChanges();
   }
 
-  public async UpdatePedido(data: Pedido) {
-    await this.firestore.doc('Lista_Pedidos/' + data.id).update(data);
+  public async SetEstado(id: string, estado: string) {
+    await this.firestore.doc('Lista_Pedidos/' + id).set({
+      estado: estado
+    }, { merge: true });
   }
 }
