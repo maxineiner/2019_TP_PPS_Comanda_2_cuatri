@@ -7,8 +7,8 @@ export class Pedido {
     estado:string;
     total:number;
 
-    usuario: string;
-    mesa: number;
+    numeroMesa: number;//no se persiste en la base
+
     constructor(idAuth: string,arrayDetalle:Array<Detalle>,estado:string,total:number) {
         this.idAuth= idAuth;
         this.arrayDetalle = arrayDetalle;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidosService } from '../../services/pedidos.service';
+import { MesaService } from '../../services/mesa.service';
 import { Pedido } from '../../model/pedido';
 
 @Component({
@@ -8,18 +9,24 @@ import { Pedido } from '../../model/pedido';
   styleUrls: ['./lista-pedidos.page.scss'],
 })
 export class ListaPedidosPage implements OnInit {
-  pedidos = [];
-  constructor(private pedidosService: PedidosService) { }
+  pedidos = new Array<Pedido>();
+  constructor(private pedidosService: PedidosService
+    , private mesaService: MesaService) { }
 
   ngOnInit() {
     this.pedidosService.getPedidos().subscribe(actionArray => {
       this.pedidos = actionArray.map(item => {
         return {
-          id: item.payload.doc.id,
           ...item.payload.doc.data()
         } as Pedido;
       });
-      //busco user y la mesa por userid para quitarle el nombre de usuario y el numero de mesa
+      var mesaService = this.mesaService;
+      this.pedidos.forEach(function (pedido) {
+        mesaService.getTableByClient(pedido.idAuth).then(mesas => {
+          var mesa = mesas.docs[0].data();
+          pedido.numeroMesa = mesa.number;
+        });
+      });
     });
   }
 
