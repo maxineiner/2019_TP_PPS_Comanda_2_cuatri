@@ -15,7 +15,7 @@ export class PedidosService {
       idAuth:auxPedido.idAuth,
       total: auxPedido.total,
       estado: auxPedido.estado,
-      arrayDetalle: auxPedido.arrayDetalle,
+      arrayDetalle: JSON.stringify(auxPedido.arrayDetalle),
 
     });
   }
