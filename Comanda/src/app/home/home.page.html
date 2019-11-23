@@ -26,19 +26,19 @@
   </ion-button>
 
   <!-- botones solo disponible para clientes -->
-  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('lista-espera', 'true')"
-    class="top" [hidden]="ocultarBtn">
-    Solicitar Mesa
-  </ion-button>
-
   <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('lista-espera')"
-    class="top">
-    Verificar Mesa
+    class="top" [hidden]="ocultarBtn">
+    Leer QR
   </ion-button>  
 
-  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="encuestas()"
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('encuesta')"
     class="top">
     Ver encuestas
+  </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('encuesta-respuesta')"
+    class="top">
+    Graficos
   </ion-button>
 
   <!-- botones solo disponible para el metre-->

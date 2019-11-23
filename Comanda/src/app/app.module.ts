@@ -18,6 +18,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { ZBar } from '@ionic-native/zbar/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { MesasModalPage } from './modals/mesas-modal/mesas-modal.page';
+import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAWUuOEwKZrD3jBv6Jxq-DmQ-hZSdNupiw',
@@ -39,6 +41,8 @@ const firebaseConfig = {
     , AngularFireAuthModule
     , AngularFirestoreModule
     , NgxPermissionsModule
+    , FormsModule
+    , ChartsModule 
     ],
   providers: [
     StatusBar,

@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Encuesta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="register()">
+    <ion-card>
+      <ion-card-header>
+        <ion-avatar class="avatar">
+          <img *ngIf="!image" src="assets/images/encuesta.jpg">
+        </ion-avatar>
+      </ion-card-header>
+
+      <ion-card-content>
+
+       <!-- <ion-list>
+          <ion-list-header>
+            <ion-label>
+              1- De las siguientes opciones ¿cuales mejoraria?
+            </ion-label>
+          </ion-list-header>
+          <ion-item *ngFor="let op of opcionesPreg1">
+            <ion-checkbox formControlName="checkbox" color="primary" (click)="selectOptionCheck(op)"
+              [checked]="op.checked"></ion-checkbox>
+            <ion-label> {{op.opcion}}</ion-label>
+          </ion-item>
+        </ion-list>-->
+
+        <ion-list>
+          <ion-radio-group formControlName="radio">
+            <ion-list-header>
+              <ion-label>
+                1- ¿Cuan satisfecho quedo con el servicio brindado?
+              </ion-label>
+            </ion-list-header>
+
+            <ion-item *ngFor="let op of opcionesPreg2">
+              <ion-label>{{op.opcion}}</ion-label>
+              <ion-radio slot="start" [value]="op.opcion">
+              </ion-radio>
+            </ion-item>
+
+          </ion-radio-group>
+        </ion-list>
+
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              2- Del 1 al 5 ¿cual es la posibilidad de que nos recomiende?
+            </ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-range formControlName="range" min="1" max="5" step="1" 
+              snaps="true" ticks="false" color="secondary" [(ngModel)]="rangeValue"></ion-range>
+              {{rangeValue}}
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              3- ¿Quedo conforme con la variedad del menu?
+            </ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-label>Seleccione una opción</ion-label>
+            <ion-select formControlName="select">
+              <ion-select-option value="SI">Si</ion-select-option>
+              <ion-select-option value="NO">No</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-list-header>
+            <ion-label>
+              4- ¿Que mejoraria, agregaria o quitaria al lugar?
+            </ion-label>
+          </ion-list-header>
+
+          <ion-item>
+            <ion-input formControlName="input" placeholder="Su opinion nos interesa"></ion-input>
+          </ion-item>
+        </ion-list>
+
+        <ion-button color='primary' fill="outline" expand="block" type="submit" [disabled]="!form.valid">
+          Registrar
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  </form>   
+
+</ion-content>

@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>encuesta-respuesta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let er of encuestaRespuestas">
+    <ion-card-header>
+      {{er.pregunta}}
+    </ion-card-header>
+    <ion-card-content>
+     <canvas baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType">
+      </canvas>
+    </ion-card-content>
+
+
+  </ion-card>
+
+</ion-content>

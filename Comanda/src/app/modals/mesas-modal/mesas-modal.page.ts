@@ -13,6 +13,7 @@ export class MesasModalPage implements OnInit {
 
   @Input() idAuth: string;
   tables: Table[];
+  valor: number;
 
   constructor(
     private mesaService: MesaService,    

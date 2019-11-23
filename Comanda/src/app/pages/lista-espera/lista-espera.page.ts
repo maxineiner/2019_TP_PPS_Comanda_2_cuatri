@@ -48,10 +48,8 @@ export class ListaEsperaPage implements OnInit {
     };
     this.zbar.scan(options)
       .then(result => {
-        result === 'Lista_Espera_Mesa' && this.sm ? this.addListaEspera()
-          : result === 'Lista_Espera_Mesa' && !this.sm ? this.presentAlert('Error', 'El codigo qr no es valido.')
-            : this.mesas.includes(result) && this.sm ? this.presentAlert('Error', 'El codigo qr no es valido.')
-              : this.mesas.includes(result) && !this.sm ? this.verificarMesa(result)
+        result === 'Lista_Espera_Mesa' ? this.verificarListaEspera()
+              : this.mesas.includes(result) ? this.verificarMesa(result)
                 : this.presentAlert('Error', 'El codigo qr no es valido.');
       })
       .catch(error => {
@@ -59,14 +57,15 @@ export class ListaEsperaPage implements OnInit {
       });
   }
 
-  async addListaEspera() {
+  async verificarListaEspera() {
     let existe = await this.listaEsperaService.existeEnListaEspera(this.authService.currentUserId());
-    existe.docs.length === 0
-      ? this.add()
-      : this.presentAlert('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
+    let mesa = await this.mesasService.getTableByClient(this.authService.currentUserId());
+    mesa.docs.length > 0 ? this.presentAlert('Info', 'Usted ya tiene una mesa asignada')
+      : existe.docs.length === 0 ? this.addListaEspera()
+          : this.presentAlert('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
   }
 
-  private add() {
+  private addListaEspera() {
     this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId());
     this.presentAlert('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
   }
@@ -74,7 +73,7 @@ export class ListaEsperaPage implements OnInit {
   async verificarMesa(numeroMesa) {
     let mesa = await this.mesasService.getTableByClient(this.authService.currentUserId());
     if (mesa.docs.length === 0) {
-      this.presentAlert('Error', 'Esta mesa no le pertenece');
+      this.presentAlert('Error', 'Esta mesa no le pertenece, puede solicitar una leyando el qr de lista de espera');
     } else {
       let table = mesa.docs[0].data() as Table;
       mesa.docs.length === 1 && table.number === parseInt(numeroMesa)
