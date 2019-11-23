@@ -19,4 +19,8 @@ export class PedidosService {
 
     });
   }
+
+  public getPedidos() {
+    return this.firestore.collection('Lista_Pedidos').snapshotChanges();
+  }
 }

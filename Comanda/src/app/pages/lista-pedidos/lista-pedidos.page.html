@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>lista-pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let pedido of pedidos">
+      <ion-label>{{pedido.usuario}} MESA {{pedido.mesa}}</ion-label>
+      <ion-radio slot="end"></ion-radio>
+    </ion-item>
+  </ion-list>
+</ion-content>

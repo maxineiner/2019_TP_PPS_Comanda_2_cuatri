@@ -50,4 +50,9 @@
     class="top">
     Lista de espera
   </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['MOZO']" color="primary" fill="outline" expand="block" (click)="goTo('lista-pedidos')"
+    class="top">
+    Pedidos
+  </ion-button>
 </ion-content>
