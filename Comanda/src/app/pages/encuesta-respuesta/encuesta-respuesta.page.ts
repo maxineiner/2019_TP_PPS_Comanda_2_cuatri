@@ -15,6 +15,7 @@ export class EncuestaRespuestaPage implements OnInit {
   encuestaRespuestas = [];
   chartLables = [];
   chartData = [];
+  tipo: string;
 
   constructor(private encuestaService: EncuestaService) { }
 
@@ -35,14 +36,14 @@ export class EncuestaRespuestaPage implements OnInit {
   }
 
   groupRespuestasAndGenerateObj(concat) {
-    let arrayAux: any[] = [];
+    let arrayAux: any[] = [];    
     const group = groupBy(concat, 'pregunta', 'tipo');
     Object.entries(group).forEach(([key, value]) => {
       Object.entries(value).forEach(([keyChild, reqResp]) => {
         this.generateChartData(keyChild, reqResp, arrayAux);
       });
       this.chartData = arrayAux;
-      this.encuestaRespuestas.push({ pregunta: key, chartLables: this.chartLables, chartData: this.chartData });
+      this.encuestaRespuestas.push({ pregunta: key, chartLables: this.chartLables, chartData: this.chartData, tipo: this.tipo});
       this.chartLables = [];
       this.chartData = [];
       arrayAux = [];
@@ -52,6 +53,7 @@ export class EncuestaRespuestaPage implements OnInit {
   private generateChartData(keyChild: string, reqResp: any, arrayAux: any[]) {
     if (keyChild == '0') {
       this.chartLables = reqResp['opciones'];
+      this.tipo = reqResp['tipo'];
       this.chartLables.forEach(c => {
         arrayAux.push(0);
       });

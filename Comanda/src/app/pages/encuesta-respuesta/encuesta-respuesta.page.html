@@ -6,15 +6,13 @@
 
 <ion-content>
   <ion-card *ngFor="let er of encuestaRespuestas">
-    <ion-card-header>
+    <ion-card-header *ngIf="er.tipo != 'input'"> 
       {{er.pregunta}}
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content *ngIf="er.tipo != 'input'">
      <canvas baseChart [data]="er.chartData" [labels]="er.chartLables" [chartType]="chartType">
       </canvas>
     </ion-card-content>
-
-
   </ion-card>
 
 </ion-content>

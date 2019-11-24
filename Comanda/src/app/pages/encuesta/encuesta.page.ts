@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { Encuesta } from 'src/app/model/encuesta';
 import { EncuestaService } from 'src/app/services/encuesta.service';
+import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-encuesta',
@@ -35,7 +37,10 @@ export class EncuestaPage implements OnInit {
   selectedArray: Array<any> = [];
   rangeValue: any;
 
-  constructor(private encuestaService: EncuestaService) { }
+  constructor(
+    private encuestaService: EncuestaService,
+    private alertController: AlertController,
+    private router: Router) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -68,6 +73,31 @@ export class EncuestaPage implements OnInit {
     });
 
     await this.encuestaService.save(this.preguntas);
+    this.presentAlertSuccess('Muchas gracias por su opinion, su respuesta se registro con exito')
+  }
+
+  async presentAlertSuccess(mensaje) {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: mensaje,
+      buttons: [
+        {
+          text: '',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            this.router.navigate(['home']);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }
