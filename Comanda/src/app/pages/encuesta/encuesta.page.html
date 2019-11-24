@@ -15,18 +15,18 @@
 
       <ion-card-content>
 
-       <!-- <ion-list>
+       <ion-list>
           <ion-list-header>
             <ion-label>
               1- De las siguientes opciones ¿cuales mejoraria?
             </ion-label>
           </ion-list-header>
-          <ion-item *ngFor="let op of opcionesPreg1">
+          <ion-item *ngFor="let op of opcionesCheck">
             <ion-checkbox formControlName="checkbox" color="primary" (click)="selectOptionCheck(op)"
               [checked]="op.checked"></ion-checkbox>
             <ion-label> {{op.opcion}}</ion-label>
           </ion-item>
-        </ion-list>-->
+        </ion-list>
 
         <ion-list>
           <ion-radio-group formControlName="radio">
@@ -36,7 +36,7 @@
               </ion-label>
             </ion-list-header>
 
-            <ion-item *ngFor="let op of opcionesPreg2">
+            <ion-item *ngFor="let op of opcionesRadio">
               <ion-label>{{op.opcion}}</ion-label>
               <ion-radio slot="start" [value]="op.opcion">
               </ion-radio>

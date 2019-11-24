@@ -10,30 +10,11 @@ const groupBy = require('group-by');
 })
 export class EncuestaRespuestaPage implements OnInit {
 
-  doughnut: [{
-    chartLabels: [],
-    chartData: [],
-    chartType: 'doughnut'
-  }];
-
-  public chartLabelsCheckBox = ['Iluminación', 'Limpieza', 'Servicio de espera'];
-  public chartLabelsRadio = ['Muy satisfecho', 'Poco satisfecho', 'Nada satisfecho'];
-  public chartLabelsRange = ['1','2','3','4','5'];
-  public chartLabelsSelect = ['SI','NO'];
-  public chartData = [120, 150, 180, 90];
   public chartType = 'doughnut';
-
-  preguntas = [
-    { pregunta: '1- De las siguientes opciones ¿cuales mejoraria?', tipo: 'checkbox', options: ['Iluminación', 'Limpieza', 'Servicio de espera']},
-    { pregunta: '2- ¿Cuan satisfecho quedo con el servicio brindado?', tipo: 'radio',  options: ['Muy satisfecho', 'Poco satisfecho', 'Nada satisfecho']},
-    { pregunta: '3- Del 1 al 10 ¿cual es la posibilidad de que nos recomiende?', tipo: 'range', options: ['1','2','3','4','5']},
-    { pregunta: '4- ¿Quedo conforme con la variedad del menu?', tipo: 'select', options: ['SI','NO']},
-    { pregunta: '5- ¿Que mejoraria, agregaria o quitaria al lugar?', tipo: 'input'}
-  ];
   encuestasRespuestas: EncuestaRespuesta[];
-
   encuestaRespuestas = [];
-  opciones = [];
+  chartLables = [];
+  chartData = [];
 
   constructor(private encuestaService: EncuestaService) { }
 
@@ -44,42 +25,53 @@ export class EncuestaRespuestaPage implements OnInit {
           ...item.payload.doc.data()
         } as EncuestaRespuesta;
       });
-      let final = [];
+      let concat = [];
       this.encuestasRespuestas.forEach(er => {
-        final = final.concat(er.preguntaRespuesta);        
+        concat = concat.concat(er.preguntaRespuesta);
       });
 
-      const group = groupBy(final, 'pregunta', 'tipo');
-
-      console.log(group)
-
-      Object.entries(group).forEach(([key, value]) => {
-        Object.entries(value).forEach(([key2, preguntaRespuesta]) => {
-          this.opciones.push(preguntaRespuesta['tipo']);
-          //console.log(preguntaRespuesta['tipo'])
-        });
-        this.encuestaRespuestas.push({pregunta: key, options: this.opciones});
-      });
-
-      //console.log(this.encuestaRespuestas);
-
+      this.groupRespuestasAndGenerateObj(concat);
     })
   }
 
-  /*generateArrayObjects(obj: string) {
-    Object.entries(obj).forEach(([keyService, value]) => {
-      Object.entries(value).forEach(([keyMotivo, value]) => {
-        this.jsonMotivos.push({motivo: keyMotivo, pieces: value});
-        let index = this.jsonServicios.findIndex(elem => elem.service === keyService);
-        index === -1 ? this.jsonServicios.push({service: keyService, motivos: this.jsonMotivos}) :
-          this.jsonServicios[index].motivos = this.jsonMotivos;
+  groupRespuestasAndGenerateObj(concat) {
+    let arrayAux: any[] = [];
+    const group = groupBy(concat, 'pregunta', 'tipo');
+    Object.entries(group).forEach(([key, value]) => {
+      Object.entries(value).forEach(([keyChild, reqResp]) => {
+        this.generateChartData(keyChild, reqResp, arrayAux);
       });
-      this.jsonMotivos = [];
+      this.chartData = arrayAux;
+      this.encuestaRespuestas.push({ pregunta: key, chartLables: this.chartLables, chartData: this.chartData });
+      this.chartLables = [];
+      this.chartData = [];
+      arrayAux = [];
     });
-  }*/
-
-  groupRespuestas() {
-
   }
 
+  private generateChartData(keyChild: string, reqResp: any, arrayAux: any[]) {
+    if (keyChild == '0') {
+      this.chartLables = reqResp['opciones'];
+      this.chartLables.forEach(c => {
+        arrayAux.push(0);
+      });
+    }
+    if (reqResp['tipo'] === 'checkbox') {
+      reqResp['respuesta'].forEach(element => {
+        let index = this.chartLables.indexOf(element);
+        this.generateArrayAux(arrayAux, index);
+      });
+    } else {
+      let index = this.chartLables.indexOf(reqResp['respuesta']);
+      this.generateArrayAux(arrayAux, index);
+    }
+  }
+
+  private generateArrayAux(arrayAux: any[], index: number) {
+    for (let i = 0; i < arrayAux.length; i++) {
+      if (index == i) {
+        arrayAux[i] = arrayAux[i] + 1;
+      }
+    }
+  }
 }
