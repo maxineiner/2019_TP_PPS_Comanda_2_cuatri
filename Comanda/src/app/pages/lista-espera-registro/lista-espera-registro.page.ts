@@ -59,6 +59,9 @@ export class ListaEsperaRegistroPage implements OnInit {
       this.presentAlert("Cargado con exito");
       this.enviarMailSucces(item);
       this.listaEsperaService.removeClienteWaitingList(item);
+      item.estado = "ACEPTADO"
+      this.listaEsperaService.AddClientConfirmed(item);
+      //persistir clientes en bd
       }
      catch (error) {
       this.presentAlert(error.message);

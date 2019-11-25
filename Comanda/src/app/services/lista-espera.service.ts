@@ -61,6 +61,17 @@ export class ListaEsperaService {
     });
 
   }
-
+  public AddClientConfirmed(auxCliente:Cliente) {
+    this.firestore.collection('Clientes').add({
+      email:auxCliente.email,
+      name: auxCliente.name,
+      lastName: auxCliente.lastName,
+      dni: auxCliente.dni,
+      image: auxCliente.image,
+      type: auxCliente.type,
+      estado:auxCliente.estado,
+      password:auxCliente.password
+    });
+  }
 
 }
