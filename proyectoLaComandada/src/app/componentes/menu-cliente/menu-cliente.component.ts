@@ -14,7 +14,6 @@ export class MenuClienteComponent implements OnInit {
 
   ionViewWillEnter()
   {
-    console.log("asdasd");
     this.inicio();
   }
 
