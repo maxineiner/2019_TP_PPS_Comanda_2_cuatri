@@ -104,11 +104,11 @@ export class LoginComponent implements OnInit {
                     promesa.unsubscribe();
                   break;
                 case 'anonimo':
-                    this.router.navigate(["/menu-jefe"]);
+                    this.router.navigate(["/menu-cliente"]);
                     promesa.unsubscribe();
                   break;
                 case 'empleado':
-                    this.router.navigate(["/menu-jefe"]);
+                    this.router.navigate(["/menu-empleado"]);
                     promesa.unsubscribe();
                   break;
               }
