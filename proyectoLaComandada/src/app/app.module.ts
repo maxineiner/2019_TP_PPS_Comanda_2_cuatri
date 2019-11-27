@@ -21,12 +21,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { LoginService } from 'src/app/servicios/login.service';
 import { MenuClienteComponent } from './componentes/menu-cliente/menu-cliente.component';
 //beta
-import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { MenuJefeComponent } from './componentes/menu-jefe/menu-jefe.component'
 import { ListaComponent } from './componentes/lista/lista.component';
 import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
+import { PedirMesaClienteComponent } from './componentes/pedir-mesa-cliente/pedir-mesa-cliente.component';
+import { MesaClienteService } from './servicios/mesa-cliente.service';
+import { SplashComponent } from './componentes/splash/splash.component';
+import { HacerPedidoClienteComponent } from './componentes/hacer-pedido-cliente/hacer-pedido-cliente.component';
+import { PedidosClienteService } from './servicios/pedidos-cliente.service';
 
 @NgModule({
   declarations: [AppComponent,
@@ -36,6 +40,9 @@ import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
   MenuJefeComponent,
   ListaComponent,
   NombreApellidoPipe,
+  SplashComponent,
+  PedirMesaClienteComponent,
+  HacerPedidoClienteComponent,
 ],
   entryComponents: [],
   imports: [BrowserModule,
@@ -56,6 +63,8 @@ import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
     AltaClienteService,
     AngularFireAuth,
     LoginService,
+    MesaClienteService,
+    PedidosClienteService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -22,13 +22,13 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-menu-toggle *ngFor = "let item of items">
-          <ion-item [routerLink] = "item.ruta">
-            <!-- <ion-icon slot = "start" [name] = "item.icono" color = "danger"></ion-icon> -->
-            <!-- <ion-label>{{item.nombre}}</ion-label> -->
+      <ion-menu-toggle *ngFor="let item of items">
+          <ion-item [routerLink]="item.ruta">
+              <ion-icon slot="start" [name]="item.icono" color="danger"></ion-icon>
+              <ion-label style="color: black;">{{item.nombre}}</ion-label>
           </ion-item>
       </ion-menu-toggle>
-    </ion-list>
+  </ion-list>
   </ion-content>
   <ion-footer>
     <ion-item (click)="cerrarSesion()">

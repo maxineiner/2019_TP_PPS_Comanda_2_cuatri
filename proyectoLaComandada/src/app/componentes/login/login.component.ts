@@ -11,11 +11,16 @@ import { LoadingController } from '@ionic/angular';
 })
 export class LoginComponent implements OnInit {
 
+  splash : boolean;
+
   constructor(private loginServi : LoginService,
     private toastController: ToastController,
     private router : Router,
     public loadingController: LoadingController) { 
-     
+      this.splash = true;
+     setTimeout(() => {
+       this.splash = false;
+     }, 2000);
     }
 
 
@@ -158,7 +163,7 @@ export class LoginComponent implements OnInit {
         break;
       case "tester":
         this.correo = "tester@tester.com";
-        this.clave = "555555"
+        this.clave = "test123"
         break;
       case "anonimo":
         this.correo = "anonimo@anonimo.com";

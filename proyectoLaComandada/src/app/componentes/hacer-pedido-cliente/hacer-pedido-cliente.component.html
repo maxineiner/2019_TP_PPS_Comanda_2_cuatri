@@ -1,0 +1,184 @@
+<ion-content scrollEvents={true} style="padding: 0;">
+  <div style="margin-top:15%">
+    <!-- menu -->
+    <div *ngIf="menu">
+      <ion-card>
+        <ion-card-header style="text-align: center;" color="danger">
+            <ion-card-title>¡Ordene su comida!</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>         
+            <ion-item lines="none">
+              <ion-button style="width: 100%; height: 50px; margin: 5%;" color="danger" (click)="opcionMenu('comidas')">
+                  <ion-icon slot="start" name="pizza" color="light" style="font-size: 2.5rem;"></ion-icon>
+                  <ion-label style="color: rgb(241, 241, 241); font-size: 2rem;">Comidas</ion-label>
+                </ion-button>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-button style="width: 100%; height: 50px; margin: 5%;" color="danger" (click)="opcionMenu('bebidas')">
+                    <ion-icon slot="start" name="beer" color="light" style="font-size: 2.5rem;"></ion-icon>
+                    <ion-label style="color: rgb(241, 241, 241); font-size: 2rem;">Bebidas</ion-label>
+                  </ion-button>
+                </ion-item>
+                <ion-item lines="none">
+                  <ion-button style="width: 100%; height: 50px; margin: 5%;" color="danger" (click)="opcionMenu('postres')">
+                    <ion-icon slot="start" name="ice-cream" color="light" style="font-size: 2.5rem;"></ion-icon>
+                    <ion-label style="color: rgb(241, 241, 241); font-size: 2rem;">Postres</ion-label>
+                  </ion-button>
+            </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Su pedido</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div *ngIf="pedido.total == 0">
+            Aun no a pedido nada...
+          </div>
+          <div *ngIf="pedido.total > 0">
+            <div *ngFor="let produ of pedido.productos">
+              <h2 style="color: black;">{{produ.nombre}}</h2>
+              cantidad :{{produ.cantidad}}
+              <br>
+              sub total: {{produ.total}}
+              <br>
+              <hr>
+            </div>
+            <ion-card-title >Total: {{pedido.total}}</ion-card-title>
+            <br>
+            <ion-button expand="block" color=danger (click)=altaPedido()><h1>Pedir</h1></ion-button>
+          </div>    
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <!-- Comidas -->
+    <ion-card *ngIf="comidas">
+      <ion-card-header style="text-align: center;" color="danger">
+          <ion-item lines="none">
+            <ion-icon slot="start" name="arrow-round-back" color="light" style="font-size: 2.5rem;" (click)="opcionMenu('menu')"></ion-icon>
+            <ion-label style="color: rgb(241, 241, 241); font-size: 2rem;">Comidas</ion-label>
+          </ion-item>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+              <ion-item lines=none *ngFor="let productoComida of productosComidaLista">
+                  <ion-card style="width: 100%;">
+                      <ion-card-header>
+                        <ion-label style="color: rgb(19, 19, 19); font-size: 2rem;">{{productoComida.nombre}}</ion-label>
+                        Precio Unitario:{{productoComida.precioUnitario}}<br>
+                        Tiempo de preparacion: {{productoComida.tiempo}}min. <br>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <img src={{productoComida.imagen}} width="50px" height="170px">
+                        <table style="width: 100%; margin:auto;">
+                          <tr>
+                            <td>
+                                <ion-button (click)="agregarProductoComida(productoComida.nombre,'-')" color=danger style="--border-radius: 100%; width: 50px; height: 50px;">
+                                <ion-icon name="remove" style="font-size: 3rem;"></ion-icon>
+                              </ion-button> 
+                            </td>
+                            <td>
+                                <h1 style="text-align: center;">Cantidad: {{productoComida.cantidad}}</h1>   
+                            </td>
+                            <td>
+                                <ion-button (click)="agregarProductoComida(productoComida.nombre,'+')" color=success style="--border-radius: 100%; width: 50px; height: 50px;">
+                                <ion-icon name="add" style="font-size: 2.5rem;" ></ion-icon>
+                              </ion-button>
+                            </td>
+                          </tr>
+                        </table>                        
+                            <br>     
+                          </ion-card-content>
+                        </ion-card> 
+                </ion-item>
+          </ion-list>         
+        </ion-card-content>
+    </ion-card>
+    <!-- Bebias -->
+    <ion-card *ngIf="bebidas">
+      <ion-card-header style="text-align: center;" color="danger">
+          <ion-item lines="none">
+            <ion-icon slot="start" name="arrow-round-back" color="light" style="font-size: 2.5rem;" (click)="opcionMenu('menu')"></ion-icon>
+            <ion-label style="color: rgb(241, 241, 241); font-size: 2rem;">Bebidas</ion-label>
+          </ion-item>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item lines=none *ngFor="let productoComida of productosBebidaLista">
+                    <ion-card style="width: 100%;">
+                        <ion-card-header>
+                          <ion-label style="color: rgb(19, 19, 19); font-size: 2rem;">{{productoComida.nombre}}</ion-label>
+                          Precio Unitario:{{productoComida.precioUnitario}}<br>
+                        </ion-card-header>
+                        <ion-card-content>
+                          <img src={{productoComida.imagen}} width="30px" height="180px">
+                          <table style="width: 100%; margin:auto;">
+                            <tr>
+                              <td>
+                                  <ion-button (click)="agregarProductoBebida(productoComida.nombre,'-')" color=danger style="--border-radius: 100%; width: 50px; height: 50px;">
+                                  <ion-icon name="remove" style="font-size: 3rem;"></ion-icon>
+                                </ion-button> 
+                              </td>
+                              <td>
+                                  <h1 style="text-align: center;">Cantidad: {{productoComida.cantidad}}</h1>   
+                              </td>
+                              <td>
+                                  <ion-button (click)="agregarProductoBebida(productoComida.nombre,'+')" color=success style="--border-radius: 100%; width: 50px; height: 50px;">
+                                  <ion-icon name="add" style="font-size: 2.5rem;" ></ion-icon>
+                                </ion-button>
+                              </td>
+                            </tr>
+                          </table>                        
+                              <br>     
+                            </ion-card-content>
+                          </ion-card> 
+                  </ion-item>
+            </ion-list>      
+        </ion-card-content>
+    </ion-card>
+    <!-- Postres -->
+    <ion-card *ngIf="postres">
+      <ion-card-header style="text-align: center;" color="danger">
+          <ion-item lines="none">
+            <ion-icon slot="start" name="arrow-round-back" color="light" style="font-size: 2.5rem;" (click)="opcionMenu('menu')"></ion-icon>
+            <ion-label style="color: rgb(241, 241, 241); font-size: 2rem;">Postres</ion-label>
+            </ion-item>
+          </ion-card-header>
+          <ion-card-content>         
+              <ion-list>
+                  <ion-item lines=none *ngFor="let productoComida of productosPostreLista">
+                      <ion-card style="width: 100%;">
+                          <ion-card-header>
+                            <ion-label style="color: rgb(19, 19, 19); font-size: 2rem;">{{productoComida.nombre}}</ion-label>
+                            Precio Unitario:{{productoComida.precioUnitario}}<br>
+                            Tiempo de preparacion: {{productoComida.tiempo}}min. <br>
+                          </ion-card-header>
+                          <ion-card-content>
+                            <img src={{productoComida.imagen}} width="50px" height="170px">
+                            <table style="width: 100%; margin:auto;">
+                              <tr>
+                                <td>
+                                    <ion-button (click)="agregarProductoPostre(productoComida.nombre,'-')" color=danger style="--border-radius: 100%; width: 50px; height: 50px;">
+                                    <ion-icon name="remove" style="font-size: 3rem;"></ion-icon>
+                                  </ion-button> 
+                                </td>
+                                <td>
+                                    <h1 style="text-align: center;">Cantidad: {{productoComida.cantidad}}</h1>   
+                                </td>
+                                <td>
+                                    <ion-button (click)="agregarProductoPostre(productoComida.nombre,'+')" color=success style="--border-radius: 100%; width: 50px; height: 50px;">
+                                    <ion-icon name="add" style="font-size: 2.5rem;" ></ion-icon>
+                                  </ion-button>
+                                </td>
+                              </tr>
+                            </table>                        
+                                <br>     
+                              </ion-card-content>
+                            </ion-card> 
+                    </ion-item>
+              </ion-list> 
+          </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

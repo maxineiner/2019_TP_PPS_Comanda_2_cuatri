@@ -28,6 +28,7 @@ export class AltaClienteComponent implements OnInit {
 
   //atributos
   cliente = {
+    id:"",
     nombre : "" ,
     apellido : "" ,
     dni : "" ,
@@ -35,7 +36,8 @@ export class AltaClienteComponent implements OnInit {
     correo : "" ,
     clave : "",
     foto:"../../assets/usos/user.png",
-    estado:"pendiente"
+    estado:"pendiente",
+    mesa:"ninguna"
   }
 
   options : CameraOptions = {

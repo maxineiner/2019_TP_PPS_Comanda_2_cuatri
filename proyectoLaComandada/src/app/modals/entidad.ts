@@ -8,4 +8,5 @@ export interface Entidad{
     nombre : string,
     perfil : string,
     dni : number,
+    mesa : string,
 }

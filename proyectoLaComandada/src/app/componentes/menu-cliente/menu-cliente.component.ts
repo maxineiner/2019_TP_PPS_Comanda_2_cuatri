@@ -17,6 +17,11 @@ export class MenuClienteComponent implements OnInit {
     this.inicio();
   }
 
+  items = [
+    {icono : "qr-scanner" , nombre : "Pedir mesa" , ruta : "pedir-mesa-cliente"},
+  ]
+  
+
   clienteLogeado = {
     nombre : "" ,
     apellido : "" ,
@@ -24,6 +29,7 @@ export class MenuClienteComponent implements OnInit {
     perfil : "cliente" ,
     correo : "" ,
     foto:"../../assets/usos/user.png",
+    mesa:""
   }
 
   async inicio()
@@ -33,8 +39,24 @@ export class MenuClienteComponent implements OnInit {
         this.clienteLogeado.nombre = datos["0"]["nombre"];
         this.clienteLogeado.apellido = datos["0"]["apellido"];
         this.clienteLogeado.foto = datos["0"]["foto"];
+        this.clienteLogeado.mesa = datos['0']['mesa'];
+        if(this.clienteLogeado.mesa == "ninguna" || this.clienteLogeado.mesa == "pendiente" || this.clienteLogeado.mesa == "habilitado")
+        {
+          this.items = [
+            {icono : "qr-scanner" , nombre : "Pedir mesa" , ruta : "pedir-mesa-cliente"},
+          ]
+        }
+        else
+        {
+          this.items = [
+            {icono : "qr-scanner" , nombre : "Pedir mesa" , ruta : "pedir-mesa-cliente"},
+            {icono : "restaurant" , nombre : "Hacer pedido" , ruta : "hacer-pedido-cliente"},
+          ]
+        }
       }
     )
+
+
   }
 
   ngOnInit() {}
