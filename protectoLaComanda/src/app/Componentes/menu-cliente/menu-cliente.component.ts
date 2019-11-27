@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../servicios/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-cliente',
@@ -8,7 +9,7 @@ import { LoginService } from '../../servicios/login.service';
 })
 export class MenuClienteComponent implements OnInit {
 
-  constructor(private loginservi : LoginService) { 
+  constructor(private loginservi : LoginService, private rutas : Router) { 
     this.inicio();
   }
 
@@ -30,6 +31,11 @@ export class MenuClienteComponent implements OnInit {
     correo : "" ,
     foto:"../../assets/usos/user.png",
     mesa:""
+  }
+
+  navegar(path)
+  {
+    this.rutas.navigate(["menu-cliente/" + path])
   }
 
   async inicio()

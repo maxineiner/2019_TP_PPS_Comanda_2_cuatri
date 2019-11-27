@@ -23,7 +23,7 @@
   <ion-content>
     <ion-list>
       <ion-menu-toggle *ngFor="let item of items">
-          <ion-item [routerLink]="item.ruta">
+          <ion-item (click)=navegar(item.ruta)>
               <ion-icon slot="start" [name]="item.icono" color="danger"></ion-icon>
               <ion-label style="color: black;">{{item.nombre}}</ion-label>
           </ion-item>

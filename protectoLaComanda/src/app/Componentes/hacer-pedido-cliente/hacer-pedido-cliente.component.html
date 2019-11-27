@@ -181,4 +181,18 @@
           </ion-card-content>
     </ion-card>
   </div>
+  <div class="footerTotal" *ngIf="!menu">
+    <h1>TOTAL: ${{pedido.total}}</h1>
+  </div>
 </ion-content>
+<style>
+  .footerTotal
+  {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: aliceblue;
+    background-color: red;
+  }
+</style>
