@@ -7,7 +7,7 @@ export interface Pedido {
     id?: string;
     mesa: string;
     productos: Producto[];
-    total: string;
+    total: number;
 }
 
 

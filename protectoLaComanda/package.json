@@ -1,5 +1,5 @@
 {
-  "name": "proyecto",
+  "name": "protectoLaComanda",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -15,28 +15,21 @@
   "dependencies": {
     "@angular/common": "~8.1.2",
     "@angular/core": "~8.1.2",
-    "@angular/fire": "^5.2.1",
+    "@angular/fire": "^5.2.3",
     "@angular/forms": "~8.1.2",
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
-    "@ionic-native/barcode-scanner": "^5.16.0",
-    "@ionic-native/camera": "^5.16.0",
+    "@ionic-native/barcode-scanner": "^5.17.1",
+    "@ionic-native/camera": "^5.17.1",
     "@ionic-native/core": "^5.0.0",
-    "@ionic-native/document-scanner": "^5.16.0",
-    "card.io.cordova.mobilesdk": "^2.1.0",
-    "cordova-plugin-document-scanner": "^4.2.1",
-    "@ionic-native/push": "^5.16.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
-    "cordova-android": "8.1.0",
-    "cordova-browser": "6.0.0",
+    "cordova-plugin-camera": "^4.1.0",
     "core-js": "^2.5.4",
-    "cors": "^2.8.5",
-    "firebase": "^7.3.0",
-    "nodemailer": "^6.3.1",
-    "phonegap-plugin-multidex": "^1.0.0",
+    "firebase": "^7.5.0",
+    "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
@@ -50,17 +43,11 @@
     "@angular/compiler": "~8.1.2",
     "@angular/compiler-cli": "~8.1.2",
     "@angular/language-service": "~8.1.2",
-    "@ionic/angular-toolkit": "~2.0.0",
+    "@ionic/angular-toolkit": "^2.1.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
-    "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-ionic-keyboard": "^2.2.0",
-    "cordova-plugin-ionic-webview": "^4.1.3",
-    "cordova-plugin-splashscreen": "^5.0.2",
-    "cordova-plugin-statusbar": "^2.4.2",
-    "cordova-plugin-whitelist": "^1.3.3",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
@@ -76,22 +63,8 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {
-        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      },
-      "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-camera": {},
-      "card.io.cordova.mobilesdk": {},
-      "phonegap-plugin-barcodescanner": {},
-      "cordova-plugin-document-scanner": {}
-    },
-    "platforms": {
-      "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-ionic-keyboard": {}
+      "phonegap-plugin-barcodescanner": {}
     }
   }
 }

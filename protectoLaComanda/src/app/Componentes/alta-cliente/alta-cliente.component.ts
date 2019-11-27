@@ -32,7 +32,7 @@ export class AltaClienteComponent implements OnInit {
     nombre : "" ,
     apellido : "" ,
     dni : "" ,
-    perfil : "cliente" ,
+    perfil: "cliente" ,
     correo : "" ,
     clave : "",
     foto:"../../assets/usos/user.png",

@@ -15,7 +15,7 @@
       <label>Tipo de perfil:</label>
        <ion-select interface="popover" [(ngModel)] = "cliente.perfil" lines = "none">
             <ion-select-option value="cliente" lines = "none">Cliente</ion-select-option >
-            <ion-select-option value="anonimo" lines = "none" (click)="anonimo()">Anonimo</ion-select-option>
+            <ion-select-option value="anonimo" lines = "none">Anonimo</ion-select-option>
         </ion-select>
     </ion-item>
     <div *ngIf="cliente.perfil == 'cliente'">
@@ -31,12 +31,11 @@
       </ion-item>
     </div>
 
-    <div *ngIf="cliente.perfil == 'anonimo'">
+    <div *ngIf="cliente.perfil === 'anonimo'">
       <ion-item lines="none" >
       <ion-input placeholder = "Alias" [(ngModel)]="cliente.nombre"></ion-input>
       </ion-item>
     </div>
-
     <ion-item  lines = "none">
         <ion-input placeholder = "Correo electrónico" [(ngModel)] = "cliente.correo"></ion-input>
     </ion-item>

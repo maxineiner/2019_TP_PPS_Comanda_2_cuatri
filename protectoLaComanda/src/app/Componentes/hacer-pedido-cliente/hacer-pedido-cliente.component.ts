@@ -219,7 +219,7 @@ export class HacerPedidoClienteComponent implements OnInit {
       estadoBarman: "",
       estadoPedido: "pendiente",
       mesa: "2",
-      total: "0",
+      total: 0,
       productos : this.productos,
     };
    
@@ -950,7 +950,7 @@ export class HacerPedidoClienteComponent implements OnInit {
   {
     let totalPedido : number = 0;
     this.pedido.productos.forEach(elemento =>{totalPedido = totalPedido + elemento.total});
-    this.pedido.total = totalPedido.toString();
+    this.pedido.total = totalPedido;
     console.log("total: " + this.pedido.total);
   }
 
