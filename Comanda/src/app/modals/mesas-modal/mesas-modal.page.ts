@@ -65,13 +65,6 @@ export class MesasModalPage implements OnInit {
     });
 
     return await modal.present();
-  }
-  
-  dismiss() {
-    console.log('asasasas')
-    this.modalCtrl.dismiss({
-      'dismissed': this,
-    });
-  }
+  } 
 
 }

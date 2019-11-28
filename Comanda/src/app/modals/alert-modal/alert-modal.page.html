@@ -17,7 +17,7 @@
 <ion-footer>
   <ion-toolbar>
     <ion-segment>
-      <ion-segment-button (click)="asignar()">
+      <ion-segment-button (click)="asignar()" *ngIf="header != 'Error'">
         <ion-label>Aceptar</ion-label>
       </ion-segment-button>
       <ion-segment-button (click)="cerrar()">

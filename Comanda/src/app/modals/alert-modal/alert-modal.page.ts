@@ -23,7 +23,8 @@ export class AlertModalPage implements OnInit {
     public router: Router) { }
 
   ngOnInit() {
-    this.number = this.data.number;
+    if(this.data)
+      this.number = this.data.number;
   }
 
   asignar() {
