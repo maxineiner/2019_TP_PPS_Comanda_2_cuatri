@@ -51,7 +51,8 @@ public async SetPropina(auxCliente:Pedido) {
     
     await this.firestore.doc('Lista_Pedidos/' + documento.docs[0].id).set({
       propina:auxCliente.propina
-    }, { merge: true });
+    }//, { merge: true }
+    );
     
   });
 
