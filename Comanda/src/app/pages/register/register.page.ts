@@ -214,12 +214,9 @@ export class RegisterPage implements OnInit {
     return null;
   }
 
-  fotoPrueba() {
+  // fotoPrueba() {
     
-    this.image = 'https://cdn.tn.com.ar/sites/default/files/styles/1366x765/public/2018/10/15/comida-chatarra-abstinencia.jpg';
-    console.log("foto subida");
-  }
-
-
-
+  //   this.image = 'https://cdn.tn.com.ar/sites/default/files/styles/1366x765/public/2018/10/15/comida-chatarra-abstinencia.jpg';
+  //   console.log("foto subida");
+  // }
 }
