@@ -24,8 +24,7 @@ export class PropinasPage implements OnInit {
     };
     this.zbar.scan(options)
       .then(result => {
-        if( Number(result) != null) {
-          if(result == 0 || result  == 5 || result == 10 || result ==15|| result ==20) {
+          if(result == '0' || result  == '5' || result == '10' || result =='15' || result =='20') {
             this.porcentajePropina = result;
             this.presentAlert("Bien","porcentaje de propina" + this.porcentajePropina);
           }
@@ -33,10 +32,6 @@ export class PropinasPage implements OnInit {
           {
             this.presentAlert('Error', 'El codigo qr no es valido');
           }
-        }else
-        {
-          this.presentAlert('Error', 'El codigo qr no es  un numero ???');
-        }
       })
       .catch(error => {
         this.presentAlert('Error', error.message);
@@ -60,6 +55,7 @@ export class PropinasPage implements OnInit {
         }
       }]
     });
+    await alert.present();
     }
 
 
