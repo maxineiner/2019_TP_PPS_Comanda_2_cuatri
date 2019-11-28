@@ -41,8 +41,8 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.myForm = new FormGroup({
       email: new FormControl('', [Validators.required, this.validatorFormatt]),
-      name: new FormControl('', [Validators.required]),
-      lastName: new FormControl(''),
+      name: new FormControl('', [Validators.required,this.validatorNameFormatt]),
+      lastName: new FormControl('',[this.validatorNameFormatt]),
       dni: new FormControl('',[this.onlyNumbersValidator, this.lengthValidator(8)]),
       pass: new FormControl('',[Validators.required,this.validatorPassFormatt,this.lengthMinValidator(6)])
     });
@@ -149,7 +149,7 @@ export class RegisterPage implements OnInit {
         }, {
           text: 'Aceptar',
           handler: () => {
-            this.navCtrl.navigateRoot('home');
+            this.navCtrl.navigateRoot('login');
           }
         }
       ]
@@ -179,7 +179,7 @@ export class RegisterPage implements OnInit {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       if ( control.value.length < min) {
         
-        console.log("error por el lenghtminvalidator");
+        // console.log("error por el lenghtminvalidator");
         return { lengthError: true };
       }
       return null;
@@ -189,15 +189,26 @@ export class RegisterPage implements OnInit {
   validatorFormatt(control: AbstractControl) {
     let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]+@[a-zA-Z0-9-]+?(\.[a-zA-Z0-9-]+){1,}$/;
     if (control.value.length > 0 && !exp.exec(control.value)) {
+      // console.log(control.value[control.value.length - 1]);
       return { emailErrFormat: true }
     }
     return null;
   }
   validatorPassFormatt(control: AbstractControl) {
-    let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]$/;
-  
-    if (control.value.length <6  && !exp.exec(control.value))  {
+    // let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]$/;
+    let exp = /^[a-zA-Z0-9.&/*+=?^_{}~-]{1,}$/;
+    // console.log(!exp.test(control.value));
+    if (control.value.length < 6  ||  control.value.length>=15  || !exp.test(control.value))   {
 
+      return { passErrFormat: true }
+    }
+    return null;
+  }
+  validatorNameFormatt(control: AbstractControl) {
+    // let exp = /^[a-zA-Z.&/*+=?^_{}~-]{1,}$/;
+    let exp = /[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ\s]$/;
+    if (!exp.test(control.value) && control.value.length !=0)   {
+   
       return { passErrFormat: true }
     }
     return null;

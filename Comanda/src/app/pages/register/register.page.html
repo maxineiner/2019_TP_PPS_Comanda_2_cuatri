@@ -30,7 +30,7 @@
               <ion-input formControlName="email" type="email" placeholder="casilla de correo"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input formControlName="pass" type="password" placeholder="contraseña"></ion-input>
+              <ion-input formControlName="pass" type="password" placeholder="contraseña" ng-trim="false" ></ion-input>
             </ion-item>
         <ion-item>
           <ion-input formControlName="name" type="text" placeholder="nombre"></ion-input>
@@ -41,7 +41,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-input formControlName="dni" type="text" placeholder="dni" maxlength="8"></ion-input>
+          <ion-input formControlName="dni" type="text" placeholder="dni" maxlength="8" ></ion-input>
         </ion-item>
         <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
           myForm.get('dni').errors.error">
