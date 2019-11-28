@@ -9,6 +9,7 @@ export class Pedido {
     total:number;
 
     numeroMesa: number;//no se persiste en la base
+    propina:number;
 
     constructor(idAuth: string,arrayDetalle:Array<Detalle>,estado:string,total:number) {
         this.idAuth= idAuth;

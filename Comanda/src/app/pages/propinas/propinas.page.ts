@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
 import { NavController, AlertController } from '@ionic/angular';
+import {PedidosService} from '../../services/pedidos.service';
+import { Pedido } from '../../model/pedido';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-propinas',
@@ -8,14 +12,19 @@ import { NavController, AlertController } from '@ionic/angular';
   styleUrls: ['./propinas.page.scss'],
 })
 export class PropinasPage implements OnInit {
-    porcentajePropina:number;
+    porcentajePropina:number = 0;
+    pedidos = [];
   constructor(
       private zbar: ZBar, 
       public alertController: AlertController,
-      public navCtrl: NavController) { }
+      public navCtrl: NavController,
+      public pedidosService:PedidosService,
+      public auth:AuthService) { }
 
-  ngOnInit() {
-    this.scanner();
+  async ngOnInit() {
+   // this.setPropinaBD(); //esto se llamaria en caso de exito en la funcion scanner
+     this.scanner();
+   
   }
   private scanner() {
     let options: ZBarOptions = {
@@ -26,7 +35,9 @@ export class PropinasPage implements OnInit {
       .then(result => {
           if(result == '0' || result  == '5' || result == '10' || result =='15' || result =='20') {
             this.porcentajePropina = result;
-            this.presentAlert("Bien","porcentaje de propina" + this.porcentajePropina);
+            this.setPropinaBD();
+            this.presentAlert("Bien","Se aplico una propina del  " + this.porcentajePropina + " % ");
+            // this.setPropinaBD();
           }
           else
           {
@@ -49,14 +60,38 @@ export class PropinasPage implements OnInit {
         text: 'Ok',
         handler: () => {
           this.navCtrl.navigateRoot('home');
-          /*headerMsj === 'Error' 
-            ? this.navCtrl.navigateRoot('home') 
-              : console.log('ok');*/
         }
       }]
     });
-    await alert.present();
+        await alert.present();
     }
 
 
-}
+     setPropinaBD() {
+      this.pedidosService.getPedidosBase().subscribe( (pedido) => {
+      
+        this.pedidos = [];
+        pedido.forEach(auxPedido => {
+          console.log(auxPedido);
+          if(auxPedido.idAuth != undefined && auxPedido.estado == "COFIRMADO" && auxPedido.propina != undefined) //creo que es cofirmado
+          {
+            console.log("Push");
+            this.pedidos.push(auxPedido);
+          }
+          
+        });
+        // console.log(this.pedidos);
+        // console.log(this.auth.currentUserId());
+        this.pedidos.forEach(element => {
+      
+          if(element.idAuth == this.auth.currentUserId())
+          {
+              element.propina = this.porcentajePropina;
+              this.pedidosService.SetPropina(element);
+          }
+        });
+      });
+     
+    }
+
+  }
