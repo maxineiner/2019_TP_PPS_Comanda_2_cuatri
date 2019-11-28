@@ -29,7 +29,7 @@ export class MesaService {
   public async updateTable(data: Table, idAuth) {
     await this.firestore.doc('Mesas/' + data.id).update(data)
       .then(doc => {
-        this.listEsperaMesaService.deleteCliente(idAuth);
+        return this.listEsperaMesaService.deleteCliente(idAuth);
       });
   }
 

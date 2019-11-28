@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Table } from '../../model/table';
 import { MesaService } from '../../services/mesa.service';
 import { NavParams, AlertController, ModalController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertModalPage } from '../alert-modal/alert-modal.page';
 
 @Component({
   selector: 'app-mesas-modal',
@@ -11,18 +12,20 @@ import { Router } from '@angular/router';
 })
 export class MesasModalPage implements OnInit {
 
-  @Input() idAuth: string;
+  idAuth: string;
   tables: Table[];
   valor: number;
 
   constructor(
     private mesaService: MesaService,    
-    private navParams: NavParams,
-    private alertController: AlertController,
     public router: Router,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      this.idAuth = params['idAuth'];      
+    });
     this.queryListTable();
   }
 
@@ -41,39 +44,33 @@ export class MesasModalPage implements OnInit {
     table.idAuth = this.idAuth;
     table.available = false;
     let data: Table = Object.assign({}, table);
-    this.presentAlert(data);
+    this.presentModalCustom('Aviso', 'Confirmar aginación de la mesa ', data);
   }
 
-  async presentAlert(data: Table) {
-    const alert = await this.alertController.create({
-      header: 'Aviso',
-      message: 'Confirmar aginación de la mesa ' + data.number,
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Aceptar',
-          handler: () => {
-            this.mesaService.updateTable(data, this.idAuth);
-            this.dismiss();
-          }
-        }
-      ]
+  async presentModalCustom(header: string, message: string, data: Table) {
+    const modal = await this.modalCtrl.create({
+      component: AlertModalPage,
+      cssClass: 'my-custom-modal-css',
+      componentProps: {
+        header: header,
+        message: message,
+        data: data,
+        idAuth: this.idAuth,
+      }
     });
 
-    await alert.present();
-  }
+    modal.onDidDismiss()
+      .then((data) => {
+        this.router.navigate(['lista-espera-metre']);
+    });
 
+    return await modal.present();
+  }
+  
   dismiss() {
-    // using the injected ModalController this page
-    // can "dismiss" itself and optionally pass back data
+    console.log('asasasas')
     this.modalCtrl.dismiss({
-      'dismissed': true
+      'dismissed': this,
     });
   }
 

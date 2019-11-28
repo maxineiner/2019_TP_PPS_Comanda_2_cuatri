@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComandaServiceService } from 'src/app/services/comanda-service.service';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ModalController } from '@ionic/angular';
 import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
 import { ListaEsperaMesaService } from 'src/app/services/lista-espera-mesa.service';
 import { MesaService } from 'src/app/services/mesa.service';
 import { Table } from 'src/app/model/table';
 import { ActivatedRoute } from '@angular/router';
+import { AlertModalPage } from 'src/app/modals/alert-modal/alert-modal.page';
 
 /** Este componente es el encargado de manejar la logica de agregar a un cliente a la lista de 
  * espera, y de verificar la mesa una vez asignada
@@ -31,14 +32,15 @@ export class ListaEsperaPage implements OnInit {
     private zbar: ZBar,
     private listaEsperaService: ListaEsperaMesaService,
     private mesasService: MesaService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private modalController: ModalController) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
       if (params['tipo'])
         this.sm = JSON.parse(params['tipo']);
     });
-    this.scanner();
+    this.scanner();    
   }
 
   private scanner() {
@@ -98,5 +100,7 @@ export class ListaEsperaPage implements OnInit {
     });
     await alert.present();
   }
+
+  //crear otro modal para redirigir el caso al this.navCtrl.navigateRoot('hacer-pedido');
 
 }

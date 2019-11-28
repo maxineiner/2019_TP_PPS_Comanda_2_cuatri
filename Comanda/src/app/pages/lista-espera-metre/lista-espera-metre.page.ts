@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaEsperaMesaService } from '../../services/lista-espera-mesa.service';
 import { ClienteEspera } from '../../model/clienteEspera';
-import { ModalController } from '@ionic/angular';
-import { MesasModalPage } from '../../modals/mesas-modal/mesas-modal.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-espera-metre',
@@ -15,7 +14,7 @@ export class ListaEsperaMetrePage implements OnInit {
 
   constructor(
     private listaEsperaMesaService: ListaEsperaMesaService,
-    private modalController: ModalController) { }
+    public router: Router) { }
 
   ngOnInit() {
     this.listaEsperaMesaService.getListaEsperaMesa().subscribe(actionArray => {
@@ -32,14 +31,8 @@ export class ListaEsperaMetrePage implements OnInit {
     this.presentModal(cliente);
   }
 
-  async presentModal(c: ClienteEspera) {
-    const modal = await this.modalController.create({
-      component: MesasModalPage,
-      componentProps: {
-        idAuth: c.idAuth        
-      }
-    });
-    return await modal.present();
+  presentModal(c: ClienteEspera) {
+    this.router.navigate(['/mesas-modal'], { queryParams: {idAuth: c.idAuth}});   
   }
 
 }

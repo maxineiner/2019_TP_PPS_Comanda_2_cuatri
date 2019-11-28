@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-avatar class="avatar">
+      <img src="assets/icon/icon.png" class="img">
+    </ion-avatar>
+    <ion-title style="text-align: center; margin-bottom: 5px;">{{header}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="text-align: center;">
+  <div style="margin-top: 20px;">
+    <span>{{message}}</span>
+    <span *ngIf="number">{{number}}</span>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment>
+      <ion-segment-button (click)="asignar()">
+        <ion-label>Aceptar</ion-label>
+      </ion-segment-button>
+      <ion-segment-button (click)="cerrar()">
+        <ion-label>Cancelar</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
