@@ -11,9 +11,16 @@ export class LoginService {
 
     colecionFotos: AngularFirestoreCollection;
     documentoFotos: AngularFirestoreDocument;
-    fotos: Observable<[]>;
+    coleccionId: Observable<Entidad[]>;
     
     constructor(private angularFirestore: AngularFirestore, private auth : AngularFireAuth,private router : Router) {
+        this.coleccionId = this.traerDatosUsuarioConId().pipe( map(actions => {
+            return actions.map( a => {
+              const data1 = a.payload.doc.data() as Entidad;
+              data1.id = a.payload.doc.id;
+              return data1;
+            });
+          }));
     }
 
 
@@ -36,16 +43,16 @@ export class LoginService {
         let correo = localStorage.getItem('correo');
         return correo;
     }
-    
-    traerUsuario(correo : string)
-    {
-        return this.angularFirestore.collection<Entidad>("entidades", ref => ref.where("correo","==",correo)).valueChanges();
-    }
+
 
     traerDatosUsuario()
     {
-        return this.traerUsuario(this.correoUsuarioActual());
+        return this.angularFirestore.collection<Entidad>("entidades", ref => ref.where("correo","==",this.correoUsuarioActual())).valueChanges();
+    }
 
+    traerDatosUsuarioConId()
+    {
+        return this.angularFirestore.collection<Entidad>("entidades", ref => ref.where("correo","==",this.correoUsuarioActual())).snapshotChanges();
     }
 
     cerrarSesion()

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ToastController } from '@ionic/angular';
-import { MesaClienteService } from 'src/app/servicios/mesa-cliente.service';
+import { MesaClienteService } from '../../Servicios/mesa-cliente.service';
 import { LoginService } from 'src/app/servicios/login.service';
-import { Entidad } from 'src/app/modals/entidad';
 
 @Component({
   selector: 'app-pedir-mesa-cliente',
@@ -24,14 +23,14 @@ export class PedirMesaClienteComponent implements OnInit {
     private mesaPedir : MesaClienteService,
     private login : LoginService)
     { 
-      this.inicio();
     }
 
     async inicio()
     {
       this.login.traerDatosUsuario().subscribe(
-        datos =>{
-          this.usuario = datos['0'];
+        nose =>{
+        this.usuario = nose['0'];
+        localStorage.setItem("idCliente",nose["0"].id);
           if(this.usuario.mesa == 'habilitado')
           {
             this.paso1 = false;
@@ -46,7 +45,7 @@ export class PedirMesaClienteComponent implements OnInit {
             this.paso3 = false;
             this.paso4 = false;
           }
-          else if( this.usuario.mesa == 'ninguna')
+          else if( this.usuario.mesa === "ninguna")
           {
             this.paso1 = true;
             this.paso2 = false;
@@ -60,34 +59,36 @@ export class PedirMesaClienteComponent implements OnInit {
             this.paso3 = false;
             this.paso4 = true;
           }
-        }
-      )
-      this.paso1 = false;
-      this.paso2 = false;
-      this.paso3 = false;
-      this.paso4 = false;
+          }
+          )
+            
+        this.paso1 = false;
+        this.paso2 = false;
+        this.paso3 = false;
+        this.paso4 = false;
     }
   
 
   ngOnInit()
   {
     this.inicio();
-    console.log("PEDIR MESA");
   }
 
   pedirMesaQR()
   {
     this.barcodeScanner.scan().then(barcodeData => {
       let datosBarcode = barcodeData.text;
+
+      console.log(this.usuario);
       if(datosBarcode == "pendiente")
       {
-        if(this.usuario.mesa = 'pendiente')
+        if(this.usuario.mesa == 'pendiente')
         {
           this.paso1 = false;
           this.paso2 = true;
         }
-        else{
-          this.usuario.mesa = "pendiente";
+        else if(this.usuario.mesa == 'ninguna')
+        {
           this.mesaPedir.cambiarEstadoAPendiente(this.usuario);
           this.paso1 = false;
           this.paso2 = true;
@@ -99,6 +100,7 @@ export class PedirMesaClienteComponent implements OnInit {
       }
      }).catch(err => {
          console.log('Error', err);
+         this.mensaje('Error! QR incorrecto');
      });
   }
 
@@ -111,8 +113,8 @@ export class PedirMesaClienteComponent implements OnInit {
         let promesa = this.mesaPedir.traerMesaId(barcodeData.text).subscribe(
           mesa =>
           {
-            console.log("mesa que traje " + mesa['0']);
             this.mesa = mesa['0'];
+            localStorage.setItem("mesaCliente",barcodeData.text);
             if(mesa['0']['estado'] == "desocupado")
             {
               this.mesa.estado = 'ocupado';

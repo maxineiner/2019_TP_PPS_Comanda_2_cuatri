@@ -9,4 +9,5 @@ export interface Entidad{
     perfil : string,
     dni : number,
     mesa : string,
+    pedido:string
 }

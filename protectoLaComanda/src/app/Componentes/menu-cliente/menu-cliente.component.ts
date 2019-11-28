@@ -30,12 +30,13 @@ export class MenuClienteComponent implements OnInit {
     perfil : "cliente" ,
     correo : "" ,
     foto:"../../assets/usos/user.png",
-    mesa:""
+    mesa:"",
+    pedido:""
   }
 
   navegar(path)
   {
-    this.rutas.navigate(["menu-cliente/" + path])
+    this.rutas.navigate(["menu-cliente/" + path]);
   }
 
   async inicio()
@@ -46,6 +47,7 @@ export class MenuClienteComponent implements OnInit {
         this.clienteLogeado.apellido = datos["0"]["apellido"];
         this.clienteLogeado.foto = datos["0"]["foto"];
         this.clienteLogeado.mesa = datos['0']['mesa'];
+        this.clienteLogeado.pedido = datos['0']['pedido'];
         if(this.clienteLogeado.mesa == "ninguna" || this.clienteLogeado.mesa == "pendiente" || this.clienteLogeado.mesa == "habilitado")
         {
           this.items = [
@@ -54,10 +56,22 @@ export class MenuClienteComponent implements OnInit {
         }
         else
         {
-          this.items = [
-            {icono : "qr-scanner" , nombre : "Pedir mesa" , ruta : "pedir-mesa-cliente"},
-            {icono : "restaurant" , nombre : "Hacer pedido" , ruta : "hacer-pedido-cliente"},
-          ]
+          if(this.clienteLogeado.pedido == "no")
+          {
+            this.items = [
+              {icono : "qr-scanner" , nombre : "Pedir mesa" , ruta : "pedir-mesa-cliente"},
+              {icono : "restaurant" , nombre : "Hacer pedido" , ruta : "hacer-pedido-cliente"},
+            ]
+          }
+          else
+          {
+            this.items = [
+              {icono : "qr-scanner" , nombre : "Pedir mesa" , ruta : "pedir-mesa-cliente"},
+              {icono : "restaurant" , nombre : "Hacer pedido" , ruta : "hacer-pedido-cliente"},
+              {icono : "clock" , nombre : "Ver estado del pedido" , ruta : "verificar-estado-pedido"},
+            ]
+          }
+
         }
       }
     )

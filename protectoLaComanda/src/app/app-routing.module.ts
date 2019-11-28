@@ -4,11 +4,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './componentes/login/login.component';
 import { AltaClienteComponent } from './componentes/alta-cliente/alta-cliente.component';
 import { MenuClienteComponent } from './componentes/menu-cliente/menu-cliente.component';
+import { VerificarEstadoPedidoComponent } from './Componentes/verificar-estado-pedido/verificar-estado-pedido.component';
+import { PedirMesaClienteComponent } from './componentes/pedir-mesa-cliente/pedir-mesa-cliente.component';
+import { HacerPedidoClienteComponent } from './componentes/hacer-pedido-cliente/hacer-pedido-cliente.component';
 //beta
 import { MenuJefeComponent } from './componentes/menu-jefe/menu-jefe.component';
 import { ListaComponent } from './componentes/lista/lista.component';
-import { PedirMesaClienteComponent } from './componentes/pedir-mesa-cliente/pedir-mesa-cliente.component';
-import { HacerPedidoClienteComponent } from './componentes/hacer-pedido-cliente/hacer-pedido-cliente.component';
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path:'menu-cliente',component:MenuClienteComponent, children:[
     {path:'pedir-mesa-cliente',component:PedirMesaClienteComponent},
     {path:'hacer-pedido-cliente',component:HacerPedidoClienteComponent},
+    {path:'verificar-estado-pedido',component:VerificarEstadoPedidoComponent}
   ]},
 //beta
   {path : "menu-jefe" , component : MenuJefeComponent , children :[

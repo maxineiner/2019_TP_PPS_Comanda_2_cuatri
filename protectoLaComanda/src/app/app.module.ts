@@ -18,19 +18,20 @@ import { AngularFireModule } from '@angular/fire';
 import { config } from './firebase';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { LoginService } from 'src/app/servicios/login.service';
 import { MenuClienteComponent } from './componentes/menu-cliente/menu-cliente.component';
-//beta
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth'
 import { MenuJefeComponent } from './componentes/menu-jefe/menu-jefe.component'
 import { ListaComponent } from './componentes/lista/lista.component';
 import { NombreApellidoPipe } from './pipes/nombre-apellido.pipe';
 import { PedirMesaClienteComponent } from './componentes/pedir-mesa-cliente/pedir-mesa-cliente.component';
-import { MesaClienteService } from './servicios/mesa-cliente.service';
 import { SplashComponent } from './componentes/splash/splash.component';
 import { HacerPedidoClienteComponent } from './componentes/hacer-pedido-cliente/hacer-pedido-cliente.component';
 import { PedidosClienteService } from './servicios/pedidos-cliente.service';
+import { LoginService } from './servicios/login.service';
+import { MesaClienteService } from './Servicios/mesa-cliente.service';
+import { VerificarEstadoPedidoComponent } from './Componentes/verificar-estado-pedido/verificar-estado-pedido.component';
+import { VerificarPedidoService } from './Servicios/verificar-pedido.service';
 
 @NgModule({
   declarations: [AppComponent,
@@ -43,6 +44,7 @@ import { PedidosClienteService } from './servicios/pedidos-cliente.service';
   SplashComponent,
   PedirMesaClienteComponent,
   HacerPedidoClienteComponent,
+  VerificarEstadoPedidoComponent
 ],
   entryComponents: [],
   imports: [BrowserModule,
@@ -65,6 +67,7 @@ import { PedidosClienteService } from './servicios/pedidos-cliente.service';
     LoginService,
     MesaClienteService,
     PedidosClienteService,
+    VerificarPedidoService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

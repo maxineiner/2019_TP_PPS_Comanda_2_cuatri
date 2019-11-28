@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {  AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 import { Entidad } from '../modals/entidad';
-import { LoginService } from './login.service';
 import { Mesa } from '../modals/mesa';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class MesaClienteService {
   
   colecion: AngularFirestoreCollection<Entidad>
   colecionMesa : AngularFirestoreCollection<Mesa>
-  constructor(private angularFirestore: AngularFirestore, private login : LoginService) { 
+  constructor(private angularFirestore: AngularFirestore) { 
     this.colecion = this.angularFirestore.collection<Entidad>("entidades");
     this.colecionMesa = this.angularFirestore.collection<Mesa>("mesas");
   }
@@ -20,6 +19,7 @@ export class MesaClienteService {
   cambiarEstadoAPendiente(cliente : Entidad)
   {
     console.log(cliente.id);
+    cliente.mesa = "pendiente";
     this.colecion.doc(cliente.id).set(cliente);
   }
 

@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit {
             this.mensaje("Error! la cuenta con la que intenta ingresar no existe");
             break;
         default:
-          let promesa = this.loginServi.traerUsuario(this.correo).subscribe(
+          let promesa = this.loginServi.traerDatosUsuario().subscribe(
             respuesta =>{
               try {
               switch (respuesta['0']['perfil'])

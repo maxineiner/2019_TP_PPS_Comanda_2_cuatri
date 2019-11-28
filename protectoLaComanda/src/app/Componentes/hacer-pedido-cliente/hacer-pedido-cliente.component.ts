@@ -156,6 +156,7 @@ export class HacerPedidoClienteComponent implements OnInit {
       imagen: "../../../assets/usos/fanta.png",
       cantidad : 0
     }
+    
     //postre
     this.helado = {
       tipo: "postre",
@@ -215,10 +216,10 @@ export class HacerPedidoClienteComponent implements OnInit {
     this.productos = [];
 
     this.pedido = {
-      estadoChef: "",
-      estadoBarman: "",
+      estadoChef: "nulo",
+      estadoBarman: "nulo",
       estadoPedido: "pendiente",
-      mesa: "2",
+      mesa: localStorage.getItem('mesaCliente'),
       total: 0,
       productos : this.productos,
     };

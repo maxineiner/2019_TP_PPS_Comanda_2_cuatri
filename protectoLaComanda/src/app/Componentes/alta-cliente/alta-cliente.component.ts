@@ -28,16 +28,17 @@ export class AltaClienteComponent implements OnInit {
 
   //atributos
   cliente = {
-    id:"",
+    id : "",
     nombre : "" ,
     apellido : "" ,
-    dni : "" ,
-    perfil: "cliente" ,
+    dni : 0 ,
+    perfil: "cliente",
     correo : "" ,
     clave : "",
     foto:"../../assets/usos/user.png",
     estado:"pendiente",
-    mesa:"ninguna"
+    mesa:"ninguna",
+    pedido : "no"
   }
 
   options : CameraOptions = {
@@ -87,19 +88,19 @@ export class AltaClienteComponent implements OnInit {
        if(datosBarcode.length == 8 || datosBarcode.length == 9)
        {this.cliente.nombre = datosBarcode[2];
        this.cliente.apellido = datosBarcode[1];
-       this.cliente.dni = datosBarcode[4];
+       this.cliente.dni = parseInt(datosBarcode[4]);
 
        }else if(datosBarcode.length == 17)
        {
         this.cliente.nombre = datosBarcode[5];
         this.cliente.apellido = datosBarcode[4];
-        this.cliente.dni = datosBarcode[1];
+        this.cliente.dni = parseInt(datosBarcode[1]);
       }
       else if(datosBarcode.length == 14)
        {
         this.cliente.nombre = datosBarcode[4];
         this.cliente.apellido = datosBarcode[3];
-        this.cliente.dni = datosBarcode[7];
+        this.cliente.dni = parseInt(datosBarcode[7]);
       }
        
      }).catch(err => {
@@ -111,7 +112,7 @@ export class AltaClienteComponent implements OnInit {
   {
     if(this.cliente.perfil == "cliente")
     {
-      if(this.cliente.apellido == "" || this.cliente.nombre == "" ||this.cliente.dni == "" || this.cliente.correo == "" || this.cliente.clave == "" )
+      if(this.cliente.apellido == "" || this.cliente.nombre == "" ||this.cliente.dni == null || this.cliente.correo == "" || this.cliente.clave == "" )
       {
         const toast = await this.toastController.create({
           message: "Error! Por favor, complete todos los campos antes de registrarse",
@@ -152,7 +153,7 @@ export class AltaClienteComponent implements OnInit {
       else{ 
         this.present();
         this.cliente.apellido = "";
-        this.cliente.dni = "";
+        this.cliente.dni = 0;
         this.cliente.foto = "../../assets/usos/user.png";
         this.cliente.estado = "aceptado";
         await this.altaCliente.AltaCliente(this.cliente);
