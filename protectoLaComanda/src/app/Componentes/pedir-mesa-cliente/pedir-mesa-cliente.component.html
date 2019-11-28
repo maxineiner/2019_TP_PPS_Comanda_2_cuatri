@@ -1,0 +1,41 @@
+<ion-content class = "ion-padding ion-text-center">
+  <div style="margin-top:15%" *ngIf="paso1">
+      <ion-button color="light" style="height: auto; width: 70%;" (click)="pedirMesaQR()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Codigo_QR.svg/500px-Codigo_QR.svg.png" alt=""></ion-button>
+      <br>
+      <img src="http://www.sistec8.com/modulos/catalogo/images/usuario/images/arrows.gif" alt="" width="25%">
+      <ion-text color="dark">
+          <h5>Pulsa para escanear el QR</h5>
+        </ion-text>
+      
+      <p style="margin-top:20%;">Para poder solicitar una mesa,
+        primero ponte en la lista de espera escanenado el codigo QR en la entrada de nuestro resturante
+        y aguarda la confirmacion de nuestro metre</p>
+  </div>
+  <div style="margin-top:15%" *ngIf="paso2">
+      <img src="https://www.yenante.co/assets/images/loading.gif" alt="" width="30%">
+      <ion-text color="dark">
+          <h5>ESPERE A QUE EL METRE LE ASIGNE UNA MESA</h5>
+        </ion-text>
+      
+        <p style="margin-top:20%;">¡Ya estas en cola pasa solicitar una mesa! solo espera a que el metre te habilite
+      para poder entrar y elegir el lugar que mas te guste!</p>
+  </div>
+  <div style="margin-top:15%" *ngIf="paso3">
+      <ion-button color="light" style="height: auto; width: 70%;" (click)="escanearMesaQR()"><img src="../../../assets/usos/QR.png" alt=""></ion-button>
+      <br>
+      <img src="http://www.sistec8.com/modulos/catalogo/images/usuario/images/arrows.gif" alt="" width="25%">
+      <img src="../../../assets/usos/21760408-mesa-cuadrada-con-mantel-rojo-y-una-pierna-redonda-aislados-sobre-fondo-blanco-.jpg" alt="" width="30%">
+      <ion-text color="dark">
+          <h5>Pulsa para escanear el QR de una MESA</h5>
+        </ion-text>
+        <p style="margin-top:20%;">¡Ya estas listo para sentarte! simplemente acércate a la mesa que mas te guste y escaneala,
+      recuerda que si la mesa ya esta ocupada no podra ser tuya...</p>
+  </div>
+  <div style="margin-top:15%" *ngIf="paso4">
+      <img src="../../../assets/usos/21760408-mesa-cuadrada-con-mantel-rojo-y-una-pierna-redonda-aislados-sobre-fondo-blanco-.jpg" alt="" width="50%">
+      <ion-text color="dark">
+          <h5>¡Execelente! ya tienes tu MESA!</h5>
+        </ion-text>
+        <p style="margin-top:20%;">As escaneado la mesa Nº{{usuario.mesa}}, ahora que tienes tu mesa, ya puedes hacer pedidos en la pestaña <strong>Hacer pedidos</strong></p>
+  </div>
+</ion-content>

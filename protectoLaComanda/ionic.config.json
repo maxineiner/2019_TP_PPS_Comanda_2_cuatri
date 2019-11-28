@@ -1,0 +1,7 @@
+{
+  "name": "protectoLaComanda",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

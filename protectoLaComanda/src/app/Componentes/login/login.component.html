@@ -1,0 +1,50 @@
+<ion-content class="bg">
+  <div *ngIf="!splash">
+    <ion-grid>
+      <ion-row>
+        <ion-col size=12 style="text-align: center;">
+            <!-- <p class="login-titulo">La Comandada</p> -->
+            <img src="../../../assets/logos/logo-login-comandada.png" style="margin-top: 5%;" alt="">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="11" class="centrar-col">
+            <!-- <p class="titulo">Iniciar Secion</p> -->
+            <ion-item class="bg-input" lines="none">
+              <ion-label position="floating" class="label">Correo Electrónico</ion-label>
+              <ion-input type="text" class="input-correo" name="correo" [(ngModel)]="correo"></ion-input>
+            </ion-item>
+            <ion-item class="bg-input" lines="none">
+              <ion-label position="floating" class="label">Contraseña</ion-label>
+              <ion-input type="password"  name="clave" [(ngModel)]="clave"></ion-input>
+            </ion-item>
+          </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="10" class="centrar-col" style="text-align: center;">
+          <br>
+          <ion-button shape="round"  expand="block" class="boton"  fill="outline" (click)="iniciarSecion()">Ingresar</ion-button>
+          <br>
+          <a href="#" class="recuperar">¿Olvidaste la contraseña? ¡Recuperala!</a>
+          <img src="../../../assets/usos/separador-png-2.png" class="amarillo" alt="">
+          <ion-button shape="round"  expand="block" class="boton"  fill="outline" [routerLink]="['/registro']" routerLinkActive="router-link-active" >Registrarse</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item color="light" style="border-radius: 10px; bottom: -4px; position:fixed; width: 100%;" >
+        <ion-label>Cuentas</ion-label>
+        <ion-select placeholder="Seleccionar cuenta" okText="Okay!" interface="action-sheet" [(ngModel)]="select" (ionChange)=llenarInput()>
+          <ion-select-option value="jefe">jefe</ion-select-option>
+          <ion-select-option value="anonimo" >anonimo</ion-select-option>
+          <ion-select-option value="invitado" >invitado</ion-select-option>
+          <ion-select-option value="tester" >tester</ion-select-option>
+          <ion-select-option value="usuario" >usuario</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </div>
+  <div *ngIf="splash">
+    <app-splash></app-splash>
+  </div>
+  </ion-content>
+    
+    
