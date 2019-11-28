@@ -29,9 +29,14 @@ export class PropinasPage implements OnInit {
             this.porcentajePropina = result;
             this.presentAlert("Bien","porcentaje de propina" + this.porcentajePropina);
           }
-          this.presentAlert('Error', 'El codigo qr no es valido');
+          else
+          {
+            this.presentAlert('Error', 'El codigo qr no es valido');
+          }
+        }else
+        {
+          this.presentAlert('Error', 'El codigo qr no es  un numero ???');
         }
-        this.presentAlert('Error', 'El codigo qr no es  un numero ???');
       })
       .catch(error => {
         this.presentAlert('Error', error.message);
