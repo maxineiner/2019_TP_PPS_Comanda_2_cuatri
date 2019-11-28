@@ -16,13 +16,26 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-segment>
-      <ion-segment-button (click)="asignar()" *ngIf="header != 'Error'">
+    <ion-segment *ngIf="action == 'confirm'">
+      <ion-segment-button (click)="asignar()">
         <ion-label>Aceptar</ion-label>
       </ion-segment-button>
       <ion-segment-button (click)="cerrar()">
         <ion-label>Cancelar</ion-label>
       </ion-segment-button>
     </ion-segment>
+
+    <ion-segment *ngIf="action == 'info'">
+      <ion-segment-button (click)="cerrar()">
+        <ion-label>Aceptar</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment *ngIf="action == 'error'">
+      <ion-segment-button (click)="cerrar()">
+        <ion-label>Aceptar</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
   </ion-toolbar>
 </ion-footer>

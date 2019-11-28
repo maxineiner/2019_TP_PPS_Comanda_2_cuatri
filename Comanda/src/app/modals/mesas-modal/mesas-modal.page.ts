@@ -56,6 +56,7 @@ export class MesasModalPage implements OnInit {
         message: message,
         data: data,
         idAuth: this.idAuth,
+        action:  'confirm'
       }
     });
 

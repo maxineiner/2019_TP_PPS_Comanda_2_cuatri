@@ -13,6 +13,7 @@ import { AlertModalPage } from 'src/app/modals/alert-modal/alert-modal.page';
  * espera, y de verificar la mesa una vez asignada
  */
 
+
 @Component({
   selector: 'app-lista-espera',
   templateUrl: './lista-espera.page.html',
@@ -41,7 +42,7 @@ export class ListaEsperaPage implements OnInit {
       if (params['tipo'])
         this.sm = JSON.parse(params['tipo']);
     });
-    this.scanner();    
+    this.scanner();
   }
 
   private scanner() {
@@ -52,8 +53,8 @@ export class ListaEsperaPage implements OnInit {
     this.zbar.scan(options)
       .then(result => {
         result === 'Lista_Espera_Mesa' ? this.verificarListaEspera()
-              : this.mesas.includes(result) ? this.verificarMesa(result)
-                : this.presentModalCustom('Error', 'El codigo qr no es valido.');
+          : this.mesas.includes(result) ? this.verificarMesa(result)
+            : this.presentModalCustom('Error', 'El codigo qr no es valido.');
       })
       .catch(error => {
         this.presentModalCustom('Error', error.message);
@@ -65,7 +66,7 @@ export class ListaEsperaPage implements OnInit {
     let mesa = await this.mesasService.getTableByClient(this.authService.currentUserId());
     mesa.docs.length > 0 ? this.presentModalCustom('Info', 'Usted ya tiene una mesa asignada')
       : existe.docs.length === 0 ? this.addListaEspera()
-          : this.presentModalCustom('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
+        : this.presentModalCustom('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
   }
 
   private addListaEspera() {
@@ -85,23 +86,6 @@ export class ListaEsperaPage implements OnInit {
     }
   }
 
-  async presentAlert(headerMsj, msj) {
-    const alert = await this.alertController.create({
-      header: headerMsj,
-      message: msj,
-      buttons: [{
-        text: 'Ok',
-        handler: () => {
-          this.navCtrl.navigateRoot('home');
-          /*headerMsj === 'Error' 
-            ? this.navCtrl.navigateRoot('home') 
-              : console.log('ok');*/
-        }
-      }]
-    });
-    await alert.present();
-  }
-
   async presentModalCustom(header: string, message: string) {
     const modal = await this.modalController.create({
       component: AlertModalPage,
@@ -109,16 +93,20 @@ export class ListaEsperaPage implements OnInit {
       componentProps: {
         header: header,
         message: message,
+        action: header == 'Error' ? 'error' : header == 'Info' ? 'info' : 'confirm',
       }
     });
 
     modal.onDidDismiss()
       .then((data) => {
-        this.router.navigate(['home']);
-    });
+        if (message === 'La mesa se verifico corretamente, puede tomar asiento y realizar su pedido')
+          this.router.navigate(['hacer-pedido']);
+        else 
+          this.router.navigate(['home']);
+        });
 
     return await modal.present();
-  } 
+  }
 
   //crear otro modal para redirigir el caso al this.navCtrl.navigateRoot('hacer-pedido');
 
