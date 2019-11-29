@@ -53,7 +53,7 @@ public async SetPropina(auxCliente:Pedido) {
     this.firestore.collection('Lista_Pedidos').doc(documento.docs[0].id).set({
       arrayDetalle:auxCliente.arrayDetalle,
       estado:auxCliente.estado,
-      idAuth:auxCliente.estado,
+      idAuth:auxCliente.idAuth,
       total:auxCliente.total,
       propina:auxCliente.propina,
       totalPropina: auxCliente.totalPropina
