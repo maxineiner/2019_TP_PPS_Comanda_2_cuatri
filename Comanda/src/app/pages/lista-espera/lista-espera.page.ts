@@ -24,6 +24,7 @@ export class ListaEsperaPage implements OnInit {
   /**contiene los numeros de las mesas */
   mesas = ['1', '2', '3'];
   sm: boolean;
+  imagenCliente: any;
 
   constructor(
     private comandaService: ComandaServiceService,
@@ -42,8 +43,8 @@ export class ListaEsperaPage implements OnInit {
       if (params['tipo'])
         this.sm = JSON.parse(params['tipo']);
     });
-    this.scanner();
-  }
+    this.scanner();    
+  }  
 
   private scanner() {
     let options: ZBarOptions = {
@@ -69,9 +70,15 @@ export class ListaEsperaPage implements OnInit {
         : this.presentModalCustom('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
   }
 
-  private addListaEspera() {
-    this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId());
+  private async addListaEspera() {
+    let seguir = await this.getClient();
+    this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId(), this.imagenCliente);
     this.presentModalCustom('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
+  }
+
+  async getClient() {
+    let x = await this.listaEsperaService.getCliente(this.authService.currentUserId());
+    this.imagenCliente = x.docs[0].data()['image'];
   }
 
   async verificarMesa(numeroMesa) {
