@@ -60,7 +60,7 @@ export class ListaEsperaRegistroPage implements OnInit {
       this.enviarMailSucces(item);
       this.listaEsperaService.removeClienteWaitingList(item);
       item.estado = "ACEPTADO"
-      this.listaEsperaService.AddClientConfirmed(item);
+      this.listaEsperaService.AddClientConfirmed(item,retorno['user']['uid']);
       //persistir clientes en bd
       }
      catch (error) {

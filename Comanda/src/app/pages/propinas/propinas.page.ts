@@ -22,7 +22,7 @@ export class PropinasPage implements OnInit {
       public auth:AuthService) { }
 
   async ngOnInit() {
-   // this.setPropinaBD(); //esto se llamaria en caso de exito en la funcion scanner
+    //this.setPropinaBD(); //esto se llamaria en caso de exito en la funcion scanner
      this.scanner();
    
   }
@@ -34,7 +34,7 @@ export class PropinasPage implements OnInit {
     this.zbar.scan(options)
       .then(result => {
           if(result == '0' || result  == '5' || result == '10' || result =='15' || result =='20') {
-            this.porcentajePropina = result;
+            this.porcentajePropina = Number(result);
             this.setPropinaBD();
             this.presentAlert("Bien","Se aplico una propina del  " + this.porcentajePropina + " % ");
             // this.setPropinaBD();
@@ -73,7 +73,7 @@ export class PropinasPage implements OnInit {
         this.pedidos = [];
         pedido.forEach(auxPedido => {
           console.log(auxPedido);
-          if(auxPedido.idAuth != undefined && auxPedido.estado == "COFIRMADO" && auxPedido.propina != undefined) //creo que es cofirmado
+          if(auxPedido.idAuth != undefined && auxPedido.estado == "CONFIRMADO" && auxPedido.propina != undefined) //creo que es cofirmado
           {
             console.log("Push");
             this.pedidos.push(auxPedido);
@@ -87,6 +87,7 @@ export class PropinasPage implements OnInit {
           if(element.idAuth == this.auth.currentUserId())
           {
               element.propina = this.porcentajePropina;
+              element.totalPropina = (element.total) / (100) * (100 + element.propina);
               this.pedidosService.SetPropina(element);
           }
         });
