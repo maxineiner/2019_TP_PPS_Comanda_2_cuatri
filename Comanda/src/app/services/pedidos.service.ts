@@ -17,7 +17,8 @@ export class PedidosService {
       total: auxPedido.total,
       estado: auxPedido.estado,
       arrayDetalle: JSON.stringify(auxPedido.arrayDetalle),
-      propina:0
+      propina:0,
+      totalPropina:0
 
     });
   }
@@ -49,8 +50,13 @@ public async SetPropina(auxCliente:Pedido) {
     console.log(documento.docs[0].id);
     // console.log('EncontrÃ© el voto', votos.users);
     
-    await this.firestore.doc('Lista_Pedidos/' + documento.docs[0].id).set({
-      propina:auxCliente.propina
+    this.firestore.collection('Lista_Pedidos').doc(documento.docs[0].id).set({
+      arrayDetalle:auxCliente.arrayDetalle,
+      estado:auxCliente.estado,
+      idAuth:auxCliente.estado,
+      total:auxCliente.total,
+      propina:auxCliente.propina,
+      totalPropina: auxCliente.totalPropina
     }//, { merge: true }
     );
     

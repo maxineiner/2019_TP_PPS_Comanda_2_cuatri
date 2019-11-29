@@ -22,8 +22,8 @@ export class PropinasPage implements OnInit {
       public auth:AuthService) { }
 
   async ngOnInit() {
-   // this.setPropinaBD(); //esto se llamaria en caso de exito en la funcion scanner
-     this.scanner();
+    this.setPropinaBD(); //esto se llamaria en caso de exito en la funcion scanner
+   //  this.scanner();
    
   }
   private scanner() {
@@ -73,7 +73,7 @@ export class PropinasPage implements OnInit {
         this.pedidos = [];
         pedido.forEach(auxPedido => {
           console.log(auxPedido);
-          if(auxPedido.idAuth != undefined && auxPedido.estado == "COFIRMADO" && auxPedido.propina == undefined) //creo que es cofirmado
+          if(auxPedido.idAuth != undefined && auxPedido.estado == "COFIRMADO" && auxPedido.propina != undefined) //creo que es cofirmado
           {
             console.log("Push");
             this.pedidos.push(auxPedido);
@@ -87,6 +87,7 @@ export class PropinasPage implements OnInit {
           if(element.idAuth == this.auth.currentUserId())
           {
               element.propina = this.porcentajePropina;
+              element.totalPropina = element.total * (1 + element.propina);
               this.pedidosService.SetPropina(element);
           }
         });
