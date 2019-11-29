@@ -19,8 +19,9 @@ const routes: Routes = [
   { path: 'encuesta-respuesta', loadChildren: './pages/encuesta-respuesta/encuesta-respuesta.module#EncuestaRespuestaPageModule'},
   { path: 'hacer-pedido', loadChildren: './pages/hacer-pedido/hacer-pedido.module#HacerPedidoPageModule'},
   { path: 'lista-pedidos', loadChildren: './pages/lista-pedidos/lista-pedidos.module#ListaPedidosPageModule'},
-  { path: 'detalle-pedido-modal', loadChildren: './modals/detalle-pedido-modal/detalle-pedido-modal.module#DetallePedidoModalPageModule'},  { path: 'propinas', loadChildren: './pages/propinas/propinas.module#PropinasPageModule' },
-
+  { path: 'detalle-pedido-modal', loadChildren: './modals/detalle-pedido-modal/detalle-pedido-modal.module#DetallePedidoModalPageModule'},
+  { path: 'propinas', loadChildren: './pages/propinas/propinas.module#PropinasPageModule' },
+  { path: 'alert-modal', loadChildren: './modals/alert-modal/alert-modal.module#AlertModalPageModule' },
 ];
 
 @NgModule({

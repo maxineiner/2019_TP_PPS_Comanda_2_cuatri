@@ -17,10 +17,10 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { ZBar } from '@ionic-native/zbar/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { MesasModalPage } from './modals/mesas-modal/mesas-modal.page';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { DetallePedidoModalPage } from './modals/detalle-pedido-modal/detalle-pedido-modal.page';
+import { AlertModalPage } from './modals/alert-modal/alert-modal.page';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAWUuOEwKZrD3jBv6Jxq-DmQ-hZSdNupiw',
@@ -33,8 +33,8 @@ const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, MesasModalPage, DetallePedidoModalPage],
-  entryComponents: [MesasModalPage, DetallePedidoModalPage],
+  declarations: [AppComponent, DetallePedidoModalPage, AlertModalPage],
+  entryComponents: [DetallePedidoModalPage, AlertModalPage],
   imports: [BrowserModule
     , IonicModule.forRoot()
     , AppRoutingModule

@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComandaServiceService } from 'src/app/services/comanda-service.service';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ModalController } from '@ionic/angular';
 import { ZBar, ZBarOptions } from '@ionic-native/zbar/ngx';
 import { ListaEsperaMesaService } from 'src/app/services/lista-espera-mesa.service';
 import { MesaService } from 'src/app/services/mesa.service';
 import { Table } from 'src/app/model/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertModalPage } from 'src/app/modals/alert-modal/alert-modal.page';
 
 /** Este componente es el encargado de manejar la logica de agregar a un cliente a la lista de 
  * espera, y de verificar la mesa una vez asignada
  */
+
 
 @Component({
   selector: 'app-lista-espera',
@@ -31,7 +33,9 @@ export class ListaEsperaPage implements OnInit {
     private zbar: ZBar,
     private listaEsperaService: ListaEsperaMesaService,
     private mesasService: MesaService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private modalController: ModalController,
+    public router: Router) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -49,54 +53,61 @@ export class ListaEsperaPage implements OnInit {
     this.zbar.scan(options)
       .then(result => {
         result === 'Lista_Espera_Mesa' ? this.verificarListaEspera()
-              : this.mesas.includes(result) ? this.verificarMesa(result)
-                : this.presentAlert('Error', 'El codigo qr no es valido.');
+          : this.mesas.includes(result) ? this.verificarMesa(result)
+            : this.presentModalCustom('Error', 'El codigo qr no es valido.');
       })
       .catch(error => {
-        this.presentAlert('Error', error.message);
+        this.presentModalCustom('Error', error.message);
       });
   }
 
   async verificarListaEspera() {
     let existe = await this.listaEsperaService.existeEnListaEspera(this.authService.currentUserId());
     let mesa = await this.mesasService.getTableByClient(this.authService.currentUserId());
-    mesa.docs.length > 0 ? this.presentAlert('Info', 'Usted ya tiene una mesa asignada')
+    mesa.docs.length > 0 ? this.presentModalCustom('Info', 'Usted ya tiene una mesa asignada')
       : existe.docs.length === 0 ? this.addListaEspera()
-          : this.presentAlert('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
+        : this.presentModalCustom('Info', 'Usted ya se encuentra en la lista de espera, por favor aguarde un momento.');
   }
 
   private addListaEspera() {
     this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId());
-    this.presentAlert('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
+    this.presentModalCustom('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
   }
 
   async verificarMesa(numeroMesa) {
     let mesa = await this.mesasService.getTableByClient(this.authService.currentUserId());
     if (mesa.docs.length === 0) {
-      this.presentAlert('Error', 'Esta mesa no le pertenece, puede solicitar una leyando el qr de lista de espera');
+      this.presentModalCustom('Error', 'Esta mesa no le pertenece, puede solicitar una leyando el qr de lista de espera');
     } else {
       let table = mesa.docs[0].data() as Table;
       mesa.docs.length === 1 && table.number === parseInt(numeroMesa)
-        ? this.presentAlert('Info', 'La mesa se verifico corretamente, puede tomar asiento y realizar su pedido')
-        : this.presentAlert('Error', 'Esta mesa no le pertenece');
+        ? this.presentModalCustom('Info', 'La mesa se verifico corretamente, puede tomar asiento y realizar su pedido')
+        : this.presentModalCustom('Error', 'Esta mesa no le pertenece');
     }
   }
 
-  async presentAlert(headerMsj, msj) {
-    const alert = await this.alertController.create({
-      header: headerMsj,
-      message: msj,
-      buttons: [{
-        text: 'Ok',
-        handler: () => {
-          this.navCtrl.navigateRoot('home');
-          /*headerMsj === 'Error' 
-            ? this.navCtrl.navigateRoot('home') 
-              : console.log('ok');*/
-        }
-      }]
+  async presentModalCustom(header: string, message: string) {
+    const modal = await this.modalController.create({
+      component: AlertModalPage,
+      cssClass: header === 'Error' ? 'my-custom-modal-css-error' : 'my-custom-modal-css',
+      componentProps: {
+        header: header,
+        message: message,
+        action: header == 'Error' ? 'error' : header == 'Info' ? 'info' : 'confirm',
+      }
     });
-    await alert.present();
+
+    modal.onDidDismiss()
+      .then((data) => {
+        if (message === 'La mesa se verifico corretamente, puede tomar asiento y realizar su pedido')
+          this.router.navigate(['hacer-pedido']);
+        else 
+          this.router.navigate(['home']);
+        });
+
+    return await modal.present();
   }
+
+  //crear otro modal para redirigir el caso al this.navCtrl.navigateRoot('hacer-pedido');
 
 }
