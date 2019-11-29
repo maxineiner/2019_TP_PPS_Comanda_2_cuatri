@@ -34,7 +34,7 @@ export class PropinasPage implements OnInit {
     this.zbar.scan(options)
       .then(result => {
           if(result == '0' || result  == '5' || result == '10' || result =='15' || result =='20') {
-            this.porcentajePropina = result;
+            this.porcentajePropina = Number(result);
             this.setPropinaBD();
             this.presentAlert("Bien","Se aplico una propina del  " + this.porcentajePropina + " % ");
             // this.setPropinaBD();
@@ -87,7 +87,7 @@ export class PropinasPage implements OnInit {
           if(element.idAuth == this.auth.currentUserId())
           {
               element.propina = this.porcentajePropina;
-              element.totalPropina = element.total * (1 + element.propina);
+              element.totalPropina = (element.total) / (100) * (100 + element.propina);
               this.pedidosService.SetPropina(element);
           }
         });
