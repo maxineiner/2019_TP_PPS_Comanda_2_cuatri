@@ -22,8 +22,8 @@ export class PropinasPage implements OnInit {
       public auth:AuthService) { }
 
   async ngOnInit() {
-    this.setPropinaBD(); //esto se llamaria en caso de exito en la funcion scanner
-   //  this.scanner();
+    //this.setPropinaBD(); //esto se llamaria en caso de exito en la funcion scanner
+     this.scanner();
    
   }
   private scanner() {
