@@ -17,6 +17,17 @@
     <ion-item *ngFor='let detalle of pedido.arrayDetalle'>
       <ion-label>{{detalle.cantidad}} - {{detalle.nombre}}</ion-label>
     </ion-item>
-  
+    <ion-item *ngIf="pedido.estado == 'PENDIENTE'">
+      <ion-label>
+        <ion-button expand="block" (click)="cambiarEstado(pedido, 'CONFIRMADO')" color='primary' fill="outline">
+          Confirmar
+        </ion-button>
+      </ion-label>
+      <ion-label>
+        <ion-button expand="block" (click)="cambiarEstado(pedido, 'CANCELADO')" color='danger' fill="outline">
+          Cancelar
+        </ion-button>
+      </ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>
