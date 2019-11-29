@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Pedido } from '../../model/pedido';
 import { NavParams, AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { PedidosService } from '../../services/pedidos.service';
+
 
 
 @Component({
@@ -16,15 +18,16 @@ export class DetallePedidoModalPage implements OnInit {
 
   constructor(
     public router: Router,
-    public modalCtrl: ModalController) { }
+    public modalCtrl: ModalController,
+    private pedidosService: PedidosService) { }
 
-  ngOnInit() {
-    // this.pedido.arrayDetalle.forEach(element => {
-      
-    //   // this.productos.push();
-    // });
-    
+  ngOnInit() {  
   }
+
+  cambiarEstado(pedido: Pedido, estado: string){
+    this.pedidosService.SetEstado(pedido.id, estado);
+  }
+  
 
   dismiss() {
     // using the injected ModalController this page

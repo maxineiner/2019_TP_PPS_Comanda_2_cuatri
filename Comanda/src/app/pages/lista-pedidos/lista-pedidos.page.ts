@@ -39,8 +39,7 @@ export class ListaPedidosPage implements OnInit {
   }
 
   verDetalle(pedido: Pedido) {
-    this.presentAlert(pedido);
-
+    this.presentModal(pedido);
   }
 
   async presentModal(pedido: Pedido) {
@@ -53,35 +52,6 @@ export class ListaPedidosPage implements OnInit {
     return await modal.present();
   }
 
-  async presentAlert(pedido: Pedido) {
-    const alert = await this.alertController.create({
-      header: 'Confirmar Pedido',
-      message: 'El pedido se enviará a preparación',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Detalle',
-          handler: () => {
-            this.presentModal(pedido);
-          }
-        }
-        , {
-          text: 'Aceptar',
-          handler: () => {
-            // pedido.estado = 'CONFIRMADO';
-            this.pedidosService.SetEstado(pedido.id, 'COFIRMADO');
-          }
-        }
-      ]
-    });
 
-    await alert.present();
-  }
 
 }
