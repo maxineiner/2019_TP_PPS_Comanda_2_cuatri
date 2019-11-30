@@ -14,10 +14,11 @@ export class ListaEsperaMesaService {
     return this.firestore.collection(DB).snapshotChanges();
   }
 
-  public async addListaEspera(email: string, id: string) {
+  public async addListaEspera(email: string, id: string, img) {
     await this.firestore.collection(DB).add({
       email: email,
-      idAuth: id
+      idAuth: id,
+      imagen: img
     });
   }
 
@@ -31,6 +32,12 @@ export class ListaEsperaMesaService {
 
   public async existeEnListaEspera(idAuth) {
     return await this.firestore.collection(DB).ref
+      .where('idAuth','==', idAuth )
+      .get();
+  }
+
+  public async getCliente(idAuth) {
+    return await this.firestore.collection('Clientes').ref
       .where('idAuth','==', idAuth )
       .get();
   }

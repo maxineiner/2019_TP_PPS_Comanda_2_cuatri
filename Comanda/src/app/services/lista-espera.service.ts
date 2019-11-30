@@ -61,7 +61,8 @@ export class ListaEsperaService {
     });
 
   }
-  public AddClientConfirmed(auxCliente:Cliente) {
+  public AddClientConfirmed(auxCliente:Cliente,retorno:any) {
+
     this.firestore.collection('Clientes').add({
       email:auxCliente.email,
       name: auxCliente.name,
@@ -70,7 +71,8 @@ export class ListaEsperaService {
       image: auxCliente.image,
       type: auxCliente.type,
       estado:auxCliente.estado,
-      password:auxCliente.password
+      password:auxCliente.password,
+      idAuth:retorno
     });
   }
 

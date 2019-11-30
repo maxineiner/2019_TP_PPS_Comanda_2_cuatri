@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'hacer-pedido', loadChildren: './pages/hacer-pedido/hacer-pedido.module#HacerPedidoPageModule'},
   { path: 'lista-pedidos', loadChildren: './pages/lista-pedidos/lista-pedidos.module#ListaPedidosPageModule'},
   { path: 'detalle-pedido-modal', loadChildren: './modals/detalle-pedido-modal/detalle-pedido-modal.module#DetallePedidoModalPageModule'},
-  { path: 'alert-modal', loadChildren: './modals/alert-modal/alert-modal.module#AlertModalPageModule' },  { path: 'solicitar-cuenta', loadChildren: './pages/solicitar-cuenta/solicitar-cuenta.module#SolicitarCuentaPageModule' },
+  { path: 'alert-modal', loadChildren: './modals/alert-modal/alert-modal.module#AlertModalPageModule' },
+  { path: 'solicitar-cuenta', loadChildren: './pages/solicitar-cuenta/solicitar-cuenta.module#SolicitarCuentaPageModule' },
 
 ];
 

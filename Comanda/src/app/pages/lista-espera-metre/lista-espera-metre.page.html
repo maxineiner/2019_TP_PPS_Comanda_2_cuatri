@@ -5,15 +5,18 @@
 </ion-header>
 
 <ion-content>
- <ion-grid>
-   <ion-row *ngFor="let c of clientes">
-     <ion-col>
-      <ion-card (click)="asignar(c)">     
-        <ion-card-content>
-          {{c.email}}
-        </ion-card-content>
-      </ion-card>
-     </ion-col>
-   </ion-row>
- </ion-grid>
+  <ion-grid>
+    <ion-row *ngFor="let c of clientes">
+      <ion-col>
+        <ion-card (click)="asignar(c)">
+          <ion-card-content>
+            <ion-avatar class="avatar">
+              <img [src]="c.imagen">
+            </ion-avatar>
+            <div style="text-align: center;"><span>{{c.email}}</span></div>            
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

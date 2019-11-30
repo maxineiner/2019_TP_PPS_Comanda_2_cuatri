@@ -76,10 +76,12 @@
   --ion-color-light-tint: #f5f6f9;
 
   @font-face {
-    font-family: 'Patrick Hand';
-    src: url('../assets/fonts/PatrickHand.woff2') format('woff2');
+    //font-family: 'Patrick Hand';
+    font-family: 'Solway';
+    src: url('../assets/fonts/Solway.woff2') format('woff2');
   }
   *{
-    font-family: 'Patrick Hand', cursive;
+    //font-family: 'Patrick Hand', cursive;
+    font-family: 'Solway', serif;
   }
 }
