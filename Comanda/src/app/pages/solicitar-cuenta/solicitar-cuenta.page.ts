@@ -36,7 +36,7 @@ export class SolicitarCuentaPage implements OnInit {
       this.pedidos = [];
       pedido.forEach(auxPedido => {
         console.log(auxPedido);
-        if(auxPedido.idAuth != undefined && auxPedido.estado == "CONFIRMADO" && auxPedido.propina != undefined) //creo que es cofirmado
+        if(auxPedido.idAuth != undefined && auxPedido.estado == "ENTREGADO" && auxPedido.propina != undefined) //creo que es cofirmado
         {
           console.log("Push");
           this.pedidos.push(auxPedido);
