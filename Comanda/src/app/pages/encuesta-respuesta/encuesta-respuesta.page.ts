@@ -16,6 +16,7 @@ export class EncuestaRespuestaPage implements OnInit {
   chartLables = [];
   chartData = [];
   tipo: string;
+  imagenes: any[] = [];
 
   constructor(private encuestaService: EncuestaService) { }
 
@@ -29,6 +30,14 @@ export class EncuestaRespuestaPage implements OnInit {
       let concat = [];
       this.encuestasRespuestas.forEach(er => {
         concat = concat.concat(er.preguntaRespuesta);
+      });
+
+      concat.forEach(element => {
+        if(element.tipo === 'img') {
+          element.respuesta.forEach(r => {
+            this.imagenes.push(r);
+          });
+        }
       });
 
       this.groupRespuestasAndGenerateObj(concat);

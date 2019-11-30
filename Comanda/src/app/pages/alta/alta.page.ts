@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ComandaServiceService } from 'src/app/services/comanda-service.service';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, ModalController } from '@ionic/angular';
 import { ActorTypeBase } from 'src/app/model/actorTypeBase';
 import { ActorType } from 'src/app/model/actorType';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertModalPage } from 'src/app/modals/alert-modal/alert-modal.page';
 
 @Component({
   selector: 'app-alta',
@@ -31,7 +32,8 @@ export class AltaPage implements OnInit {
     private navCtrl: NavController,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private modalController: ModalController) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -70,7 +72,7 @@ export class AltaPage implements OnInit {
         this.image = `data:image/jpeg;base64,${imageData}`;
       }
     }, (err) => {
-      this.presentAlert(err);
+      this.presentModalCustom('Error',err);
     });
   }
 
@@ -84,7 +86,7 @@ export class AltaPage implements OnInit {
         this.setControlsValues(code, 5, 4, 1, 8);
       }
     }).catch(err => {
-      this.presentAlert(err.message);
+      this.presentModalCustom('Error',err.message);
     });
   }
 
@@ -191,9 +193,9 @@ export class AltaPage implements OnInit {
       let data = await this.authService.createUserWithEmailAndPassword(this.actorType.emial, this.actorType.password);
       let result = await this.comandaService.saveActorType(this.actorType);
       let rol = this.comandaService.saveRol(data['user']['uid'], this.actorType.type);
-      this.presentAlertSuccess('El alta se realizo exitosamente');
+      this.presentModalCustom('Info','El alta se realizo exitosamente');
     } catch (error) {
-      this.presentAlertSuccess(error.message);
+      this.presentModalCustom('Error',error.message);
     }
   }
 
@@ -207,42 +209,26 @@ export class AltaPage implements OnInit {
       this.myForm.get('email').value,
       this.myForm.get('password').value
     );
-  }
+  }  
 
-  async presentAlert(err) {
-    const alert = await this.alertController.create({
-      header: 'Aviso',
-      subHeader: 'Error',
-      message: err,
-      buttons: ['OK']
+  async presentModalCustom(header: string, message: string) {
+    const modal = await this.modalController.create({
+      component: AlertModalPage,
+      cssClass: header === 'Error' ? 'my-custom-modal-css-error' : 'my-custom-modal-css',
+      componentProps: {
+        header: header,
+        message: message,
+        action: header == 'Error' ? 'error' : header == 'Info' ? 'info' : 'confirm',
+      }
     });
 
-    await alert.present();
-  }
+    modal.onDidDismiss()
+      .then((data) => {
+        this.router.navigate(['home']);
+        });
 
-  async presentAlertSuccess(mensaje) {
-    const alert = await this.alertController.create({
-      header: 'Aviso',
-      message: mensaje,
-      buttons: [
-        {
-          text: '',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Aceptar',
-          handler: () => {
-            this.router.navigate(['home']);
-          }
-        }
-      ]
-    });
-
-    await alert.present();
-  }
+    return await modal.present();
+  }   
 
   /** custom validators */
   onlyNumbersValidator(control: AbstractControl): { [key: string]: boolean } | null {
