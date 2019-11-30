@@ -1,0 +1,75 @@
+.flotante {
+    display:scroll;
+        position:fixed;
+        bottom:20%;
+        width:100%
+
+
+    }
+    .flotante2 {
+      display:scroll;
+          position:fixed;
+          width:100%;
+          bottom:0%;
+      }
+    img{
+        display:block;
+        margin:auto;
+        width: 130px;
+        }
+
+        .button{
+            margin-left: 1px;
+            display: inline-block;
+            width: 90%;
+            padding: 5px 15px;
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: #fff;
+            background-color: rgb(36, 218, 66);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        
+            border: none;
+            outline: 0;
+         
+            padding: 8px;
+            color: white;
+           /* background-color: #000;*/
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            padding-bottom: 0%;
+          }
+          
+        
+          .buttonR {
+            margin-left: 1px;
+            display: inline-block;
+            width: 90%;
+            padding: 5px 15px;
+            font-size: 24px;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: #fff;
+            background-color: rgb(235, 69, 69);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        
+            border: none;
+            outline: 0;
+         
+            padding: 8px;
+            color: white;
+           /* background-color: #000;*/
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            padding-bottom: 0%;
+          }
+        
