@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { DetallePedidoModalPage } from './modals/detalle-pedido-modal/detalle-pedido-modal.page';
 import { AlertModalPage } from './modals/alert-modal/alert-modal.page';
+import { FiltroPedidosPipe } from './pipes/filtro-pedidos.pipe';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAWUuOEwKZrD3jBv6Jxq-DmQ-hZSdNupiw',

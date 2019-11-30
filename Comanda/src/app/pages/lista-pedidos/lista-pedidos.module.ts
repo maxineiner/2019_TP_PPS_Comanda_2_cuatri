@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { ListaPedidosPage } from './lista-pedidos.page';
 
+import { FiltroPedidosPipe } from '../../pipes/filtro-pedidos.pipe';
+
 const routes: Routes = [
   {
     path: '',
@@ -21,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ListaPedidosPage]
+  declarations: [ListaPedidosPage, FiltroPedidosPipe]
 })
 export class ListaPedidosPageModule {}
