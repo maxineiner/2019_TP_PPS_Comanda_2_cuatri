@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'detalle-pedido-modal', loadChildren: './modals/detalle-pedido-modal/detalle-pedido-modal.module#DetallePedidoModalPageModule'},
   { path: 'alert-modal', loadChildren: './modals/alert-modal/alert-modal.module#AlertModalPageModule' },
   { path: 'solicitar-cuenta', loadChildren: './pages/solicitar-cuenta/solicitar-cuenta.module#SolicitarCuentaPageModule' },
+  { path: 'propinas', loadChildren: './pages/solicitar-cuenta/solicitar-cuenta.module#SolicitarCuentaPageModule' },
 
 ];
 
