@@ -91,7 +91,7 @@
         </ion-item>
 
         <ion-item>
-          <div class="avatar" style="padding: 10px;" *ngFor="let img of images">
+          <div class="avatar" *ngFor="let img of images">
             <img [src]="img">
             <ion-icon name="trash" (click)="remove(img)"></ion-icon>
           </div>          

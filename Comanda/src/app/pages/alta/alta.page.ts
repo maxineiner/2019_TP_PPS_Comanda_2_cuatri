@@ -37,8 +37,8 @@ export class AltaPage implements OnInit {
 
   ngOnInit() {
     this.myForm = new FormGroup({
-      name: new FormControl('', [Validators.required, this.soloLetras]),
-      lastName: new FormControl('', [Validators.required, this.soloLetras]),
+      name: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
       dni: new FormControl('', [Validators.required, this.onlyNumbersValidator, this.lengthValidator(8)]),
       cuil: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, this.validatorFormatt]),
@@ -256,13 +256,5 @@ export class AltaPage implements OnInit {
     return null;
   }
 
-  soloLetras(control: AbstractControl): { [key: string]: boolean } | null {
-    const value = control.value;
-    let regex = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
-    if (control.value.length > 0 && !regex.exec(value)) {
-      return { errorSoloLetras: true };
-    }
-    return null;
-  }
 
 }

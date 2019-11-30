@@ -8,8 +8,6 @@ import { MesaService } from 'src/app/services/mesa.service';
 import { Table } from 'src/app/model/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertModalPage } from 'src/app/modals/alert-modal/alert-modal.page';
-import { PedidosService } from 'src/app/services/pedidos.service';
-import { Pedido } from 'src/app/model/pedido';
 
 /** Este componente es el encargado de manejar la logica de agregar a un cliente a la lista de 
  * espera, y de verificar la mesa una vez asignada
@@ -28,7 +26,6 @@ export class ListaEsperaPage implements OnInit {
   sm: boolean;
   imagenCliente: any;
   tables: any[];
-  propina = [5, 10, 15, 20];
 
   constructor(
     private comandaService: ComandaServiceService,
@@ -40,12 +37,10 @@ export class ListaEsperaPage implements OnInit {
     private mesasService: MesaService,
     private route: ActivatedRoute,
     private modalController: ModalController,
-    public router: Router,
-    private pedidosService: PedidosService) { }
+    public router: Router) { }
 
   ngOnInit() {
-    //this.verificarEstadopedido();
-    this.getListTable();    
+    this.getListTable();
   }
 
   async getListTable() {
@@ -69,24 +64,12 @@ export class ListaEsperaPage implements OnInit {
       .then(result => {
         result === 'Lista_Espera_Mesa' ? this.verificarListaEspera()
           : this.tables.includes(result) ? this.verificarMesa(result)
-              : this.presentModalCustom('Error', 'El codigo qr no es valido.');
+            : this.presentModalCustom('Error', 'El codigo qr no es valido.');
       })
       .catch(error => {
         this.presentModalCustom('Error', error.message);
       });
   }
-
-  /*async verificarEstadopedido() {
-    const pedidoDoc = await this.pedidosService.getPedido(this.authService.currentUserId());
-    if(pedidoDoc.docs[0]) {
-      const pedido: Pedido = pedidoDoc.docs[0].data() as Pedido;
-      if(pedido.estado === 'ENTREGADO')
-        this.router.navigate(['propina']);
-      else 
-        this.presentModalCustom('Error', 'El pedido aun no esta entregado');
-    }
-   
-  }*/
 
   async presentAlert(msj) {
     const alert = await this.alertController.create({
@@ -108,23 +91,19 @@ export class ListaEsperaPage implements OnInit {
   }
 
   private async addListaEspera() {
-    try {
-      let cliente = await this.getClient();
-      let resp = await this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId(), this.imagenCliente);
-      this.presentModalCustom('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
-    } catch(err) {
-      this.presentModalCustom('Error', err.message);
-    }    
+    //this.getClient();
+    //this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId(), this.imagenCliente);
+    this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId());
+    this.presentModalCustom('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
   } 
 
   async getClient() {
     try {
-      let data = await this.listaEsperaService.getCliente(this.authService.currentUserId());
-      this.imagenCliente = data.docs[0].data()['image'];
+      let x = await this.listaEsperaService.getCliente(this.authService.currentUserId());
+      this.imagenCliente = x.docs[0].data()['image'];
     } catch(err) {
       this.presentModalCustom('Error', err.message);
-    }   
-    
+    }       
   }
 
   async verificarMesa(numeroMesa) {

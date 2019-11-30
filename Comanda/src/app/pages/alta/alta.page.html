@@ -22,18 +22,10 @@
         <ion-item>
           <ion-input formControlName="name" type="text" placeholder="nombre"></ion-input>
         </ion-item>
-        <div class="isa_error" *ngIf="myForm.get('name').errors && myForm.get('name').dirty && 
-          myForm.get('name').errors.errorSoloLetras">
-          <p>Verifique los datos</p>
-        </div>
 
         <ion-item>
           <ion-input formControlName="lastName" type="text" placeholder="apellido"></ion-input>
         </ion-item>
-        <div class="isa_error" *ngIf="myForm.get('lastName').errors && myForm.get('lastName').dirty && 
-          myForm.get('lastName').errors.errorSoloLetras">
-          <p>Verifique los datos</p>
-        </div>
 
         <ion-item>
           <ion-input formControlName="dni" type="text" placeholder="dni" maxlength="8"></ion-input>
@@ -64,7 +56,7 @@
         </div>
 
         <ion-item>
-          <ion-input formControlName="password" type="password" placeholder="contraseña"></ion-input>
+          <ion-input formControlName="password" type="text" placeholder="contraseña"></ion-input>
         </ion-item>
 
         <ion-item *ngIf="typeEmployed !== 'S'">

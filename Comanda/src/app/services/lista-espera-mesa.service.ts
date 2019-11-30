@@ -17,8 +17,7 @@ export class ListaEsperaMesaService {
   public async addListaEspera(email: string, id: string, img?) {
     await this.firestore.collection(DB).add({
       email: email,
-      idAuth: id,
-      imagen: img
+      idAuth: id
     });
   }
 
