@@ -18,23 +18,22 @@ Delta: Arley Ducau
 
 | Tarea | Descripcion | Estado | Desarrollado por | Fecha
 |---|---|---|---|---|
-| A | Alta dueño | finalizado | Nicolas Mazzoconi |
-| B | Alta empleado | finalizado | Giuliano Tritto |
-| C | Alta producto | finalizado | Pellita Roman |
-| D | Alta cliente | finalizado | Pellita Roman |
-| E | Alta mesa | finalizado | Nicolas Mazzoconi |
-| F | Ingreso Local | finalizado | Giuliano Tritto |
-| G | QR mesa | finalizado | Pellita Roman |
-| H | QR Propina | finalizado | Arley Ducau |
-| I | Encuesta cliente | finalizado | Nicolas Mazzoconi |
-| J | Encuesta empleado | finalizado | Giuliano Tritto |
-| K | Encuesta supervisor | no integrado | Pellita Roman |
-| L | Pedir plato y bebida | finalizado | Arley Ducau |
-| M | Tomar Pedido | finalizado | Nicolas Mazzoconi |
-| N | Hacer reserva | finalizado | Giuliano Tritto |
-| O | Realizar pedido direccion | finalizado | Arley Ducau |
-| P | Chat delivery | finalizado | Arley Ducau |
-| Q | Juego descuento | finalizado | Arley Ducau |
+| A | Alta dueño | finalizado | Nicolas Mazzoconi | 5/11
+| B | Alta empleado | finalizado | Giuliano Tritto | 4/11
+| C | Alta producto | finalizado | Pellita Roman | 6/11
+| D | Alta cliente | finalizado | Pellita Roman | 9/11
+| E | Alta mesa | finalizado | Nicolas Mazzoconi | 7/11
+| F | Ingreso Local | finalizado | Giuliano Tritto | 8/11
+| G | QR mesa | finalizado | Pellita Roman | 12/11
+| H | QR Propina | finalizado | Giuliano Tritto | 14/11
+| I | Encuesta cliente | finalizado | Nicolas Mazzoconi | 16/11
+| J | Encuesta empleado | finalizado | Giuliano Tritto | 18/11
+| K | Pedir plato y bebida | finalizado | Arley Ducau | 21/11
+| L | Tomar Pedido | finalizado | Nicolas Mazzoconi | 24/11
+| M | Hacer reserva | finalizado | Arley Ducau | 27/11
+| N | Realizar pedido direccion | finalizado | Arley Ducau | 28/11
+| O | Chat delivery | finalizado | Arley Ducau | 28/11
+| P | Juego descuento | finalizado | Arley Ducau | 29/11
 
 
 
