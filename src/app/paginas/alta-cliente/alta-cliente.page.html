@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Tipo de usuario</ion-label>
+    <ion-select [(ngModel)]="this.tipoRegistro">
+      <ion-select-option>Usuario</ion-select-option>
+      <ion-select-option>Anónimo</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="this.nombreUsuario"></ion-input>
+  </ion-item>
+
+  <ng-container *ngIf="this.tipoRegistro == 'Nuevo usuario'">
+    <ion-item>
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text" [(ngModel)]="this.apellidoUsuario"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">DNI</ion-label>
+      <ion-input type="number" [(ngModel)]="this.dniUsuario"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input type="email" [(ngModel)]="this.correoUsuario"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label position="floating">Clave</ion-label>
+      <ion-input type="password" [(ngModel)]="this.claveUsuario"></ion-input>
+    </ion-item>
+  </ng-container>
+
+
+  <ion-item lines="full">
+    <ion-label>Imagen: </ion-label>
+    <ion-label *ngIf="this.urlFotoUsuario != ''">
+      <ion-thumbnail>
+        <ion-img [src]="this.urlFotoUsuario"></ion-img>
+      </ion-thumbnail>
+    </ion-label>
+    <ion-label *ngIf="this.urlFotoUsuario == ''">NaN</ion-label>
+  </ion-item>
+
+  <ion-button (click)="this.tomarDatosDNI()" expand="full" color="dark">Datos desde código QR del DNI</ion-button>
+  <ion-button (click)="this.tomarFotoUsuario()" expand="full" color="dark">Cargar foto</ion-button>
+  <ng-container *ngIf="this.tipoRegistro == 'Nuevo usuario'">
+    <ion-button (click)="this.cargarUsuario()" expand="full" color="danger">Registrar usuario</ion-button>
+  </ng-container>
+  <ng-container *ngIf="this.tipoRegistro == 'Anónimo'">
+    <ion-button (click)="this.cargarUsuario()" expand="full" color="danger">Ingresar como anónimo</ion-button>
+  </ng-container>
+</ion-content>

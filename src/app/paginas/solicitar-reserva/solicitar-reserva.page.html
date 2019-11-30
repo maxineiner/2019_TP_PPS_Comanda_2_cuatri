@@ -1,0 +1,71 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title *ngIf="this.misReservas.length > 0 && this.verMisReservas">Mis reservas</ion-title>
+      <ion-title *ngIf="this.misReservas.length === 0 || !this.verMisReservas">Solicitar reserva</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ng-container *ngIf="this.misReservas.length > 0 && this.verMisReservas">
+      <ng-container *ngIf="this.misReservas.length > 0">
+        <ng-container *ngFor="let reserva of this.misReservas">
+          <ion-item lines="full">
+            Mesa: {{this.reserva.idMesa}}<br>Hora: {{this.reserva.fecha['seconds']*1000 | date: 'HH:mm' }}hs<br>Fecha: {{this.reserva.fecha['seconds']*1000 | date: 'dd-MM-yyyy' }}<br>Estado: {{this.reserva.estado | titlecase}}
+          </ion-item>
+        </ng-container>
+      </ng-container>
+
+      <ion-button (click)="this.dejarDeVerMisReservas()" expand="full">Solicitar nueva reserva</ion-button>
+    </ng-container>
+
+    <ng-container *ngIf="this.misReservas.length === 0 || !this.verMisReservas">
+      <ion-item>
+        <ion-label position="floating">Seleccione una mesa</ion-label>
+        <ion-select [(ngModel)]="this.mesaSeleccionada">
+          <ng-container *ngFor="let mesa of this.mesas">
+            <ion-select-option [value]="mesa">Mesa {{mesa.numero}} [{{mesa.tipo}}] ({{mesa.espacios}} espacios)</ion-select-option>
+          </ng-container>
+        </ion-select>
+      </ion-item>
+    
+      <ng-container *ngIf="this.mesaSeleccionada !== undefined">
+        <ion-item lines="full">
+          Mesa: {{this.mesaSeleccionada.numero}}
+        </ion-item>
+
+        <ion-item lines="full">
+          Tipo de mesa: {{this.mesaSeleccionada.tipo}}
+        </ion-item>
+
+        <ion-item lines="full">
+          Espacios: {{this.mesaSeleccionada.espacios}}
+        </ion-item>
+      
+        <ion-item lines="full">
+          <ion-label>Imagen: </ion-label>
+          <ion-label>
+            <ion-thumbnail>
+              <ion-img [src]="this.mesaSeleccionada.foto"></ion-img>
+            </ion-thumbnail>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+
+      <ion-item>
+          <ion-label position="floating">Fecha</ion-label>
+          <ion-input type="date" [(ngModel)]="this.fechaReserva"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Hora</ion-label>
+        <ion-input type="time" [(ngModel)]="this.horaReserva" min="10:00" max="23:00"></ion-input>
+      </ion-item>
+
+      <ion-label style="font-size: 10px;">
+        Las reservas se pueden realizar hasta 1 hora antes del horario a reservar<br>
+        El límite de tolerancia de una reserva es de 15 minutos
+      </ion-label>
+    
+      <ion-button (click)="this.solicitarReserva()" expand="full">Solicitar reserva</ion-button>
+    </ng-container>
+  </ion-content>

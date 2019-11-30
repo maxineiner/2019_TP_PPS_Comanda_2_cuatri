@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="dark" style="text-align: center;">Generar Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="esMozo">
+    <ion-card style="border: 4px solid black; text-align: center; font-size: 18px;">
+      <ion-label>Mesas:</ion-label>
+      <ion-select [(ngModel)]="id" placeholder="Seleccione mesa">
+        <ng-container *ngFor="let item of mesasClientes">
+          <ion-select-option *ngIf="!item.cerrada" value="{{item.id}}">{{item.idMesa}}</ion-select-option>
+        </ng-container>
+      </ion-select>
+      <ion-button color="danger" (click)="CargarCuenta()">Cargar Cuenta</ion-button>
+    </ion-card>
+  </div>
+  <br>
+  <ion-card style="border: 2px solid red; text-align: center; font-size: 18px;" *ngIf="id != ''">
+    <br><br>
+    <table style="width: 100%; text-align: center;">
+      <thead>
+        <th>Producto</th><th>Precio Unit.</th><th>Cantidad</th> 
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of productosCuenta">
+          <td>{{item.nombre}}</td>
+          <td>{{item.precio}}</td>
+          <td>{{item.cantidad}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <!-- <ion-item *ngIf="descBebida">
+      <h5>Descuento por bebida gratis: ${{bebidaGratis}}</h5>
+    </ion-item>
+    <ion-item *ngIf="descPostre">
+      <h5>Descuento por postre gratis: ${{postreGratis}}</h5>
+    </ion-item>-->
+    <ion-item *ngIf="descPorcentaje">
+      <h5>Descuento por juego: 10%</h5>
+    </ion-item>
+    <br> 
+    <ng-container *ngIf="!esMozo">
+      <ng-container>
+        <ion-item style="text-align: center;">
+          <h1>Total sin propina: ${{total}}</h1>
+        </ion-item>
+        <ion-button *ngIf="!delivery" (click)="Propina()" color="dark">Sumar Propina</ion-button>
+      </ng-container>
+      <br>
+      <ion-item  *ngIf="!delivery">
+        <h1>Total final más propina: ${{total * propina}}</h1>
+      </ion-item>
+      <br>
+      <ng-container *ngIf="!delivery">
+        <ion-button (click)="SolicitarCuenta()" color="danger" expand="block">Solicitar Cuenta</ion-button>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="esMozo && !delivery">
+      <ion-item *ngIf="propina == 0 && total != 0">
+        <h2>Falta ingresar la propina!</h2>
+      </ion-item>
+      <ng-container>
+        <ion-item>
+          <h1>Total final más propina: ${{total*propina}}</h1>
+        </ion-item>
+        <br>
+        <ion-button color="danger" expand="full" (click)="Pagada()">Guardar Pago</ion-button>
+      </ng-container>  
+    </ng-container>    
+  </ion-card>
+</ion-content>

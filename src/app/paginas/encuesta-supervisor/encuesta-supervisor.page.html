@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Encuesta Supervisor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item lines="full">
+        <ion-label>
+            <ion-button color='dark' (click)="this.EmpleadoSelect()" expand="full">Seleccionar Empleado</ion-button>
+        </ion-label>
+    
+        <ion-label >
+            <ion-label *ngIf="this.empleado == ''">Sin Seleccionar</ion-label>
+            <ion-label *ngIf="this.empleado != ''">{{this.empleado.nombre}} {{this.empleado.apellido}}</ion-label>
+        </ion-label>
+      </ion-item>
+
+
+  <ion-label>Del 1 al 10 que tan limpio mantiene su lugar de trabajo</ion-label>
+  <ion-item>
+    <ion-range [(ngModel)]="this.limpieza" pin="true" snaps="true" ticks="false" min="1" max="10"
+      color="primary">
+      <ion-label slot="start">1</ion-label>
+      <ion-label slot="end">10</ion-label>
+    </ion-range>
+  </ion-item>
+
+  <ion-list>
+    <ion-radio-group [(ngModel)]="this.rapido">
+      <ion-list-header>
+        <ion-label>¿Qué tan rapido hace sus tarea?</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Muy rapido</ion-label>
+        <ion-radio slot="start" value="muy rapido" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Rapido</ion-label>
+        <ion-radio slot="start" value="rapido" checked></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>No destaca</ion-label>
+        <ion-radio slot="start" value="no destaca"></ion-radio>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>Lento</ion-label>
+        <ion-radio slot="start" value="lento"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Indique que destacaria del empleado</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Amabilidad con clientes</ion-label>
+      <ion-checkbox [(ngModel)]="this.amabilidad_dest" slot="start" value="true"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Velocidad de atencion</ion-label>
+      <ion-checkbox [(ngModel)]="this.velocidad_dest" slot="start" value="true"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Limpieza</ion-label>
+      <ion-checkbox [(ngModel)]="this.limpieza_dest" slot="start" value="true"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Puntualidad</ion-label>
+      <ion-checkbox [(ngModel)]="this.puntualidad_dest" slot="start" value="true"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label style="font-size: 12px;">¿Se reciben malos comentarios de este empleado la ultima semana?</ion-label>
+    <ion-select [(ngModel)]="this.mal" placeholder="Seleccione">
+      <ion-select-option value="true">Sí</ion-select-option>
+      <ion-select-option value="false">No</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Añada alguna nota del empleado</ion-label>
+    <ion-input type="text" [(ngModel)]="this.comentarios" maxlength="40"></ion-input>
+  </ion-item>
+
+
+  <ion-button (click)="this.enviarEncuesta()" expand="full">Enviar encuesta</ion-button>
+</ion-content>

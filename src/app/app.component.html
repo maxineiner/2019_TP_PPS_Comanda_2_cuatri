@@ -1,0 +1,23 @@
+<ion-app>
+  <div *ngIf='showSplash' class="base_1">
+      <div class="base_2">
+      </div>
+    </div>
+    <ion-toolbar color='tertiary'>
+      <ion-button slot="start" fill="clear" color="light" (click)='home()'>
+        <ion-icon name="home"></ion-icon>
+      </ion-button>
+      <ion-title text-center>
+        La Comanda PPS
+      </ion-title>
+      <ion-button slot="end" fill="clear" color="danger" (click)='LogOut()'>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+
+    <ion-content>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-content>
+</ion-app>
+
+

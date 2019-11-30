@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color='dark'>
+    <ion-title>Chat delivery</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content (ionScrollEnd)="logScrollEnd()" type='reset' [scrollEvents]="true" class="back" color='medium'>
+  <ion-header>
+    <ion-toolbar color='dark'>
+      <ion-button color='dark' expand="full"  (click)="ScrollToBottom()">
+        Ir a mas recientes
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngFor="let mensaje of mensajes">
+
+      <div *ngIf="mensaje.lado=='end'" class="derecha">
+        <div>
+          <h3 class='nombre' style="color: black">{{mensaje.nombre}}</h3>
+        </div>
+        <div>
+          <h3 style="color: black">{{mensaje.mensaje}}</h3>
+        </div>
+        <div class="fecha" style="color: black">{{mensaje.fecha}}</div>
+      </div>
+      <div *ngIf="mensaje.lado=='start'" class="izquierda">
+        <div>
+          <h3 class='nombre' style="color: black">{{mensaje.nombre}}</h3>
+        </div>
+        <div>
+          <h3 style="color: black">{{mensaje.mensaje}}</h3>
+        </div>
+        <div class="fecha" style="color: black">{{mensaje.fecha}}</div>
+      </div>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-item>
+    <ion-textarea [(ngModel)]="this.msj"></ion-textarea>
+    <ion-button color="success" (click)="sendMessage()">
+      <ion-icon name="send"></ion-icon>
+    </ion-button>
+  </ion-item>
+</ion-footer>

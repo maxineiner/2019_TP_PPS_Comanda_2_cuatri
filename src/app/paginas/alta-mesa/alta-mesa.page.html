@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Agregar mesa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Número de mesa</ion-label>
+    <ion-input type="number" [(ngModel)]="this.numeroMesa" min="1"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Cantidad de comensales</ion-label>
+    <ion-input type="number" [(ngModel)]="this.cantidadComensales" min="1"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Tipo de mesa</ion-label>
+    <ion-select [(ngModel)]="this.tipoMesa">
+      <ion-select-option>Estándar</ion-select-option>
+      <ion-select-option>Con acceso para movilidad reducida</ion-select-option>
+      <ion-select-option>VIP</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label>Código QR: </ion-label>
+    <ion-label *ngIf="this.codigoQrMesa != ''">Cargado</ion-label>
+    <ion-label *ngIf="this.codigoQrMesa == ''">Sin cargar</ion-label>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label>Imagen: </ion-label>
+    <ion-label *ngIf="this.urlFotoMesa != ''">
+      <ion-thumbnail>
+        <ion-img [src]="this.urlFotoMesa"></ion-img>
+      </ion-thumbnail>
+    </ion-label>
+    <ion-label *ngIf="this.urlFotoMesa == ''">Sin cargar</ion-label>
+  </ion-item>
+
+  <ion-button (click)="this.asociarCodigoQR()" expand="full">Asociar código QR</ion-button>
+  <ion-button (click)="this.tomarFotoMesa()" expand="full">Tomar foto de la mesa</ion-button>
+  <ion-button (click)="this.cargarMesa()" expand="full">Agregar mesa</ion-button>
+</ion-content>

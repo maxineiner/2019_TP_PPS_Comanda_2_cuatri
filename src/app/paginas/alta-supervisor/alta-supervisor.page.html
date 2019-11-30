@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="danger">Crear de dueño o supervisor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nombre:</ion-label>
+    <ion-input type="text" [(ngModel)]="empleado.nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Apellido:</ion-label>
+    <ion-input type="text" [(ngModel)]="empleado.apellido"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Correo:</ion-label>
+    <ion-input inputmode="email" [(ngModel)]="empleado.mail"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Contraseña:</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">DNI:</ion-label>
+    <ion-input type="text" [(ngModel)]="empleado.dni"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">CUIL:</ion-label>
+    <ion-input type="text" [(ngModel)]="empleado.cuil"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Perfil:</ion-label>
+    <ion-select [(ngModel)]="empleado.perfil" placeholder="perfil">
+      <ion-select-option value="dueño">Dueño</ion-select-option>
+      <ion-select-option value="supervisor" selected>Supervisor</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Foto: </ion-label>
+    <ion-label *ngIf="empleado.foto == ''">Sin subir</ion-label>
+    <ion-label *ngIf="empleado.foto != ''">Subida</ion-label>
+    <ion-thumbnail  *ngIf="empleado.foto != ''">
+      <ion-img [src]="empleado.foto"></ion-img>
+    </ion-thumbnail>
+  </ion-item>
+
+  <br>
+  <h3 *ngIf="faltan" class="error">Faltan datos en el registro!</h3>
+  <h3 *ngIf="faltaFoto" class="error">Falta subir foto de usuario!</h3>
+  <h3 *ngIf="emailmal" class="error">Ingrese correo válido!</h3>
+  <br>
+
+  <!-- <ion-button (click)="LeerQR()" color="danger" expand="block">
+    Cargar con QR del DNI
+  </ion-button> -->
+  <ion-button (click)="SacarFoto()" color="danger" expand="block">
+    Sacar foto
+  </ion-button>
+  <ion-button (click)="Ingresar()" color="danger" expand="block">
+    Guardar Usuario
+  </ion-button>
+  
+</ion-content>

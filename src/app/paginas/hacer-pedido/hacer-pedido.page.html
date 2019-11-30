@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Hacer Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="esMozo">
+    <ion-item><ion-label>Seleccione Nro de Mesa:</ion-label></ion-item>
+    <ion-select [(ngModel)]="pedido['id_mesa_cliente']" placeholder="Seleccione Nro Mesa">
+      <ng-container *ngFor="let m of mesasClientes">
+        <ion-select-option value="{{m.id}}" *ngIf="!m.cerrada">{{m.idMesa}}</ion-select-option>
+      </ng-container>
+    </ion-select>
+  </ng-container>  
+  <ng-container *ngIf="pedidosProductos.length > 0">
+    <ion-item><ion-label>Pedido Actual:</ion-label></ion-item>
+    <table style="width: 100%; border: 2px solid red; text-align: center;">
+      <thead><th>Producto</th><th>Precio</th> <th>Cantidad</th> <th>Borrar</th></thead>
+      <tbody>
+        <ng-container *ngFor="let prod of pedidosProductos">
+          <tr>
+            <ng-container *ngFor="let p of productos">
+              <ng-container *ngIf="p.id == prod.id_producto">
+                <td>{{p.nombre}}</td>
+                <td>{{p.precio}}</td>
+                <td>{{prod.cantidad}}</td>
+              </ng-container>              
+            </ng-container>     
+            <td><ion-button color="danger" (click)="BorrarProducto(prod.id_producto)" shape="round">X</ion-button></td>       
+          </tr>
+        </ng-container>        
+      </tbody>
+    </table>
+  </ng-container>  
+  <ion-list *ngFor="let item of productos">
+    <div style="width:100%;">
+      <ion-item><h2>{{item.nombre}}</h2></ion-item>
+      <ion-item>{{item.descripcion}}</ion-item>
+      <div style="height: 100px; text-align: center;">
+        <img src="{{item.foto_1}}" style="width: 30%; height: 100%;">
+        <img src="{{item.foto_2}}" style="width: 30%; height: 100%;">
+        <img src="{{item.foto_3}}" style="width: 30%; height: 100%;">
+      </div>
+      <br>
+      <ion-item>Precio: ${{item.precio}}.00</ion-item>
+      <ion-item>
+          Cantidad: &nbsp;<input type="number" min="1" [(ngModel)]="cantidad" style="width: 30px;">
+        <ion-button color="danger" (click)="Agregar(item.id)" slot="end">Agregar a Pedido</ion-button>
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-button (click)="LeerQR()" color='dark' expand="full">Seleccionar por QR</ion-button>
+  <ion-button (click)="TerminarPedido()" color='dark' expand="full">Terminar Pedido</ion-button>
+</ion-footer>
