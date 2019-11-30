@@ -91,8 +91,9 @@ export class ListaEsperaPage implements OnInit {
   }
 
   private async addListaEspera() {
-    let cliente = this.getClient();
-    this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId(), this.imagenCliente);
+    //this.getClient();
+    //this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId(), this.imagenCliente);
+    this.listaEsperaService.addListaEspera(this.authService.currentUserEmail(), this.authService.currentUserId());
     this.presentModalCustom('Info', 'Se agrego a la lista de espera, en unos minutos se le asignara una mesa.');
   } 
 
@@ -102,8 +103,7 @@ export class ListaEsperaPage implements OnInit {
       this.imagenCliente = x.docs[0].data()['image'];
     } catch(err) {
       this.presentModalCustom('Error', err.message);
-    }   
-    
+    }       
   }
 
   async verificarMesa(numeroMesa) {
