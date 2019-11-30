@@ -17,9 +17,6 @@
       <td><ion-icon name="cart" style="font-size:25px; background-color: rgba(170, 235, 154, 0.938);"></ion-icon></td> 
       <td><h2 class= "valorCarrito"> Total {{this.valorCarrito}} </h2></td>
       </tr>
-   
-   
-   
 </div>
   <div class="card" *ngFor = "let item of arrayProductos">
       <!-- <div class="card" *ngFor = "let itemImagen of item.image">
@@ -30,7 +27,11 @@
       <!-- <p class="title">{{item.image}}</p> -->
       <p class="title"> PRECIO :{{item.precio}}</p>
       <p>{{item.descripcion}} </p>
-      <p>Unidades: <input class="inputNumber" type="number" min=0 max=99 (change)="cambioCantidad(item, $event)"></p>
+      Unidades:
+    <input class="inputNumber" type="number" value="0"  min=0 max=99  (change)="cambioCantidad(item, $event)">
+    
+      
+      
       <!-- <p><button class="button"  (click)="aceptar(item)">Aceptar</button></p>
       <p><button class="buttonR"  (click)="rechazar(item)">Rechazar</button></p> -->
     </div>
