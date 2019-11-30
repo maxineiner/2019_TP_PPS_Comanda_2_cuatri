@@ -16,7 +16,7 @@ export class AlertModalPage implements OnInit {
   @Input() data: Table; 
   @Input() idAuth: any;
   @Input() action: string;
-  number: number;
+  number: any;
 
   constructor(
     public modalCtrl: ModalController, 
