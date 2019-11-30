@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>solicitarCuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor = "let item of auxPedido.arrayDetalle">
+    <p>{{item.nombre}}  $/un {{item.precio}}  {{item.cantidad}} un. --- ${{item.subtotal}}</p>
+  </div>
+  <h2>Total {{auxPedido.total}}</h2>
+</ion-content>
