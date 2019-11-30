@@ -14,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ListaPedidosPage implements OnInit {
   pedidos = new Array<Pedido>();
-  filterArgs: PedidosFilter;
+  filterArgs: PedidosFilter = new PedidosFilter();
   constructor(private pedidosService: PedidosService
     , private mesaService: MesaService
     , private modalController: ModalController
@@ -58,32 +58,34 @@ export class ListaPedidosPage implements OnInit {
     return await modal.present();
   }
 
-  async setFilter() {
+  setFilter() {
     var rol: string;
-    await this.authService.getRolwithEmail(this.authService.currentUserId()).subscribe(async (res: any) => {
+    var filterRef = this.filterArgs;
+    this.authService.getRolwithEmail(this.authService.currentUserId()).subscribe(async (res: any) => {
       res.forEach(r => {
         if (r.idAuth == this.authService.currentUserId()) {
           rol = r.rol;
         }
       });
+      switch (rol) {
+        case 'MOZO':
+          filterRef.estadosPedido = ['PENDIENTE','CONFIRMADO','EN PROGRESO', 'TERMINADO', 'RECIBIDO', 'ESPERANDO CUENTA'];
+          filterRef.tipoDetallePedido = null;
+          break;
+        case 'COCINERO':
+            filterRef.estadosPedido = ['CONFIRMADO','EN PROGRESO'];
+            filterRef.tipoDetallePedido = 'COMIDA';
+          break;
+        case 'BARTENDER':
+            filterRef.estadosPedido = ['CONFIRMADO','EN PROGRESO'];
+            filterRef.tipoDetallePedido = 'BEBIDA';
+          break;
+        default:
+          break;
+      }
     });
 
-    switch (rol) {
-      case 'MOZO':
-       this.filterArgs.estadosPedido = ['PENDIENTE','CONFIRMADO','EN PROGRESO', 'TERMINADO', 'RECIBIDO', 'ESPERANDO CUENTA'];
-       this.filterArgs.tipoDetallePedido = null;
-        break;
-      case 'COCINERO':
-          this.filterArgs.estadosPedido = ['CONFIRMADO','EN PROGRESO'];
-          this.filterArgs.tipoDetallePedido = 'COMIDA';
-        break;
-      case 'BARTENDER':
-          this.filterArgs.estadosPedido = ['CONFIRMADO','EN PROGRESO'];
-          this.filterArgs.tipoDetallePedido = 'BEBIDA';
-        break;
-      default:
-        break;
-    }
+    
   }
 
 
