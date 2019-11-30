@@ -11,7 +11,8 @@ import { AuthService } from "./servicios/auth.service";
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent {
+export class AppComponent{
+  sound;
   showSplash =true;
   notShowSplash=false;
   public appPages = [
@@ -34,6 +35,7 @@ export class AppComponent {
     private publicRouter:Router,
     private auth:AuthService
     ) {
+      this.sound = true;
     this.initializeApp();
   }
 
@@ -50,7 +52,19 @@ export class AppComponent {
 
   }
   LogOut(){
+    if(localStorage.getItem('Sonido') == 'true')
+    {
+      let audio = new Audio();
+      audio.src = '../assets/fin.mp3';
+      audio.load();
+      audio.play();
+    }
     this.auth.LogOut();
     this.publicRouter.navigate(['/log-in'])
+  }
+
+  sonido(bol){
+    this.sound = bol;
+    localStorage.setItem('Sonido', bol);
   }
 }

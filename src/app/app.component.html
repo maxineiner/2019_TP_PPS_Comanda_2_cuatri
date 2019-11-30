@@ -10,6 +10,8 @@
       <ion-title text-center>
         La Comanda PPS
       </ion-title>
+      <ion-icon name="volume-high" (click)='sonido(false)' *ngIf='sound'></ion-icon>
+      <ion-icon name="volume-off" (click)='sonido(true)' *ngIf='!sound'></ion-icon>
       <ion-button slot="end" fill="clear" color="danger" (click)='LogOut()'>
         <ion-icon name="close"></ion-icon>
       </ion-button>

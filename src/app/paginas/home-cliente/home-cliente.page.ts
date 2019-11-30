@@ -47,6 +47,13 @@ export class HomeClientePage {
   }
 
   public async EscannerQR() {
+    if(localStorage.getItem('Sonido') == 'true')
+      {
+        let audio = new Audio();
+        audio.src = '../assets/click.m4a';
+        audio.load();
+        audio.play();
+      }
     let sp = await this.spiner.GetAllPageSpinner("");
     sp.present();
     this.barcodeScanner.scan().then(resultado => {
@@ -179,6 +186,13 @@ export class HomeClientePage {
   }
 
   Chat(){
+    if(localStorage.getItem('Sonido') == 'true')
+      {
+        let audio = new Audio();
+        audio.src = '../assets/click.m4a';
+        audio.load();
+        audio.play();
+      }
     this.route.navigate(['chat'])
   }
 
@@ -206,10 +220,24 @@ export class HomeClientePage {
   }
 
   public RealizarPedido() {
+    if(localStorage.getItem('Sonido') == 'true')
+      {
+        let audio = new Audio();
+        audio.src = '../assets/click.m4a';
+        audio.load();
+        audio.play();
+      }
     this.route.navigate(['/hacer-pedido']);
   }
 
  public async ConfirmarRecepcion() {
+  if(localStorage.getItem('Sonido') == 'true')
+  {
+    let audio = new Audio();
+    audio.src = '../assets/click.m4a';
+    audio.load();
+    audio.play();
+  }
   let sp = await this.spiner.GetAllPageSpinner("");
   sp.present();
     this.mesasClientes.forEach(mesacl => {
@@ -244,14 +272,35 @@ export class HomeClientePage {
   }
 
   public PedirCuenta() {
+    if(localStorage.getItem('Sonido') == 'true')
+      {
+        let audio = new Audio();
+        audio.src = '../assets/click.m4a';
+        audio.load();
+        audio.play();
+      }
     this.route.navigate(['/cuenta']);
   }
 
   public RealizarReserva() {
+    if(localStorage.getItem('Sonido') == 'true')
+      {
+        let audio = new Audio();
+        audio.src = '../assets/click.m4a';
+        audio.load();
+        audio.play();
+      }
     this.route.navigate(['/solicitar-reserva']);
   }
 
   public Jugar() {
+    if(localStorage.getItem('Sonido') == 'true')
+      {
+        let audio = new Audio();
+        audio.src = '../assets/click.m4a';
+        audio.load();
+        audio.play();
+      }
     this.route.navigate(['/descuento']);
   }
 }

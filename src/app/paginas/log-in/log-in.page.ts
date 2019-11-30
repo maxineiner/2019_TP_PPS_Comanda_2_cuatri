@@ -30,9 +30,14 @@ export class LogInPage implements OnInit {
     console.log(this.email)
     console.log(this.password)
     this.auth.LogIn(this.email, this.password).then(res => {
-      console.log(res)
       sp.dismiss();
-
+      if(localStorage.getItem('Sonido') == 'true')
+      {
+        let audio = new Audio();
+        audio.src = '../assets/inicio.mp3';
+        audio.load();
+        audio.play();
+      }
       this.publicRouter.navigate(['/home'])
     
     }).catch(err =>{
