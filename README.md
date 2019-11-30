@@ -33,7 +33,7 @@ Delta: Arley Ducau
 | M | Hacer reserva | finalizado | Arley Ducau | 25/11
 | N | Realizar pedido direccion | finalizado | Arley Ducau | 26/11
 | O | Chat delivery | finalizado | Arley Ducau | 28/11
-| P | Juego descuento | finalizado | Arley Ducau | 29/11
+| P | Juego descuento | finalizado | Román Pellitta | 29/11
 
 
 
