@@ -30,8 +30,8 @@ Delta: Arley Ducau
 | J | Encuesta empleado | finalizado | Giuliano Tritto | 18/11
 | K | Pedir plato y bebida | finalizado | Arley Ducau | 21/11
 | L | Tomar Pedido | finalizado | Nicolas Mazzoconi | 24/11
-| M | Hacer reserva | finalizado | Arley Ducau | 27/11
-| N | Realizar pedido direccion | finalizado | Arley Ducau | 28/11
+| M | Hacer reserva | finalizado | Arley Ducau | 25/11
+| N | Realizar pedido direccion | finalizado | Arley Ducau | 26/11
 | O | Chat delivery | finalizado | Arley Ducau | 28/11
 | P | Juego descuento | finalizado | Arley Ducau | 29/11
 
