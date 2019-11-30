@@ -1,12 +1,23 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>solicitarCuenta</ion-title>
-  </ion-toolbar>
+  
 </ion-header>
 
 <ion-content>
+        <ion-card-title>
+          <img src="assets/icon/icon.png" class="img">
+        </ion-card-title>
+      
+    <h1 class="ion-text-center">RESUMEN DE CUENTA</h1>
   <div *ngFor = "let item of auxPedido.arrayDetalle">
-    <p>{{item.nombre}}  $/un {{item.precio}}  {{item.cantidad}} un. --- ${{item.subtotal}}</p>
+    <p class="ion-text-center">{{item.nombre}}  $/un {{item.precio}}  {{item.cantidad}} un. --- ${{item.subtotal}}</p>
   </div>
-  <h2>Total {{auxPedido.total}}</h2>
+  <div class='flotante' vertical="bottom">
+  <h2 class="ion-text-center">Subtotal: ${{auxPedido.total}}</h2>
+  <h2 class="ion-text-center" >Propina Aplicada: {{auxPedido.propina}}%</h2>
+  <h2 class="ion-text-center" > TOTAL: ${{auxPedido.totalPropina}}</h2>
+</div>
+<div class='flotante2' vertical="bottom">
+<p ><button class="button"  (click)="aceptar()">Confirmar</button></p>
+<p><button class="buttonR"  (click)="rechazar()">Regresar</button></p>
+</div>
 </ion-content>

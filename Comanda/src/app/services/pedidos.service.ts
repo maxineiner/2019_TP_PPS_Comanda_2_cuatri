@@ -63,4 +63,24 @@ public async SetPropina(auxCliente:Pedido) {
   });
 
 }
+public async SetEstadoJ(auxCliente:Pedido,estado:string) {
+
+ await this.firestore.collection('Lista_Pedidos').ref.where('idAuth', '==', auxCliente.idAuth).get().then(async (documento) => {
+
+   console.log(documento.docs[0].id);
+   // console.log('EncontrÃ© el voto', votos.users);
+   
+   this.firestore.collection('Lista_Pedidos').doc(documento.docs[0].id).set({
+     arrayDetalle:JSON.stringify(auxCliente.arrayDetalle),
+     estado:estado,
+     idAuth:auxCliente.idAuth,
+     total:auxCliente.total,
+     propina:auxCliente.propina,
+     totalPropina: auxCliente.totalPropina
+   }//, { merge: true }
+   );
+   
+ });
+
+}
 }
