@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color='dark'>
+    <ion-title text-center>Pedidos pendientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-slides style="height: 100%" scrollbar='true' pager="true" [options]="slideOpts">
+    <ion-slide style="height: 100%" *ngFor="let pendiente of this.pedidos">
+      <ion-content>
+        <ion-item>
+          <ion-label>Creación:</ion-label>
+          <ion-input class='input_blanco' type="text" [(ngModel)]="pendiente.comienzo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Productos:</ion-label>
+        </ion-item>
+        <div *ngFor="let producto of this.pendiente['productos']">
+          <div *ngIf="producto.sector == empleado.perfil">
+            <ion-item>
+              <ion-label>{{pendiente.cantidad}} --> </ion-label>
+              <ion-input class='input_blanco' disabled type="text" [(ngModel)]="producto.nombre"></ion-input>
+            </ion-item>
+          </div>
+          
+        </div>
+        <ion-footer>
+          <ion-toolbar>
+            <ion-button color='dark' expand="full" (click)='this.AceptarPedido(pendiente)'>Aceptar pedido</ion-button>
+          </ion-toolbar>
+        </ion-footer>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

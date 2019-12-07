@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Confirmar reservas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngFor="let reserva of this.reservasPendientes">
+    <ion-item lines="full">
+      <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <b>Mesa</b>: {{this.reserva.idMesa}}<br>
+          <b>Hora</b>: {{this.reserva.fecha['seconds']*1000 | date: 'HH:mm' }}hs<br>
+          <b>Fecha</b>: {{this.reserva.fecha['seconds']*1000 | date: 'dd-MM-yyyy' }}<br>
+          <b>Estado</b>: {{this.reserva.estado | titlecase}}<br>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button (click)="this.confirmarReserva(this.reserva)" expand="full" >Confirmar</ion-button>
+          <ion-button (click)="this.rechazarReserva(this.reserva)" expand="full" color="danger" >Rechazar</ion-button>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ng-container>
+</ion-content>

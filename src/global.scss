@@ -1,0 +1,63 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+
+
+.base_1 {
+    /* The image used */
+    background-image: url("./assets/icon/base.png");
+
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.base_2 {
+    /* The image used */
+    background-image: url("./assets/icon/splashScreen.png");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation-name: spin;
+    animation-duration:2500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform:scale(1,1);
+    }
+    to {
+        transform:scale(0.8,0.8);
+    }
+}
+
+ion-content
+{
+    //--background: lightblue;
+}
+
+
+
+
+ion-alert{
+ --background: url('./assets/icon/icono_2.png')!important;
+}

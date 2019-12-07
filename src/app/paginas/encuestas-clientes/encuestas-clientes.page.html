@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color='dark'>
+    <ion-title text-center>Encuestas Clientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-slides style="height: 100%" scrollbar='true' pager="true" [options]="slideOpts">
+    <ion-slide style="height: 100%" *ngFor="let encuesta of this.encuestas">
+      <ion-content>
+        <ion-label>Nivel de satisfacción</ion-label>
+        <ion-item>
+          <ion-range [(ngModel)]="encuesta.nivelSatisfaccion" pin="true" snaps="true" ticks="false" min="1" max="10" color="primary">
+            <ion-label slot="start">1</ion-label>
+            <ion-label slot="end">10</ion-label>
+          </ion-range>
+        </ion-item>
+      
+        <ion-list>
+          <ion-radio-group [(ngModel)]="encuesta.amabilidad">
+            <ion-list-header>
+              <ion-label>¿Qué tan amable fue nuestro personal?</ion-label>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Muy amable</ion-label>
+              <ion-radio slot="start" value="muy amable" checked></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Amable</ion-label>
+              <ion-radio slot="start" value="amable" checked></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Correcto</ion-label>
+              <ion-radio  slot="start" value="correcto"></ion-radio>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label>Poco amable</ion-label>
+              <ion-radio slot="start" value="poco amable"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Indique qué aspectos nuestros destacaría</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>La calidad de la comida</ion-label>
+            <ion-checkbox [(ngModel)]="encuesta.calidadComida" slot="start" value="comida"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>La calidad de la bebida</ion-label>
+            <ion-checkbox [(ngModel)]="encuesta.calidadBebida" slot="start" value="bebida"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>La atención</ion-label>
+            <ion-checkbox [(ngModel)]="encuesta.atencion" slot="start" value="atencion"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>La organización</ion-label>
+            <ion-checkbox [(ngModel)]="encuesta.organizacion" slot="start" value="organizacion"></ion-checkbox>
+          </ion-item>
+          <ion-item lines="full">
+            <ion-label>El salón y el ambiente</ion-label>
+            <ion-checkbox  [(ngModel)]="encuesta.salonYAmbiente" slot="start" value="salonyambiente"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      
+        <ion-item>
+          <ion-label style="font-size: 12px;">¿Recomendaría nuestro restaurante?</ion-label>
+          <ion-select [(ngModel)]="encuesta.recomendacion" placeholder="Seleccione">
+            <ion-select-option value="true">Sí</ion-select-option>
+            <ion-select-option value="false">No</ion-select-option>
+          </ion-select>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label position="floating">Breve reseña del servicio</ion-label>
+          <ion-input type="text" [(ngModel)]="encuesta.comentarios" maxlength="40"></ion-input>
+        </ion-item>
+      
+        <ion-item lines="full" *ngIf="encuesta.foto1 != ''">
+          <ion-label>Foto 1: </ion-label>
+          <ion-label>
+            <ion-thumbnail>
+              <ion-img [src]="encuesta.foto1"></ion-img>
+            </ion-thumbnail>
+          </ion-label>
+        </ion-item>
+      
+        <ion-item lines="full" *ngIf="encuesta.foto2 != ''">
+          <ion-label>Foto 2: </ion-label>
+          <ion-label>
+            <ion-thumbnail>
+              <ion-img [src]="encuesta.foto2"></ion-img>
+            </ion-thumbnail>
+          </ion-label>
+        </ion-item>
+      
+        <ion-item lines="full" *ngIf="encuesta.foto3 != ''">
+          <ion-label>Foto 3: </ion-label>
+          <ion-label>
+            <ion-thumbnail>
+              <ion-img [src]="encuesta.foto3"></ion-img>
+            </ion-thumbnail>
+          </ion-label>
+        </ion-item>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

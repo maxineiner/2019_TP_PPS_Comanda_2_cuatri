@@ -1,0 +1,43 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div>
+          Hora registro
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          Nombre
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          Sacar de Lista
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngFor="let espera of this.lista_espera">
+      <ion-col>
+        <div>
+          {{espera.ingreso}}
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          {{espera.nombre}}
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-button color='danger' (click)='this.Eliminar(espera.id)' >Sacar</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button color='dark' expand="full" (click)='this.AltaCliente()' >Alta Cliente</ion-button>
+  </ion-toolbar>
+</ion-footer>

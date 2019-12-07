@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pedidos en preparación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ng-container *ngFor="let item of pedidos">
+      <ng-container *ngFor="let mesa of mesasClientes">
+        <ng-container *ngIf="mesa['id'] == item['id_mesa_cliente'] && (item['estado'] == 'preparacion' || item.estado == 'terminado' && usr['perfil']=='mozo' && !item['delivery'])">
+          <ion-card style="border: 2px solid red; text-align: center;">
+            <ion-item style="font-size: 15px;">
+              Mesa:  {{mesa.idMesa}} - Estado: {{item.estado}}
+            </ion-item>
+            <br>
+            <table style="width: 100%; text-align: center;">
+              <thead>
+                <th>Producto</th><th>Cantidad</th><th>Sector</th><th>Estado</th>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let prod of pedidosProductos">
+                  <ng-container *ngIf="prod.id_pedido == item.id">
+                    <tr>
+                      <ng-container *ngFor="let p of productos">
+                        <ng-container *ngIf="p.id == prod.id_producto">
+                          <td>{{p.nombre}}</td>
+                          <td>{{prod.cantidad}}</td>
+                          <td>{{p.sector}}</td>
+                          <td>{{prod.estado}}</td>
+                        </ng-container>              
+                      </ng-container>           
+                    </tr>
+                  </ng-container>
+                </ng-container>  
+                <tr><td><br></td></tr>
+                <tr>
+                  <td colspan="4">
+                    <ion-button (click)="EntregarPedido(item.id)" *ngIf="item['estado'] == 'terminado'" color="success" expand="full">
+                      Entregar Pedido
+                    </ion-button>
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </ion-card>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngFor="let item of pedidos">
+        <ng-container *ngIf="(item['estado']!='sconfirmar'&& item['estado'] != 'fin' &&  item.estado != 'entregado') && usr['perfil']=='delivery' && item['delivery'] && item['direccion']">
+          <ion-card style="border: 2px solid red; text-align: center;">
+            <ion-item style="font-size: 15px;">
+              Delivery: {{item['direccion']}}
+            </ion-item>
+            <br>
+            <table style="width: 100%; text-align: center;">
+              <thead>
+                <th>Producto</th><th>Cantidad</th><th>Sector</th><th>Estado</th>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let prod of pedidosProductos">
+                  <ng-container *ngIf="prod.id_pedido == item.id">
+                    <tr>
+                      <ng-container *ngFor="let p of productos">
+                        <ng-container *ngIf="p.id == prod.id_producto">
+                          <td>{{p.nombre}}</td>
+                          <td>{{prod.cantidad}}</td>
+                          <td>{{p.sector}}</td>
+                          <td>{{prod.estado}}</td>
+                        </ng-container>              
+                      </ng-container>           
+                    </tr>
+                  </ng-container>
+                </ng-container>  
+                <tr><td><br></td></tr>
+                <tr>
+                  <td colspan="4">
+                    <ion-button (click)="EntregarPedido(item.id)" *ngIf="item['estado'] == 'terminado'" color="success" expand="full">
+                      Entregar Pedido
+                    </ion-button>
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </ion-card>
+        </ng-container>
+    </ng-container>
+  </ion-list>
+</ion-content>

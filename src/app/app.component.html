@@ -1,0 +1,25 @@
+<ion-app>
+  <div *ngIf='showSplash' class="base_1">
+      <div class="base_2">
+      </div>
+    </div>
+    <ion-toolbar color='tertiary'>
+      <ion-button slot="start" fill="clear" color="light" (click)='home()'>
+        <ion-icon name="home"></ion-icon>
+      </ion-button>
+      <ion-title text-center>
+        La Comanda PPS
+      </ion-title>
+      <ion-icon name="volume-high" (click)='sonido(false)' *ngIf='sound'></ion-icon>
+      <ion-icon name="volume-off" (click)='sonido(true)' *ngIf='!sound'></ion-icon>
+      <ion-button slot="end" fill="clear" color="danger" (click)='LogOut()'>
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+
+    <ion-content>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-content>
+</ion-app>
+
+

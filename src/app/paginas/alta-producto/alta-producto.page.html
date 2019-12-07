@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color='dark'>
+    <ion-title text-center>Cargar producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label >Nombre:</ion-label>
+    <ion-input class='input_blanco' type="text" [(ngModel)]="this.producto.nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label >Descripción:</ion-label>
+    <ion-input class='input_blanco'  type="text" [(ngModel)]="this.producto.descripcion"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label >Tiempo de preparación:</ion-label>
+    <ion-input class='input_blanco' type="number" [(ngModel)]="this.producto.tiempo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label >Precio:</ion-label>
+    <ion-label><ion-icon name="logo-usd"></ion-icon></ion-label>
+    <ion-input class='input_blanco' type="number" [(ngModel)]="this.producto.precio"></ion-input>
+  </ion-item>
+
+
+
+  <ion-item lines="full">
+    <ion-label>
+        <ion-button color='dark' (click)="this.tomarfoto(1)" expand="full">Foto Uno</ion-button>
+        <ion-button color='dark' (click)="this.tomarfoto(2)" expand="full">Foto Dos</ion-button>
+        <ion-button color='dark' (click)="this.tomarfoto(3)" expand="full">Foto Tres</ion-button>
+        <ion-button color='dark' (click)="this.tomarqr()" expand="full">Asociar QR</ion-button>
+    </ion-label>
+
+    <ion-label >
+        <ion-label *ngIf="this.producto.foto_1 != ''">Cargado</ion-label>
+        <ion-label *ngIf="this.producto.foto_1 == ''">Sin cargar</ion-label>
+        <br>
+        <ion-label *ngIf="this.producto.foto_2 != ''">Cargado</ion-label>
+        <ion-label *ngIf="this.producto.foto_2 == ''">Sin cargar</ion-label>
+        <br>
+        <ion-label *ngIf="this.producto.foto_3 != ''">Cargado</ion-label>
+        <ion-label *ngIf="this.producto.foto_3 == ''">Sin cargar</ion-label>
+        <br>
+        <ion-label *ngIf="this.producto.qr == ''">Sin cargar</ion-label>
+        <ion-label *ngIf="this.producto.qr != ''">{{this.producto.qr}}</ion-label>
+    </ion-label>
+  </ion-item>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button color='dark' expand="full" (click)='this.CrearProducto()' >Cargar producto</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="danger">Encuesta Obligatoria</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label style="font-size: 12px;">¿Entrada o salida?</ion-label>
+    <ion-select [(ngModel)]="encuesta.hora" placeholder="">
+      <ion-select-option value="entrada">Entrada</ion-select-option>
+      <ion-select-option value="salida">Salida</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-list>
+    <ion-radio-group [(ngModel)]="encuesta.sector">
+      <ion-list-header>
+        <ion-label>Seleccione su sector:</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label>Metre</ion-label>
+        <ion-radio slot="start" value="metre"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mozo</ion-label>
+        <ion-radio slot="start" value="mozo"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cocina</ion-label>
+        <ion-radio slot="start" value="cocina"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bar</ion-label>
+        <ion-radio slot="start" value="bar"></ion-radio>
+      </ion-item>
+      <!-- <ion-item>
+        <ion-label>Delivery</ion-label>
+        <ion-radio slot="start" value="delivery"></ion-radio>
+      </ion-item> -->
+    </ion-radio-group>
+  </ion-list>
+  <ion-item>
+    <ion-label>Nivel de limpieza del espacio de trabajo:</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-range [(ngModel)]="encuesta.limpieza" pin="true" snaps="true" ticks="false" min="1" max="10" color="danger">
+      <ion-label slot="start">1</ion-label>
+      <ion-label slot="end">10</ion-label>
+    </ion-range>
+  </ion-item>
+  <ion-item>
+    <ion-label>¿Su lugar de trabajo se </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>encontraba ordenado?</ion-label>
+    <ion-checkbox [(ngModel)]="encuesta.orden" slot="end" value="ordenado"></ion-checkbox>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Comentarios adicionales:</ion-label>
+    <ion-input type="text" [(ngModel)]="encuesta.comentario" maxlength="100"></ion-input>
+  </ion-item>
+
+  <ion-item lines="full" *ngIf="encuesta.foto != ''">
+    <ion-label>
+      <ion-thumbnail>
+        <ion-img [src]="encuesta.foto"></ion-img>
+      </ion-thumbnail>
+    </ion-label>
+  </ion-item>
+
+  <ion-button (click)="TomarFoto()" expand="full" color="danger" *ngIf="encuesta.foto == ''">Agregar foto</ion-button>
+
+  <ion-button (click)="EnviarEncuesta()" expand="full" color="dark">Enviar encuesta</ion-button>
+</ion-content>

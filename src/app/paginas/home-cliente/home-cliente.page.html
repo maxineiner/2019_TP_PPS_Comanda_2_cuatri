@@ -1,0 +1,47 @@
+<ion-content [scrollEvents]="true">
+  <ion-card class="ion-activatable" (click)="this.EscannerQR()" [ngClass]="{ 'card-vertical': !this.platform.isLandscape(), 'card-horizontal': this.platform.isLandscape() }">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-icon name="qr-scanner" [ngClass]="{ 'icon-horizontal': this.platform.isLandscape(), 'icon-vertical': !this.platform.isLandscape() }"></ion-icon>
+    <h2>Escanear QR</h2>
+  </ion-card>
+
+  <ion-card class="ion-activatable" (click)="this.RealizarPedido()" [ngClass]="{ 'card-vertical': !this.platform.isLandscape(), 'card-horizontal': this.platform.isLandscape() }">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-icon name="restaurant" [ngClass]="{ 'icon-horizontal': this.platform.isLandscape(), 'icon-vertical': !this.platform.isLandscape() }"></ion-icon>
+    <h2>Realizar pedido</h2>
+  </ion-card>
+
+  <ion-card class="ion-activatable" (click)="this.ConfirmarRecepcion()" [ngClass]="{ 'card-vertical': !this.platform.isLandscape(), 'card-horizontal': this.platform.isLandscape() }">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-icon name="checkbox-outline"></ion-icon>
+    <h2>Confirmar recepción del pedido</h2>
+  </ion-card>
+
+  <ion-card class="ion-activatable" (click)="this.PedirCuenta()" [ngClass]="{ 'card-vertical': !this.platform.isLandscape(), 'card-horizontal': this.platform.isLandscape() }">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-icon name="list" [ngClass]="{ 'icon-horizontal': this.platform.isLandscape(), 'icon-vertical': !this.platform.isLandscape() }"></ion-icon>
+    <h2>Mi cuenta</h2>
+  </ion-card>
+
+  <ng-container *ngIf="this.usuario.perfil === 'cliente'">
+    <ion-card class="ion-activatable" (click)="this.RealizarReserva()" [ngClass]="{ 'card-vertical': !this.platform.isLandscape(), 'card-horizontal': this.platform.isLandscape() }">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-icon name="calendar" [ngClass]="{ 'icon-horizontal': this.platform.isLandscape(), 'icon-vertical': !this.platform.isLandscape() }"></ion-icon>
+      <h2>Realizar reserva</h2>
+    </ion-card>
+  </ng-container>
+
+  <ng-container *ngIf="this.chat">
+      <ion-card class="ion-activatable" (click)="this.Chat()" [ngClass]="{ 'card-vertical': !this.platform.isLandscape(), 'card-horizontal': this.platform.isLandscape() }">
+        <ion-ripple-effect></ion-ripple-effect>
+        <ion-icon name="chatboxes" [ngClass]="{ 'icon-horizontal': this.platform.isLandscape(), 'icon-vertical': !this.platform.isLandscape() }"></ion-icon>
+        <h2>Chat Delivery</h2>
+      </ion-card>
+    </ng-container>
+
+  <ion-card class="ion-activatable" (click)="this.Jugar()" [ngClass]="{ 'card-vertical': !this.platform.isLandscape(), 'card-horizontal': this.platform.isLandscape() }">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-icon name="logo-game-controller-b" [ngClass]="{ 'icon-horizontal': this.platform.isLandscape(), 'icon-vertical': !this.platform.isLandscape() }"></ion-icon>
+    <h2>Jugar</h2>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color='dark'>
+    <ion-title text-center>Pedidos aceptados</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-slides style="height: 100%" scrollbar='true' pager="true" [options]="slideOpts">
+    <ion-slide style="height: 100%" *ngFor="let pedido of this.pedidos">
+      <ion-content>
+        <ion-item>
+          <ion-label >Creación:</ion-label>
+          <ion-input class='input_blanco'  type="text" [(ngModel)]="pedido.comienzo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Productos:</ion-label>
+        </ion-item>
+        <div *ngFor="let producto of this.pedido['productos']">
+          <ion-item>
+            <ion-label>{{pedido.cantidad}} --> </ion-label>
+            <ion-input class='input_blanco' disabled type="text" [(ngModel)]="producto.nombre"></ion-input>
+          </ion-item>
+        </div>
+        <ion-footer>
+          <ion-toolbar>
+            <ion-button color='dark' expand="full" (click)='this.TerminarPedido(pedido)' >Pedido finalizado</ion-button>
+          </ion-toolbar>
+        </ion-footer>
+      </ion-content>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

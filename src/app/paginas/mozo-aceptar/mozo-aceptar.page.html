@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar color='dark'>
+    <ion-title>Aceptar Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ng-container *ngFor="let item of pedidos">
+      <ng-container *ngFor="let mesa of mesasClientes">
+        <ng-container *ngIf="mesa['id'] == item['id_mesa_cliente'] && item['estado'] == 'sconfirmar' && usr['perfil']=='mozo' && !item['delivery']">
+          <ion-card style="border: 2px solid red; text-align: center;">
+            <ion-item style="font-size: 17px;">
+              Mesa:  {{mesa.idMesa}} 
+              <ion-button color="dark" (click)="BorrarPedido(item.id, item.id_mesa_cliente)" shape="round" slot="end">Borrar Pedido</ion-button>
+            </ion-item>
+            <br>
+            <table style="width: 100%; text-align: center;">
+              <thead style="font-size: 17px;">
+                <th>Producto</th><th>Cantidad</th>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let prod of pedidosProductos">
+                  <ng-container *ngIf="prod.id_pedido == item.id">
+                    <tr style="font-size: 17px;">
+                      <ng-container *ngFor="let p of productos">
+                        <ng-container *ngIf="p.id == prod.id_producto">
+                          <td>{{p.nombre}}</td>
+                          <td>{{prod.cantidad}}</td>
+                        </ng-container>              
+                      </ng-container>           
+                    </tr>
+                  </ng-container>
+                </ng-container>  
+                <tr><td><br></td></tr>
+                <tr>
+                  <td colspan="2">
+                    <ion-button (click)="AceptarPedido(item.id)" slot="end" expand="full" color="success">Aceptar Pedido</ion-button>
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </ion-card>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngFor="let item of pedidos">
+        <ng-container *ngIf="item['estado'] == 'sconfirmar' && usr['perfil']!='mozo' && item['delivery']">
+          <ion-card style="border: 2px solid red; text-align: center;">
+            <ion-avatar>
+              <img [src]="item['foto']">
+            </ion-avatar>
+            <ion-item style="font-size: 17px;">
+              Delivery:  {{item['direccion']}}
+              <ion-button color="dark" (click)="BorrarPedido(item.id, item.id_mesa_cliente, item['email'])" shape="round" slot="end">Borrar Pedido</ion-button>
+            </ion-item>
+            <br>
+            <table style="width: 100%; text-align: center;">
+              <thead style="font-size: 17px;">
+                <th>Producto</th><th>Cantidad</th>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let prod of pedidosProductos">
+                  <ng-container *ngIf="prod.id_pedido == item.id">
+                    <tr style="font-size: 17px;">
+                      <ng-container *ngFor="let p of productos">
+                        <ng-container *ngIf="p.id == prod.id_producto">
+                          <td>{{p.nombre}}</td>
+                          <td>{{prod.cantidad}}</td>
+                        </ng-container>              
+                      </ng-container>           
+                    </tr>
+                  </ng-container>
+                </ng-container>  
+                <tr><td><br></td></tr>
+                <tr>
+                  <td colspan="2">
+                    <ion-button (click)="AceptarPedido(item.id, item['email'])" slot="end" expand="full" color="success">Aceptar Pedido</ion-button>
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </ion-card>
+        </ng-container>
+    </ng-container>
+
+
+  </ion-list>
+</ion-content>

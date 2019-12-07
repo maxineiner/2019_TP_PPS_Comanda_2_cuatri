@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Juego por descuento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <br><br>
+    <ion-item>
+      <ion-title>Adivina el número Secreto</ion-title>
+    </ion-item>
+    <br>
+    <ion-item>
+      <p>
+        Ingrese un número del 1 al 10 y si adivina nuestro número secreto en
+        el primer intento ganará 10% de descuento en el total final de su compra.
+      </p>
+    </ion-item>
+    <br>
+    <ion-item>
+      <label>Ingrese un número del 1 al 10:</label>
+    </ion-item>
+    <ion-item>
+      <ion-input type="number" placeholder="Respuesta" [(ngModel)]="respuesta" required></ion-input>
+    </ion-item>
+    <br><br>
+    <ion-button (click)="NuevoNumero()" *ngIf="this.respondio" color="dark" expand="block">
+      Jugar de Nuevo
+    </ion-button>
+    <ion-button color="danger" *ngIf="!this.respondio" (click)="VerificarNumero()" expand="block">
+      Responder
+    </ion-button>
+</ion-content>
