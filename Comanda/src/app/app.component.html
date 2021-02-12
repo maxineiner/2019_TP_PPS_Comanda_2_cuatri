@@ -1,0 +1,20 @@
+<ion-app>
+  <div *ngIf='showSplash; else app' class="fondo">
+    <div class="base">
+      <div class="logo"></div>
+    </div>
+  </div>
+  <ng-template #app>
+    <ion-toolbar color='primary' class="ion-toolbar">
+      <ion-title>
+        <h1>Comanda</h1>
+      </ion-title>
+      <ion-buttons slot="secondary">
+        <ion-button slot="end" fill="clear" color="light" (click)="LogOut()">
+          <ion-icon name="log-out"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-router-outlet style="margin-top: 50px;"></ion-router-outlet>
+  </ng-template>
+</ion-app>

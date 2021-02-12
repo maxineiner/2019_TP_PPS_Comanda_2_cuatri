@@ -1,0 +1,62 @@
+<ion-content>
+  <ion-fab vertical="top" horizontal="end">
+    <ion-fab-button>Usuarios</ion-fab-button>
+
+    <ion-fab-list side="bottom">
+      <ion-fab-button (click)="autocompletar('cristiansaliba96@gmail.com','a12345')">Dueño</ion-fab-button>
+      <ion-fab-button (click)="autocompletar('supervisor@gmail.com','123456')">Super</ion-fab-button>
+      <ion-fab-button (click)="autocompletar('metre@gmail.com','123456')">Metre</ion-fab-button>
+      <ion-fab-button (click)="autocompletar('cliente@gmail.com','a12345')">Cliente</ion-fab-button>
+      <ion-fab-button (click)="autocompletar('Cheff@gmail.com','123456')">Cheff</ion-fab-button>  
+      <ion-fab-button (click)="autocompletar('Bar@gmail.com','123456')">Bar</ion-fab-button>  
+      <ion-fab-button (click)="autocompletar('Mozo@gmail.com','123456')">Mozo</ion-fab-button>  
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <img src="assets/icon/icon.png" class="img">
+      </ion-card-title>
+      <ion-card-title class="ion-text-center">
+        <h2 class='text'>Iniciar Sesión</h2>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text>
+            <h4>
+              Correo Electrónico
+            </h4>
+          </ion-text>
+        </ion-label>
+        <ion-input clear-input type='text' color="primary" [(ngModel)]='email'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">
+          <ion-text>
+            <h4>
+              Contraseña
+            </h4>
+          </ion-text>
+        </ion-label>
+        <ion-input clearInput type='password' color="primary" [(ngModel)]='password'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <ion-button expand="block" (click)='OnSubmitLogIn()' color='primary' fill="outline">
+            Ingresar
+          </ion-button>
+        </ion-label>
+      </ion-item>     
+      <ion-item>
+        <ion-label>
+          <ion-button expand="block" (click)='GoToRegister()' color='primary' fill="outline">
+            Registrarse
+          </ion-button>
+        </ion-label>
+      </ion-item>  
+    </ion-card-content>
+  </ion-card>
+</ion-content>

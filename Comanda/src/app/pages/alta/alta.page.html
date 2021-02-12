@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{titleTypeEmployed}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="save()">
+    <ion-card>
+      <ion-card-header>
+        <ion-avatar class="avatar" (click)="takePhoto()">
+          <img *ngIf="!image" src="assets/images/usuario.png">
+          <img *ngIf="image" [src]="image">
+        </ion-avatar>
+        <div class="icon-container">
+          <ion-icon (click)="barcodeScannerFn()" class="icon" name="barcode"></ion-icon>
+          <p style="font-size: 10px;">Escanea el DNI</p>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-input formControlName="name" type="text" placeholder="nombre"></ion-input>
+        </ion-item>
+        <div class="isa_error" *ngIf="myForm.get('name').errors && myForm.get('name').dirty && 
+          myForm.get('name').errors.errorSoloLetras">
+          <p>Verifique los datos</p>
+        </div>
+
+        <ion-item>
+          <ion-input formControlName="lastName" type="text" placeholder="apellido"></ion-input>
+        </ion-item>
+        <div class="isa_error" *ngIf="myForm.get('lastName').errors && myForm.get('lastName').dirty && 
+          myForm.get('lastName').errors.errorSoloLetras">
+          <p>Verifique los datos</p>
+        </div>
+
+        <ion-item>
+          <ion-input formControlName="dni" type="text" placeholder="dni" maxlength="8"></ion-input>
+        </ion-item>
+        <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
+          myForm.get('dni').errors.error">
+          <p>El campo dni solo debe contener numeros</p>
+        </div>
+        <div class="isa_error" *ngIf="myForm.get('dni').errors && myForm.get('dni').dirty && 
+          myForm.get('dni').touched && myForm.get('dni').errors.lengthError">
+          <p>El campo dni debe contener 8 numeros</p>
+        </div>
+
+        <ion-item>
+          <ion-input formControlName="cuil" type="text" placeholder="cuil" maxlength="12"></ion-input>
+        </ion-item>
+        <div class="isa_error" *ngIf="myForm.get('cuil').errors && myForm.get('cuil').dirty && 
+          myForm.get('cuil').errors.error">
+          <p>El campo cuit solo debe contener numeros</p>
+        </div>
+
+        <ion-item>
+          <ion-input formControlName="email" type="text" placeholder="email"></ion-input>
+        </ion-item>
+        <div class="isa_error" *ngIf="myForm.get('email').errors && myForm.get('email').dirty &&
+          myForm.get('email').touched && myForm.get('email').errors.emailErrFormat">
+          <p>El formato del email ingresado no es el correcto</p>
+        </div>
+
+        <ion-item>
+          <ion-input formControlName="password" type="password" placeholder="contraseña"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="typeEmployed !== 'S'">
+          <ion-label>Tipo de Empleado</ion-label>
+          <ion-select formControlName="tiposEmpleados" placeholder="Seleccione uno">
+            <ion-select-option value="COCINERO">Cocinero</ion-select-option>
+            <ion-select-option value="BARTENDER">Bar Tender</ion-select-option>
+            <ion-select-option value="MOZO">Mozo</ion-select-option>
+            <ion-select-option value="METRE">Metre</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button color='primary' fill="outline" expand="block" type="submit" [disabled]="!myForm.valid">
+          Registrar
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+
+
+  </form>
+
+</ion-content>

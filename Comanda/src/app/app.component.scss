@@ -1,0 +1,40 @@
+.fondo{
+    height: 100%; 
+    background-color: black;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.base {
+    background-image: url("../assets/images/base.png");  
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo {
+    background-image: url("../assets/images/icon.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    animation-name: spin;
+    animation-duration:3500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+
+.ion-toolbar {
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    from {
+        transform:rotate(0deg) scale(0,0);
+    }
+    to {
+        transform:rotate(360deg) scale(3,3);
+    }
+}

@@ -1,0 +1,56 @@
+<ion-content>
+  <!--<ngx-spinner ></ngx-spinner>-->
+ 
+  <ion-button *ngxPermissionsOnly="['DUEÑO', 'SUPERVISOR']" color="primary" fill="outline" expand="block"
+    (click)="goTo('alta', 'S')" class="top">
+    Alta Dueño/Supervisor
+  </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['DUEÑO', 'SUPERVISOR']" color="primary" fill="outline" expand="block"
+    (click)="goTo('alta', 'E')" class="top">
+    Alta Empleado
+  </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['COCINERO', 'BARTENDER']" color="primary" fill="outline" expand="block"
+    (click)="goTo('alta-productos')" class="top">
+    Alta Productos
+  </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['DUEÑO', 'SUPERVISOR']" color="primary" fill="outline" expand="block"
+    (click)="goTo('alta-mesa')" class="top">
+    Alta Mesas
+  </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['DUEÑO', 'SUPERVISOR']" color="primary" fill="outline" expand="block"
+    (click)="listaEspera()" class="top">
+    Administrar lista espera registro
+  </ion-button>
+
+  <!-- botones solo disponible para clientes -->
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('lista-espera')"
+    class="top" [hidden]="ocultarBtn">
+    Leer QR
+  </ion-button>  
+
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('encuesta')"
+    class="top">
+    Ver encuestas
+  </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['CLIENTE']" color="primary" fill="outline" expand="block" (click)="goTo('encuesta-respuesta')"
+    class="top">
+    Graficos
+  </ion-button>
+
+
+  <!-- botones solo disponible para el metre-->
+  <ion-button *ngxPermissionsOnly="['METRE']" color="primary" fill="outline" expand="block" (click)="goTo('lista-espera-metre')"
+    class="top">
+    Lista de espera
+  </ion-button>
+
+  <ion-button *ngxPermissionsOnly="['MOZO', 'COCINERO', 'BARTENDER']" color="primary" fill="outline" expand="block" (click)="goTo('lista-pedidos')"
+    class="top">
+    Pedidos
+  </ion-button>
+</ion-content>

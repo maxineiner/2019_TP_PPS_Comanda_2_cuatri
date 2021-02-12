@@ -1,0 +1,71 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Alta productos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <form [formGroup]="myForm" (ngSubmit)="save()">
+      <ion-card>
+  
+        <ion-card-content>
+          <ion-item>
+            <ion-input formControlName="name" type="text" placeholder="nombre"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-input formControlName="descripcion" type="text" placeholder="descripcion"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-input formControlName="tiempo" type="number" placeholder="tiempo estimado"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-input formControlName="precio" type="number" placeholder="precio"></ion-input>
+          </ion-item>
+          <br>
+
+          <ion-grid *ngIf= (arrayInit)>
+            <ion-row>
+              <ion-col col-33 class ="colum" *ngFor="let data of arrayFotos">
+             <div class="card card-1" >
+               <img class= "iimage" src="{{data.link}}">
+                <!-- <p style="font-size: 9px;">{{post.product_final_categories_name}}</p> -->
+               </div>
+               </ion-col>
+            </ion-row>
+          </ion-grid>
+
+
+              
+          <ion-button color='primary' fill="outline" expand="block" type="submit"
+            [disabled]="!myForm.valid">
+            Cargar producto
+          </ion-button>
+  
+        </ion-card-content>
+      </ion-card>
+    </form>
+
+    <!-- <ion-button class="font-style" color="success" fill="outline" shape="round" expand="full" type="submit"
+    (click)="cargarimagenPrueba()">
+    Cargar foto prueba
+  </ion-button> -->
+
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="start">
+        <!-- <ion-fab-button (click)="elegirFoto()">
+          <ion-icon name="images"></ion-icon>
+        </ion-fab-button> -->
+        <ion-fab-button (click)="takePhoto()">
+          <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  
+  </ion-content>

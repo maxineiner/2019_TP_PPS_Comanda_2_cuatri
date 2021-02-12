@@ -1,0 +1,61 @@
+
+<ion-content>
+    
+
+       
+  <!-- <tr *ngFor="let item of arrayClientes">
+    <td>{{item.email}}</td>
+    <td>{{item.name}}</td>            
+    <td>{{item.lastname}}</td> 
+    <td>{{item.dni}}</td>
+    <td> <img src={{item.image}} class="imagenTabla"> </td> 
+   
+  </tr> -->
+<h2 class="ion-text-center" style="color:rgba(51, 61, 211, 0.932);"> Carta de Productos</h2>
+<div class='flotante' vertical="bottom" (click)="finalizarPedido()">
+    <tr>
+      <td><ion-icon name="cart" style="font-size:25px; background-color: rgba(170, 235, 154, 0.938);"></ion-icon></td> 
+      <td><h2 class= "valorCarrito"> Total {{this.valorCarrito}} </h2></td>
+      </tr>
+</div>
+  <div class="card" *ngFor = "let item of arrayProductos">
+      <!-- <div class="card" *ngFor = "let itemImagen of item.image">
+          <img class="img-thumbnail" src="{{itemImagen.link}}" alt="Avatar" style="width:100%">
+      </div> -->
+      <img class="img-thumbnail" src="{{item.image[0].link}}" alt="Avatar" style="width:100%">
+      <h1>{{item.name}} </h1>
+      <!-- <p class="title">{{item.image}}</p> -->
+      <p class="title"> PRECIO :{{item.precio}}</p>
+      <p>{{item.descripcion}} </p>
+      Unidades:
+    <input class="inputNumber" type="number" value="0"  min=0 max=99  (change)="cambioCantidad(item, $event)">
+    
+      
+      
+      <!-- <p><button class="button"  (click)="aceptar(item)">Aceptar</button></p>
+      <p><button class="buttonR"  (click)="rechazar(item)">Rechazar</button></p> -->
+    </div>
+
+    <div *ngIf="this.mostrarForm" class="divClass">
+
+    <h1 class="ion-text-center">CONFIRMAR PEDIDO</h1>
+    
+    <div *ngFor = "let item of auxPedido.arrayDetalle">
+        <p>{{item.nombre}}  $/un {{item.precio}}  {{item.cantidad}} un. --- ${{item.subtotal}}</p>
+      </div>
+      <h2>Total {{auxPedido.total}}</h2>
+    <br>
+    <br>
+    <button class="buttonR"  (click)="regresar()" color="success">Regresar</button>
+    <br>
+    <br>
+    <button  class="button"  (click)="aceptar()" color="success">Aceptar</button>
+    <br>
+    <br>
+    <div id="msjError">
+        {{msjError}}
+    </div>
+    <br>
+    </div> 
+
+</ion-content>

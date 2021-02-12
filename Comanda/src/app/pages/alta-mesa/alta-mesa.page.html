@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Alta Mesas</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="myForm" (ngSubmit)="save()">
+    <ion-card>
+      <ion-card-header>
+        <ion-avatar class="avatar" (click)="takePhoto()">
+          <img *ngIf="!image" src="../../../assets/images/mesa2.jpg">
+          <img *ngIf="image" [src]="image">
+        </ion-avatar>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input formControlName="number" type="number" placeholder="número de mesa"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input formControlName="capacity" type="number" placeholder="capacidad"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Tipo de Mesa</ion-label>
+          <ion-select formControlName="type" placeholder="Seleccione uno">
+            <ion-select-option value="Normal">Normal</ion-select-option>
+            <ion-select-option value="Discapacitados">Discapacitados</ion-select-option>
+            <ion-select-option value="VIP">VIP</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button color='primary' fill="outline" expand="block" type="submit" [disabled]="!myForm.valid">
+          Registrar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </form>
+</ion-content>

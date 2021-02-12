@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>lista-pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let pedido of pedidos | filtroPedidos: filterArgs" (click)="verDetalle(pedido)">
+      <ion-label>MESA {{pedido.numeroMesa}}</ion-label>
+      <ion-label slot="end">{{pedido.estado}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

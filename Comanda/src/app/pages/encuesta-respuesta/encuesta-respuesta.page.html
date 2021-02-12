@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>encuesta-respuesta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let er of encuestaRespuestas">
+    <ion-card-header *ngIf="er.tipo != 'input' && er.tipo != 'img'">
+      {{er.pregunta}}
+    </ion-card-header>
+    <ion-card-content *ngIf="er.tipo != 'input' && er.tipo != 'img'">
+      <canvas baseChart [data]="er.chartData" [labels]="er.chartLables" [chartType]="chartType">
+      </canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="imagenes">
+    <ion-card-header>
+      Imagenes
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" *ngFor="let i of imagenes">
+            <img [src]="i" style="width: 80px; height: 80px;">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
